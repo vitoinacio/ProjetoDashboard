@@ -1,0 +1,32 @@
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+.sidebar{
+  width: 20%;
+  background-color: var(--cor1);
+  height: 100%;
+}
+
+.sidebar h3{
+  color: #504f4f;
+  font-size: 20px;
+  margin: 10px;
+}
+
+.sidebar a{
+  color: #6e6d6d;
+  display: block;
+  text-decoration: none;
+  margin-left: 15px;
+  margin-top: 13px;
+  margin-bottom: 15px;
+}
+
+.content{
+  width: 80%;
+  background-color: rgb(224, 222, 222);
+}
+
