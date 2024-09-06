@@ -6,7 +6,7 @@ header {
   align-items: center;
 }
 
-.info-header{
+.info-header {
   color: var(--cor1);
   display: flex;
   justify-content: space-around;
@@ -15,7 +15,16 @@ header {
   align-items: center;
 }
 
-.info-header img{
+.info-header {
+  cursor: pointer;
+}
+
+.info-header .logo h3:hover,
+.info-header i:hover{
+  opacity: 0.7;
+}
+
+.info-header img {
   width: 40px;
   height: 40px;
   border-radius: 20px;

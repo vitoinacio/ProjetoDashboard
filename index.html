@@ -4,11 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="src/css/style.css" />
-    <script type="module" src="src/js/script.js" defer></script>
     <script
       src="https://kit.fontawesome.com/7414161b6e.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script type="module" src="src/js/script.js" defer></script>
     <title>Dashboard</title>
   </head>
   <body>
@@ -17,9 +18,6 @@
       <div class="info-header">
         <div class="logo">
           <h3>SmartWallet</h3>
-        </div>
-        <div class="icons-header">
-          <i class="fa-solid fa-magnifying-glass"></i>
         </div>
       </div>
       <div class="info-header">
@@ -35,7 +33,7 @@
       <!-- SIDEBAR -->
       <div class="sidebar">
         <h3>Home</h3>
-        <a href="#"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+        <a href="#" class="active"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
         <a href="#"><i class="fa-solid fa-sliders"></i> Analise</a>
         <a href="#"><i class="fa-solid fa-wallet"></i> Carteira</a>
         <a href="#"><i class="fa-regular fa-circle-user"></i> User</a>
@@ -43,7 +41,37 @@
       </div>
       <!-- CONTENT -->
       <div class="content">
-        
+        <div class="info-cash">
+          <div class="info-cash-box" style="background: linear-gradient(45deg,  rgb(3, 3, 158), blue);">
+            <div class="info-text">
+              <h3>Entrada total</h3>
+              <p>R$1.500,00</p>
+            </div>
+            <i class="fa-solid fa-money-bills"></i>
+          </div>
+          <div class="info-cash-box" style="background: linear-gradient(45deg, rgb(199, 146, 2), orange);">
+            <div class="info-text">
+              <h3>Debitos totais</h3>
+              <p>R$800,00</p>
+            </div>
+            <i class="fa-solid fa-receipt"></i>
+          </div>
+          <div class="info-cash-box" style="background: linear-gradient(45deg, rgb(2, 156, 2), rgb(3, 221, 3));">
+            <div class="info-text">
+              <h3>Restante</h3>
+              <p>R$700,00</p>
+            </div>
+            <i class="fa-solid fa-coins"></i>
+          </div>
+        </div>
+        <div class="info-graficos">
+          <div class="grafico-box">
+            <canvas id="graficoDeBarra"></canvas>
+          </div>
+          <div class="grafico-box">
+            <canvas id="graficoCircular"></canvas>
+          </div>
+        </div>
       </div>
     </section>
     <!-- FIM MAIN -->
