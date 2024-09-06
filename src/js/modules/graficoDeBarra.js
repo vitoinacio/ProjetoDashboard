@@ -22,7 +22,7 @@ export default function graficoDeBarra() {
       ],
       datasets: [
         {
-          label: "Análise de gastos mensais R$",
+          label: "Gastos mensais R$",
           data: data,
           backgroundColor: [
             "rgba(240, 248, 255, 0.7)",  // Janeiro - Alice Blue

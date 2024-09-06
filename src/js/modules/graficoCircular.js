@@ -6,19 +6,19 @@ export default function graficoCircular(){
   let graficoBarra = new Chart(ctx, {
     type: 'doughnut',
     data: {
-      labels: ['entrada', 'debitos', 'restante'],
+      labels: ['Entrada', 'Debitos', 'Restante'],
       datasets: [{
         label: 'Percentual de gastos',
         data: [1500, 800, 700],
         backgroundColor: [
-          'rgba(2, 110, 9, 0.9)',  // Entrada Total - Verde Forte (representa entrada positiva)
-          'rgba(199, 100, 2, 0.9)',  // Débitos - Vermelho Forte (representa despesas e saídas)
-          'rgba(3, 1, 158, 0.9)',  // Restante - Azul Forte (representa o saldo restante ou o que sobra)
+          'rgba(3, 60, 158, 0.5)',  // Entradada - Azul Forte (representa a Entrada Total)
+          'rgba(199, 120, 2, 0.5)',  // Débitos - Vermelho Forte (representa despesas e saídas)
+          'rgba(2, 120, 9, 0.5)',  // Restante Total - Verde Forte (representa Restante positivo)
         ],
         borderColor: [
-          'rgb(2, 110, 9)',  // Entrada Total - Verde Forte (representa entrada positiva)
-          'rgb(199, 100, 2)',  // Débitos - Vermelho Forte (representa despesas e saídas)
-          'rgb(3, 1, 158)',  // Restante - Azul Forte (representa o saldo restante ou o que sobra)
+          'rgba(3, 1, 0.8, 0.5)',  // Entradada - Azul Forte (representa a Entrada Total)
+          'rgba(199, 20, 0.7, 0.5)',  // Débitos - Vermelho Forte (representa despesas e saídas)
+          'rgba(2, 20, 0.7, 0.5)',  // Restante Total - Verde Forte (representa Restante positivo)
         ],
         borderWidth: 1
       }]
