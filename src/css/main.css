@@ -38,9 +38,12 @@
   height: 20px;
 }
 .content {
+  display: flex;
+  flex-direction: column;
   width: 80%;
   background-color: rgb(224, 222, 222);
   padding: 20px;
+  gap: 30px;
 }
 
 .info-cash{

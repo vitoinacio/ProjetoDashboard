@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="src/css/style.css" />
-    <script type="module" src="src/js/script.js" defer></script>
     <script
       src="https://kit.fontawesome.com/7414161b6e.js"
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script type="module" src="src/js/script.js" defer></script>
     <title>Dashboard</title>
   </head>
   <body>
@@ -67,12 +67,12 @@
             <i class="fa-solid fa-coins"></i>
           </div>
         </div>
-        <div class="info-canvas">
-          <div class="info-analise">
-            <canvas id="analiseMes"></canvas>
+        <div class="info-graficos">
+          <div class="grafico-box">
+            <canvas id="graficoDeBarra"></canvas>
           </div>
-          <div>
-            <canvas id="myChart"></canvas>
+          <div class="grafico-box">
+            <canvas id="graficoCircular"></canvas>
           </div>
         </div>
       </div>

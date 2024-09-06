@@ -1,3 +1,6 @@
-//import analiseMes from "./modules/analiseMes.js";
+import graficoCircular from "./modules/graficoCircular.js";
+import graficoDeBarra from "./modules/graficoDeBarra.js";
 
-//analiseMes();
+
+graficoDeBarra();
+graficoCircular();
