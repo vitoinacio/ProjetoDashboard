@@ -1,0 +1,36 @@
+@media screen and (max-width: 920px) {
+
+  .contentMenuMobile{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 35px;
+    height: 35px;
+  }
+
+  .menuMobile{
+    content: "";
+    height: 4px;
+    width: 35px;
+    border-radius: 5px;
+    background-color: aliceblue;
+    position: absolute;
+  }
+
+  .menuMobile:nth-child(2){
+    top: 10px;
+  }
+
+  .menuMobile:nth-child(3){
+    top: 20px;
+  }
+
+  .main div.active{
+    display: block;
+    position: absolute;
+    width: 50%;
+  }
+
+}
+
+

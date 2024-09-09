@@ -1,6 +1,8 @@
 @import url('./header.css');
 @import url("./main.css");
 @import url("./graficos.css");
+@import url("./responsivo.css");
+@import url("./menuMobile.css");
 
 *{
   margin: 0;
