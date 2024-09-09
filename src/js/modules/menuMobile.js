@@ -13,6 +13,8 @@ export default function menuMobile(){
     })
   }
   
-  menuMobile.addEventListener('click', openMenuMobile);
+  events.forEach(userEvents =>{
+    menuMobile.addEventListener(userEvents, openMenuMobile);
+  })
 
 }
