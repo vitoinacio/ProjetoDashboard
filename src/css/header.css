@@ -19,6 +19,12 @@ header {
   cursor: pointer;
 }
 
+.info-header .logo{
+margin-top: 10px;
+  display: flex;
+  gap: 20px;
+}
+
 .info-header .logo h3:hover,
 .info-header i:hover{
   opacity: 0.7;
