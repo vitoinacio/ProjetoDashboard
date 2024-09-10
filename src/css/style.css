@@ -1,8 +1,8 @@
-@import url('./header.css');
-@import url("./main.css");
-@import url("./graficos.css");
-@import url("./responsivo.css");
-@import url("./menuMobile.css");
+@import url('./dashboard.css/header.css');
+@import url("./dashboard.css/main.css");
+@import url("./dashboard.css/graficos.css");
+@import url("./dashboard.css/responsivo.css");
+@import url("./dashboard.css/menuMobile.css");
 
 *{
   margin: 0;
