@@ -1,7 +1,7 @@
 .main {
   display: flex;
   flex-wrap: wrap;
-  height: 90%;
+  height: 100%;
 }
 
 .sidebar {
