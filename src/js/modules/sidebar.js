@@ -1,7 +1,8 @@
 export default function sidebar(){
 
-  const sidebar = document.querySelectorAll('sidebar a');
+  const sidebar = document.querySelectorAll('.sidebar a');
   const activeClass = "active";
+  const userEvents = ["click"]; 
 
   function activeTab(index) {
     sidebar.forEach((item) => {
@@ -12,7 +13,7 @@ export default function sidebar(){
 
   function addTabNavEvent() {
     sidebar.forEach((itemMenu, index) => {
-      itemMenu.addEventListener("click", () => activeTab(index));
+      itemMenu.addEventListener(userEvents, () => activeTab(index));
     });
   }
 
@@ -21,7 +22,6 @@ export default function sidebar(){
       //ativar primeiro item
       activeTab(0);
       addTabNavEvent();
-      console.log('iii')
     }
   }
   init();
