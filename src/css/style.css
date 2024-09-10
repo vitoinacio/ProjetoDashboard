@@ -1,20 +1,23 @@
-@import url('./dashboard.css/header.css');
+@import url("./dashboard.css/header.css");
 @import url("./dashboard.css/main.css");
 @import url("./dashboard.css/graficos.css");
 @import url("./dashboard.css/responsivo.css");
 @import url("./dashboard.css/menuMobile.css");
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-html, body{height: 100%;}
+html,
+body {
+  height: 100%;
+}
 
-:root{
-  --cor1: #FFFFFF;
+:root {
+  --cor1: #ffffff;
   --cor2: #121d77;
-  --cor3: #112E49;
+  --cor3: #112e49;
 }
