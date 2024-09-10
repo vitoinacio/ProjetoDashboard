@@ -1,7 +1,9 @@
 export default function graficoDeBarra() {
+  
   const ctx = document.getElementById("graficoDeBarra");
 
-  let data = [1,2,3,4,5,6,6,5,4,3,2,1];
+  if (ctx) {
+    let data = [1,2,3,4,5,6,6,5,4,3,2,1];
 
   let graficoBarra = new Chart(ctx, {
     type: "bar",
@@ -64,4 +66,6 @@ export default function graficoDeBarra() {
       },
     },
   });
+  }
+
 }
