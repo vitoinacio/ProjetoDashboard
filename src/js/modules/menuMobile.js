@@ -7,13 +7,13 @@ export default function menuMobile(){
   const events = ["touchstart", "click"]
 
   function openMenuMobile(){
-    sidebar.classList.toggle(activeClass);
+    sidebar.classList.add(activeClass);
     outsideClick(sidebar, events, () =>{
       sidebar.classList.remove(activeClass);
     })
   }
   
-  events.forEach(userEvents =>{
+  events.forEach(userEvents () =>{
     menuMobile.addEventListener(userEvents, openMenuMobile);
   })
 
