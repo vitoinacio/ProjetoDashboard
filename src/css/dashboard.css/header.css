@@ -1,9 +1,10 @@
 header {
   background-color: var(--cor2);
-  padding: 10px 2%;
+  padding: 1% 2%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 9%;
 }
 
 .info-header {
