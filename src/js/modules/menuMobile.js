@@ -4,7 +4,7 @@ export default function menuMobile(){
   const menuMobile = document.querySelector('.contentMenuMobile');
   const sidebar = document.querySelector('.sidebar')
   const activeClass = 'active';
-  const events = ["touchstart", "click"]
+  const events = ["click"]
 
   function openMenuMobile(){
     sidebar.classList.add(activeClass);
