@@ -12,7 +12,7 @@ export default function menuMobile(){
       sidebar.classList.remove(activeClass);
     })
   }
-  
+ 
   events.forEach((userEvents) =>{
     menuMobile.addEventListener(userEvents, openMenuMobile);
   })
