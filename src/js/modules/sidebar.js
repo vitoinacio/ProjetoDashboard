@@ -1,6 +1,6 @@
 export default function sidebar() {
   const sidebar = document.querySelectorAll(".sidebar a");
-  let path = window.location.pathname.split("/").pop();
+  const path = window.location.pathname.split("/").pop();
   const activeClass = "active";
   const userEvents = ["click"];
 

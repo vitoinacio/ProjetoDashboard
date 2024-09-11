@@ -1,0 +1,95 @@
+.dropdown-menu{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  top: 52px;
+  left: 70%;
+  background-color: var(--cor1);
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  padding: 15px;
+  color: var(--cor4);
+  border-radius: 10px;
+  cursor: default;
+  display: none;
+}
+
+.perfil-menu{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.perfil-menu img{
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.info-perfil h5{
+  color: var(--cor5);
+}
+
+.button-plano {
+  display: flex;
+  justify-content: center;
+}
+
+.button-plano button{
+  background-color: var(--cor1);
+  padding: 6px;
+  border: 1px solid var(--cor2);
+  color: var(--cor2);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-plano button:hover,
+.button-plano button:focus {
+  background-color: #eff0f0;
+}
+
+.logout{
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.logout .login {
+  display: flex;
+  flex-direction: column;
+  flex: 60%;
+}
+
+.logout .login p{
+  font-size: 11px;
+  color: var(--cor5);
+}
+
+.logout .login h5{
+  font-size: 13px;
+  font-weight: 300;
+  color: #474747;
+}
+
+.logout .buttons-menu{
+  display: flex;
+  flex: 30%;
+  gap: 10px;
+}
+
+.logout .buttons-menu button {
+  background-color: white;
+  border: none;
+  padding: 7px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.logout .buttons-menu button i{
+  font-size: 20px;
+}
+
+.active{
+  display: flex;
+}
