@@ -1,29 +1,30 @@
-export default function sidebar(){
-
-  const sidebar = document.querySelectorAll('.sidebar a');
+export default function sidebar() {
+  const sidebar = document.querySelectorAll(".sidebar a");
+  let path = window.location.pathname.split("/").pop();
   const activeClass = "active";
-  const userEvents = ["click"]; 
+  const userEvents = ["click"];
 
-  function activeTab(index) {
+  function activeTab() {
     sidebar.forEach((item) => {
-      item.classList.remove(activeClass);
+      const href = item.href.split("/").pop().replace("#", "");
+      path == href
+        ? item.classList.add(activeClass)
+        : item.classList.remove(activeClass);
     });
-    sidebar[index].classList.add(activeClass);
   }
 
   function addTabNavEvent() {
-    sidebar.forEach((itemMenu, index) => {
-      itemMenu.addEventListener(userEvents, () => activeTab(index));
+    sidebar.forEach((itemMenu) => {
+      itemMenu.addEventListener(userEvents, () => activeTab());
     });
   }
 
   function init() {
     if (sidebar.length) {
       //ativar primeiro item
-      activeTab(0);
+      activeTab();
       addTabNavEvent();
     }
   }
   init();
-
 }
