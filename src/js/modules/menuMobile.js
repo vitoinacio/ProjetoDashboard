@@ -1,4 +1,5 @@
 import outsideClick from "./outsideClick.js";
+
 export default function menuMobile(){
 
   const menuMobile = document.querySelector('.contentMenuMobile');

@@ -3,6 +3,8 @@
 @import url("./dashboard.css/graficos.css");
 @import url("./dashboard.css/responsivo.css");
 @import url("./dashboard.css/menuMobile.css");
+@import url("./buttonConfig.css/buttonConfig.css");
+@import url("./buttonConfig.css/responsivoConfig.css");
 
 * {
   margin: 0;
@@ -20,4 +22,6 @@ body {
   --cor1: #ffffff;
   --cor2: #121d77;
   --cor3: #112e49;
+  --cor4: #504f4f;
+  --cor5: #6e6d6d;
 }

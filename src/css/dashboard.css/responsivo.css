@@ -1,5 +1,6 @@
 @media screen and (max-width: 1255px) {
 
+
   .info-cash {
     gap: 10px;
   }
@@ -23,16 +24,10 @@
   }
 
   .grafico-box{
+    display: flex;
+    justify-content: center;
     width: 100%;
     height: 379px;
-  }
-
-  #graficoCircular{
-    margin-left: 30%;
-  }
-
-  #graficoDeBarra{
-    margin-left: 5%;
   }
 
 }
@@ -82,6 +77,8 @@
   }
 
   .grafico-box{
+    display: flex;
+    justify-content: center;
     width: 100%;
     height: 200px;
   }
