@@ -6,6 +6,7 @@
 @import url("./buttonConfig.css/buttonConfig.css");
 @import url("./buttonConfig.css/responsivoConfig.css");
 @import url("./index.css/headerIndex.css");
+@import url("./index.css/main.css");
 
 * {
   margin: 0;
