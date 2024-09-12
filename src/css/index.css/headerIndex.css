@@ -1,0 +1,33 @@
+.header-nav{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  padding: 60px;
+}
+
+.logo-nav h2{
+  display: flex;
+  color: var(--cor2);
+  font-weight: 400;
+  font-size: 30px;
+}
+
+.logo-nav h2 i{
+  margin-right: 10px;
+}
+
+.menu-nav{
+  display: flex;
+  gap: 40px;
+}
+
+.menu-nav a{
+  text-decoration: none;
+  color: var(--cor5);
+  font-size: 18px;
+}
+
+.menu-nav a:hover{
+  
+}
