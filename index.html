@@ -9,9 +9,45 @@
       crossorigin="anonymous"
     ></script>
     <script type="module" src="src/js/script.js" defer></script>
+    <script src="src/js/modules/navFixed.js" defer></script>
     <title>SmartWallet</title>
   </head>
   <body>
-    
+    <!-- INICIO HEADER -->
+    <header class="header-nav nav-fixed">
+      <div class="logo-nav">
+        <h2><i class="fa-solid fa-chart-line"></i>Smart<strong>Wallet</strong></h2>
+      </div>
+      <div class="menu-nav">
+        <a href="#">Quem somos?</a>
+        <a href="#">Gestão de gastos</a>
+        <a href="#">Oque Oferecemos</a>
+      </div>
+      <div class="buttons-nav">
+        <button class="btn-criarConta">Criar conta</button>
+        <button class="btn-entrar">Entrar</button>
+      </div>
+    </header>
+    <hr>
+    <!-- FIM HEADER -->
+    <!-- INICIO MAIN -->
+    <section class="main">
+      <div class="container">
+        <div class="section-chamada">
+          <div class="text-chamada">
+            <h1>Gestão e controle financeiro</h1>
+            <p>Para vôce, completo e gratuito*</p>
+          </div>
+          <div class="input-chamada">
+            <input type="email" name="email" id="email" placeholder="Seu email..">
+            <button>Cadastre-se</button>
+          </div>
+        </div>
+        <div class="section-image">
+          <img src="src/img/dashboard.png" alt="Dasboard image">
+        </div>
+      </div>
+    </section>
+    <!-- FIM MAIN -->
   </body>
 </html>

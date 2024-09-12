@@ -1,0 +1,72 @@
+.container{
+  background-image: url('../../img/fundo.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  height: 605px;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0px 90px;
+  border-bottom: 1px solid var(--cor5);
+}
+
+.section-chamada{
+  display: flex;
+  flex-direction: column;
+  flex: 60%;
+  gap: 100px;
+  margin-top: 100px;
+}
+
+.section-chamada .text-chamada h1{
+  color: var(--cor2);
+  font-weight: 900;
+  font-size: 35px;
+}
+
+.section-chamada .text-chamada p{
+  font-size: 30px;
+  color: var(--cor4);
+}
+
+.input-chamada{
+  position: relative;
+  display: flex;
+}
+
+.input-chamada input{
+  padding: 18px;
+  border-radius: 50px;
+  width: 600px;
+  border: 1px solid var(--cor2);
+  outline: none;
+  font-size: 20px;
+}
+
+.input-chamada button{
+  background-color: var(--cor2);
+  color: white;
+  position: absolute;
+  border: none;
+  font-size: 18px;
+  width: 200px;
+  padding: 20px;
+  border-radius: 50px;
+  left: 60%;
+}
+
+.input-chamada button:hover{
+  background-color: var(--cor3);
+  cursor: pointer;
+}
+
+.section-image{
+  flex: 40%;
+  margin-top: 130px;
+}
+
+.section-image img{
+  width: 500px;
+  height: 500px;
+}

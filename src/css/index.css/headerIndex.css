@@ -1,0 +1,154 @@
+.header-nav{
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  padding: 65px;
+  animation: background-before 0.5s forwards;
+}
+
+@keyframes background-before{
+  0%{
+    opacity: 0;
+    background-color: var(--cor2);
+    padding: 40px;
+  }100%{
+    opacity: 1;
+    background-color: white;
+    padding: 65px;
+  }
+}
+
+.logo-nav h2{
+  display: flex;
+  color: var(--cor2);
+  font-weight: 400;
+  font-size: 30px;
+}
+
+.logo-nav h2 i{
+  margin-right: 10px;
+}
+
+.menu-nav{
+  display: flex;
+  gap: 40px;
+}
+
+.menu-nav a{
+  text-decoration: none;
+  color: var(--cor5);
+  font-size: 18px;
+  position: relative;
+}
+
+.menu-nav a::after{
+  content: " ";
+  width: 100%;
+  height: 1px;
+  background-color: var(--cor5);
+  position: absolute;
+  top: 21px;
+  left: 0px;
+  opacity: 0;
+}
+
+.menu-nav a:hover::after{
+  animation: progress-bar 0.7s forwards;
+}
+  
+@keyframes progress-bar {
+    0% {
+      opacity: 1;
+      width: 1%;
+    }100%{
+      opacity: 1;
+      width: 100%;
+    }
+}
+
+.buttons-nav{
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.buttons-nav button{
+  padding: 13px;
+  font-size: 16px;
+  border-radius: 30px;
+  font-weight: bolder;
+}
+
+.buttons-nav .btn-criarConta{
+  width: 200px;
+  border: none;
+  background-color: var(--cor2);
+  color: white;
+}
+
+.buttons-nav .btn-criarConta:hover{
+  background-color: var(--cor3);
+  cursor: pointer;
+}
+
+.buttons-nav .btn-entrar{
+  width: 120px;
+  border: 1px solid var(--cor2);
+  background-color: white;
+  color: var(--cor2);
+}
+
+.buttons-nav .btn-entrar:hover{
+  background-color: var(--cor3);
+  color: white;
+  cursor: pointer;
+}
+
+.header-nav.active{
+  animation: background 0.5s forwards;
+}
+
+@keyframes background{
+  0%{
+    opacity: 0;
+    background-color: white;
+    padding: 65px;
+  }100%{
+    opacity: 1;
+    background-color: var(--cor2);
+    padding: 40px;
+  }
+}
+
+.header-nav.active .logo-nav h2,
+.header-nav.active .menu-nav a{
+  color: white;
+}
+
+.header-nav.active .menu-nav a::after{
+  background-color: white;
+}
+
+.header-nav.active .buttons-nav .btn-criarConta {
+  background-color: white;
+  color: var(--cor2);
+}
+
+.header-nav.active .buttons-nav .btn-criarConta:hover{
+  background-color: var(--cor3);
+  color: white;
+}
+
+.header-nav.active .buttons-nav .btn-entrar{
+  background-color: var(--cor2);
+  color: white;
+  border: 1px solid white;
+}
+
+.header-nav.active .buttons-nav .btn-entrar:hover{
+  background-color: var(--cor3);
+  border: 1px solid var(--cor3);
+}
