@@ -8,7 +8,7 @@
   justify-content: space-around;
   align-items: center;
   padding: 0px 90px;
-  border-bottom: 1px solid var(--cor5);
+  border-bottom: 1px solid #bebdbd;
 }
 
 .section-chamada{
@@ -33,12 +33,14 @@
 .input-chamada{
   position: relative;
   display: flex;
+  width: 90%;
+  z-index: 0;
 }
 
 .input-chamada input{
   padding: 18px;
   border-radius: 50px;
-  width: 600px;
+  width: 100%;
   border: 1px solid var(--cor2);
   outline: none;
   font-size: 20px;
@@ -53,7 +55,7 @@
   width: 200px;
   padding: 20px;
   border-radius: 50px;
-  left: 60%;
+  right: 0%;
 }
 
 .input-chamada button:hover{
