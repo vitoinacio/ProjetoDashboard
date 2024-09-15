@@ -25,11 +25,29 @@
       </div>
       <div class="buttons-nav">
         <button class="btn-criarConta">Criar conta</button>
-        <button class="btn-entrar">Entrar</button>
+        <button class="btn-entrar" id="loginBtn" >Entrar</button>
       </div>
     </header>
     <hr>
     <!-- FIM HEADER -->
+     <!--INICIO LOGIN-->
+  <div id="loginModal" class="modal">
+      <div class="modal-content">
+          <span class="close" id="closeBtn">×</span>
+          <form>
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required>
+
+              <label for="password">Senha:</label>
+              <input type="password" id="password" name="password" required>
+
+              <button type="submit">Entrar</button>
+              <button type="reset">Limpar</button>
+              <a href="#" id="recoverPassword">Recuperar Senha</a>
+          </form>
+      </div>
+  </div>
+     <!--FIM LOGIN-->
     <!-- INICIO MAIN -->
     <section class="main">
       <div class="container">

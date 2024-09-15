@@ -8,6 +8,7 @@
 @import url("./index.css/headerIndex.css");
 @import url("./index.css/main.css");
 @import url("./index.css/secundaria.css");
+@import url("./login.css/login.css");
 
 * {
   margin: 0;
