@@ -3,7 +3,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
-  height: 605px;
+  height: 100vh;
   width: 100%;
   justify-content: space-around;
   align-items: center;
