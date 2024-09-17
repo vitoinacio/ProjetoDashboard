@@ -5,7 +5,7 @@
   justify-content: space-around;
   align-items: center;
   background-color: white;
-  padding: 65px;
+  padding: 65px 70px;
   animation: background-before 0.5s forwards;
   z-index: 1;
 }
