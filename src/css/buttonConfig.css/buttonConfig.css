@@ -74,8 +74,7 @@
 
 .logout .buttons-menu{
   display: flex;
-  flex: 30%;
-  gap: 10px;
+  width: 120px;
 }
 
 .logout .buttons-menu button {

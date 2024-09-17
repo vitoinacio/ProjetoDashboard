@@ -19,9 +19,9 @@
         <h2><i class="fa-solid fa-chart-line"></i>Smart<strong>Wallet</strong></h2>
       </div>
       <div class="menu-nav">
-        <a href="#">Quem somos?</a>
-        <a href="#">Gestão de gastos</a>
-        <a href="#">O que oferecemos</a>
+        <a href="#oqueOferecemos">O que oferecemos</a>
+        <a href="#gestao-de-gastos">Gestão de gastos</a>
+        <a href="#quem-somos">Quem somos?</a>
       </div>
       <div class="buttons-nav">
         <button class="btn-criarConta">Criar conta</button>
@@ -35,15 +35,13 @@
       <div class="modal-content">
           <span class="close" id="closeBtn">×</span>
           <form>
-              <label for="email">Email:</label>
-              <input type="email" id="email" name="email" required>
-
-              <label for="password">Senha:</label>
-              <input type="password" id="password" name="password" required>
-
+              <input type="email" id="email" name="email" placeholder="Email" required>
+              <input type="password" id="password" name="password" placeholder="Senha" required>
               <button type="submit">Entrar</button>
               <button type="reset">Limpar</button>
               <a href="#" id="recoverPassword">Recuperar Senha</a>
+              <p>Ou</p>
+              <a href="#" id="criarConta">Crie sua conta</a>
           </form>
       </div>
   </div>
@@ -57,7 +55,7 @@
             <p>Para você, completo e gratuito*</p>
           </div>
           <div class="input-chamada">
-            <input type="email" name="email" id="email" placeholder="Seu email..">
+            <input type="email" name="email" id="emailIndex" placeholder="Seu email..">
             <button>Cadastre-se</button>
           </div>
         </div>
@@ -68,7 +66,7 @@
     </section>
     <!-- FIM MAIN -->
     <!-- SECTION SECUNDARIA -->
-    <section class="info-secundaria">
+    <section class="info-secundaria" id="oqueOferecemos">
       <div class="titulo-secundaria">
         <h2>O controle total em suas mãos</h2>
         <p>Com o controle, você está a um passo de suas metas e objetivos</p>
@@ -82,5 +80,52 @@
       </div>
     </section>
     <!-- FIM SECUNDARIA -->
+    <!-- Seção Gestão de Gastos -->
+    <section id="gestao-de-gastos" class="gestao-de-gastos">
+        <div class="container-gastos">
+            <h2>Gestão de Gastos</h2>
+            <div class="gestao-de-gastos-content">
+                <div class="gestao-de-gastos-texto">
+                    <p class="text-primary">Na Smart Wallet, sabemos que a gestão eficaz dos seus gastos é crucial para uma vida financeira saudável. Nossos dashboards de gastos foram projetados para ajudar você a controlar e otimizar suas despesas de maneira simples e eficiente.</p>
+                    <div>
+                      <p class="text"><strong>Análise Detalhada:</strong> Nossos dashboards fornecem uma visão abrangente das suas finanças, categorizando suas despesas e oferecendo insights detalhados sobre onde seu dinheiro está sendo gasto. Com gráficos e relatórios intuitivos, você pode facilmente identificar padrões e áreas onde é possível economizar.</p> 
+                      <img src="src/img/telaDasboard.png" alt="imagem da dasboard">
+                    </div>
+                    <div>
+                      <img src="src/img/telaDasboard.png" alt="imagem da dasboard"> 
+                      <p class="text"><strong>Controle de Orçamento:</strong> Defina e acompanhe seu orçamento com facilidade. Nossos recursos de planejamento permitem que você estabeleça metas financeiras e monitore seu progresso ao longo do tempo. Ajuste seu orçamento com base em suas necessidades e veja como suas finanças estão se saindo em relação às suas metas.</p>
+                    </div>
+                    <div>
+                      <p class="text"><strong>Alertas e Notificações:</strong> Mantenha-se informado com alertas personalizados que o ajudam a evitar gastos excessivos. Receba notificações sobre despesas que estão se aproximando dos limites do seu orçamento e ajuste seus hábitos de gasto de acordo.</p>
+                      <img src="src/img/telaDasboard.png" alt="imagem da dasboard">
+                    </div>
+                    <div>
+                      <img src="src/img/telaDasboard.png" alt="imagem da dasboard">
+                      <p class="text"><strong>Relatórios e Tendências:</strong> Gere relatórios detalhados para uma visão mais profunda de seus hábitos financeiros. Descubra tendências ao longo do tempo e use essas informações para tomar decisões mais informadas sobre seus gastos futuros.</p>
+                    </div>
+                    <p class="text-primary">Com a Smart Wallet, a gestão dos seus gastos se torna uma tarefa fácil e agradável. Nossa plataforma foi projetada para fornecer todas as ferramentas necessárias para que você tenha total controle sobre suas finanças e alcance seus objetivos financeiros com confiança.</p>
+                </div>
+                <div class="gestao-de-gastos-imagem">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Seção Quem Somos -->
+    <section id="quem-somos" class="quem-somos">
+      <div class="container-quemSomos">
+          <h2>Quem Somos ?</h2>
+          <div class="quem-somos-content">
+              <div class="quem-somos-texto">
+                  <p><strong>Bem-vindo à Smart Wallet!</strong> Somos líderes em soluções inovadoras para gestão financeira pessoal. Nossa missão é capacitar você a tomar decisões financeiras mais inteligentes e informadas com a ajuda de nossos dashboards de gastos intuitivos e eficazes.</p>
+                  <p>Na Smart Wallet, entendemos que a gestão de despesas pode ser um desafio. Por isso, desenvolvemos ferramentas que tornam o acompanhamento dos seus gastos simples e direto. Nossos dashboards oferecem uma visão clara e detalhada de suas finanças, permitindo que você monitore seu orçamento e identifique áreas de economia com facilidade.</p>
+                  <p>Estamos comprometidos em fornecer soluções que não só atendem às suas necessidades atuais, mas também se adaptam ao seu estilo de vida em constante mudança. Nossa abordagem combina design elegante e funcionalidade avançada para criar produtos que você realmente usa e aprecia.</p>
+                  <p>Na Smart Wallet, acreditamos que a gestão financeira eficaz é a chave para uma vida financeira saudável. Junte-se a nós e descubra como nossos dashboards podem transformar a maneira como você gerencia seus gastos e alcança seus objetivos financeiros.</p>
+              </div>
+              <div class="quem-somos-imagem">
+            </div>
+          </div>
+      </div>
+    </section>
   </body>
 </html>
