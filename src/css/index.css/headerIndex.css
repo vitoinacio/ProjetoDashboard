@@ -149,3 +149,9 @@
   background-color: var(--cor3);
   border: 1px solid var(--cor3);
 }
+
+.header-nav.active 
+.contentMenuMobile-index 
+.button-menuMobile{
+  background-color: white;
+}

@@ -1,0 +1,111 @@
+.contentMenuMobile-index{
+  display: none;
+  flex-direction: column;
+  position: relative;
+  width: 35px;
+  height: 35px;
+}
+
+.button-menuMobile{
+  content: "";
+  height: 4px;
+  width: 35px;
+  border-radius: 5px;
+  background-color: var(--cor2);
+  position: absolute;
+}
+
+.button-menuMobile:nth-child(2){
+  top: 10px;
+}
+
+.button-menuMobile:nth-child(3){
+  top: 20px;
+}
+
+.menuMobile-index{
+  display: none;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.664);
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  align-items: center;
+  justify-content: space-around;
+  padding: 40px;
+  gap: 50px;
+}
+
+.menuMobile-index a{
+  position: relative;
+  text-decoration: none;
+  color: var(--cor6);
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 2px;
+}
+
+.menuMobile-index a::after{
+  content: " ";
+  width: 100%;
+  height: 1px;
+  background-color: var(--cor6);
+  position: absolute;
+  top: 21px;
+  left: 0px;
+  opacity: 0;
+}
+
+.menuMobile-index a:hover::after{
+  animation: progress-bar 0.3s forwards;
+}
+  
+@keyframes progress-bar {
+    0% {
+      opacity: 1;
+      width: 1%;
+    }100%{
+      opacity: 1;
+      width: 100%;
+    }
+}
+
+.menuMobile-index .buttons{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.menuMobile-index button{
+  font-weight: bold;
+  border-radius: 30px;
+}
+
+.menuMobile-index .buttons .btn-criarConta{
+  background-color: var(--cor2);
+  color: white;
+  border: none;
+}
+
+.menuMobile-index .buttons .btn-criarConta:hover{
+  background-color: var(--cor3);
+}
+
+.menuMobile-index .buttons .btn-entrar{
+  background-color: white;
+  color: var(--cor2);
+  border: 2px solid var(--cor2);
+}
+
+.menuMobile-index .buttons .btn-entrar:hover{
+  color: white;
+  background-color: var(--cor3);
+  border: 2px solid var(--cor3);
+}
+
+.menuMobile-index.active{
+  display: flex;
+}
+
+
