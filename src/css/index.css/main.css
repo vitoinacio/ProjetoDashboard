@@ -3,12 +3,10 @@
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
-  height: 100vh;
   width: 100%;
   justify-content: space-around;
   align-items: center;
   padding: 0px 90px;
-  border-bottom: 1px solid #bebdbd;
 }
 
 .section-chamada{
