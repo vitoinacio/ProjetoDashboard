@@ -33,7 +33,7 @@
   width: 150px;
   height: 2px;
   bottom: 0%;
-  left: 40%;
+  left: calc(50% - 75px);
 }
 
 .container-card{
