@@ -35,6 +35,15 @@
     font-weight: bolder;
   }
 
+  .modal{
+    height: 100vh;
+    position: fixed;
+  }
+
+  .modal-content{
+    position: fixed;
+  }
+
 }
 
 @media screen and (max-width: 1220px) {
@@ -262,6 +271,19 @@
 } 
 
 @media screen and (max-width: 350px) {
+
+  .modal-content{
+    width: 250px;
+  }
+
+  #email, #password{
+    padding: 10px;
+    width: 200px;
+  }
+
+  .modal-content button {
+    width: 200px;
+  }
 
   .section-image img{
     width: 300px;

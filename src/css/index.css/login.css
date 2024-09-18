@@ -4,8 +4,9 @@
 }
 
 .modal {
-    display: none;
+    display: flex;
     position: fixed;
+    justify-content: center;
     top: -1px;
     z-index: 1;
     width: 100%;
@@ -43,7 +44,7 @@
     cursor: pointer;
 }
 
-form {
+.modal-content form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -61,7 +62,7 @@ form {
 
 
 
-button {
+.modal-content button {
     padding: 14px;
     font-size: 17px;
     width: 270px;
