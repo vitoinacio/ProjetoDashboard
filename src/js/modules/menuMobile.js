@@ -21,7 +21,7 @@ export default function menuMobile(){
     events.forEach((userEvents) =>{
       menuMobile.addEventListener(userEvents, openMenuMobile);
     })
-  } if (menuMobileIndex) {
+  } else if (menuMobileIndex) {
     const menuIndex = document.querySelector(".menuMobile-index")
 
     function openMenuMobile(){
