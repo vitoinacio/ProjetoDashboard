@@ -100,6 +100,8 @@
 .menuMobile-index button{
   font-weight: bold;
   border-radius: 30px;
+  width: 250px;
+  padding: 18px;
 }
 
 .menuMobile-index .buttons .btn-criarConta{
