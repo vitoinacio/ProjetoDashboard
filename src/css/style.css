@@ -13,6 +13,7 @@
 @import url("./index.css/footer.css");
 @import url("./index.css/responsivo.css");
 @import url("./index.css/menuMobile.css");
+@import url("./erro.css");
 
 * {
   margin: 0;
