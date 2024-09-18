@@ -57,18 +57,222 @@
   }
   /* HEADER FIM */
   /* INICIO MAIN */
-    
+  .container{
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 0px;
+  }
+
+  .section-chamada{
+    margin-top: 0px;
+    gap: 70px;
+  }
+
+  .section-image{
+    flex: 100%;
+    margin-top: 30px;
+  }
+
+  .section-image img{
+    width: 700px;
+    height: 700px;
+  }
+
+  .input-chamada{
+    width: 100%;
+  }
+
+  .container-card{
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .card-info{
+    max-width: 100%;
+    gap: 20px;
+    padding: 50px;
+  }
+
+  .titulo-secundaria{
+    padding: 70px 0px;
+  }
+
+  .gestao-de-gastos-texto div{
+    gap: 5%;
+  }
+
+  .gestao-de-gastos-texto .text-primary{
+    font-size: 17px;
+  }
+
+  .gestao-de-gastos-texto .text{
+    width: 390px;
+    font-size: 16px;
+  }
+
+  .gestao-de-gastos-texto img{
+    max-width: 300px;
+    max-height: 150px;
+  }
   /* FIM MAIN */
   
   }
 
-/* @media screen and (max-width: px) {
+@media screen and (max-width: 500px) {
 
   /* HEADER INICIO */
-    
   /* HEADER FIM */
   /* INICIO MAIN */
-    
-  /* FIM MAIN */
-  
-  /* } */ 
+  .container{
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 0px;
+  }
+
+  .section-chamada{
+    margin-top: 0px;
+    gap: 70px;
+    align-items: center;
+  }
+
+  .section-image{
+    flex: 100%;
+    margin-top: 30px;
+  }
+
+  .section-image img{
+    width: 400px;
+    height: 400px;
+  }
+
+  .section-chamada .text-chamada h1{
+    font-size: 28px;
+    font-weight: 800;
+  }
+
+  .section-chamada .text-chamada p{
+    font-size: 22px;
+  }
+
+  .input-chamada{
+    display: flex;
+    width: 80%;
+  }
+
+  .input-chamada input{
+    padding: 15px;
+    font-size: 15px;
+  }
+
+  .input-chamada button{
+    padding: 15px;
+    width: 150px;
+    font-size: 15px;
+  }
+
+  .info-secundaria{
+    padding: 150px 40px 50px 40px;
+  }
+
+  .titulo-secundaria{
+    padding: 70px 0px;
+  }
+
+  .titulo-secundaria h2{
+    font-size: 30px;
+  }
+
+  .titulo-secundaria p {
+    font-size: 22px;
+  }
+
+  .titulo-secundaria p::after{
+    left: 30%;
+  }
+
+  .container-card{
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .card-info{
+    max-width: 100%;
+    gap: 20px;
+    padding: 30px;
+  }
+
+  .gestao-de-gastos{
+    padding: 60px 20px;
+  }
+
+  .container-gastos h2{
+    font-size: 30px;
+  }
+
+  .gestao-de-gastos-texto div{
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .gestao-de-gastos-texto div:nth-child(2){
+    flex-direction: column-reverse;
+  }
+  .gestao-de-gastos-texto div:nth-child(4){
+    flex-direction: column-reverse;
+  }
+
+  .gestao-de-gastos-texto .text-primary{
+    font-size: 18px;
+  }
+
+  .gestao-de-gastos-texto .text{
+    width: 300px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .gestao-de-gastos-texto img{
+    max-width: 300px;
+    max-height: 150px;
+  }
+
+  .quem-somos-texto{
+    text-align: center;
+  }
+/* FIM MAIN */
+/* INICIO FOOTER */
+  footer{
+    height: auto;
+    align-items: center;
+    text-align: center;
+  }
+
+  .info-footer{
+    flex-direction: column;
+    align-items: center;
+  }
+/* FIM FOOTER */
+} 
+
+@media screen and (max-width: 350px) {
+  .titulo-secundaria h2{
+    margin-top: 170px;
+  }
+
+  .titulo-secundaria p::after{
+    left: 20%;
+  }
+
+  .gestao-de-gastos-texto .text{
+    width: 250px;
+  }
+
+  .gestao-de-gastos-texto img{
+    max-width: 250px;
+    max-height: 125px;
+  }
+}
