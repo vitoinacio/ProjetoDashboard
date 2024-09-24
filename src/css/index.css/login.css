@@ -1,73 +1,113 @@
 .login-container {
-    width: 100%;
-    height: 100vh;
+  width: 100%;
+  height: 100vh;
 }
 
 .modal {
-    display: none;
-    position: fixed;
-    justify-content: center;
-    top: -1px;
-    z-index: 1;
-    width: 100%;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+  display: none;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  top: 0px;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
-    display: flex;
-    position: relative;
-    bottom: 90px;
-    flex-direction: column;
-    align-items: center;
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 60px;
-    border: 1px solid #888;
-    max-width: 400px;
-    border-radius: 20px;
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fefefe;
+  padding: 60px;
+  max-width: 400px;
+  border-radius: 20px;
+}
+.modal-content i,
+.modal-content p {
+  color: var(--cor2);
+  display: flexbox;
+  padding: 0 0 5px 0;
+  position: relative;
+  bottom: 20px;
+  font-size: 25px;
 }
 
 .close {
-    color: #aaa;
-    float: right;
-    font-size: 35px;
-    font-weight: bold;
-    position: absolute;
-    right: 25px;
-    top: 20px;
+  color: #aaa;
+  font-size: 35px;
+  font-weight: bold;
+  position: absolute;
+  right: 25px;
+  top: 28px;
 }
 
-.close:hover, .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+.close i:hover,
+.close i:focus {
+  color: var(--cor5);
+  cursor: pointer;
 }
 
 .modal-content form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
 }
 
-#email, #password{
-    padding: 18px;
-    border-radius: 10px;
-    outline: none;
-    border: 0.5px solid #c4c2c2;
-    width: 270px;
-    font-size: 16px;
+#email,
+#password {
+  padding: 15px;
+  border-radius: 10px;
+  outline: none;
+  border: 0.5px solid #c4c2c2;
+  width: 300px;
+  font-size: 16px;
 }
-
-
 
 .modal-content button {
-    padding: 14px;
-    font-size: 17px;
-    width: 270px;
-    border-radius: 10px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    cursor: pointer;
+  padding: 13px;
+  font-size: 18px;
+  width: 300px;
+  border-radius: 20px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  background-color: var(--cor2);
+  color: var(--cor1);
+  border: none;
+  margin-top: 20px;
+}
+
+button.limpar-btn-modal {
+  padding: 11px;
+  margin-top: 5px;
+  background: white;
+  border: 2px solid var(--cor3);
+  color: var(--cor3);
+}
+
+.modal-content button:hover {
+  background-color: var(--cor3);
+}
+
+button.limpar-btn-modal:hover {
+  color: white;
+}
+
+.recoverPassword {
+  position: absolute;
+  margin: 115px 0 0 240px;
+}
+.criarConta {
+  position: absolute;
+  margin: 50px 0 0 215px;
+}
+
+a {
+  color: #888;
+  font-size: 12px;
 }
