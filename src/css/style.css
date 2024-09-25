@@ -14,6 +14,7 @@
 @import url("./index.css/responsivo.css");
 @import url("./index.css/menuMobile.css");
 @import url("./erro.css");
+@import url("./cadastro.css/cadastro.css");
 
 * {
   margin: 0;
