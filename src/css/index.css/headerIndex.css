@@ -82,7 +82,12 @@
 }
 
 .buttons-nav .btn-criarConta{
+  text-decoration: none;
   width: 200px;
+  padding: 15px;
+  border-radius: 30px;
+  text-align: center;
+  font-weight: bold;
   border: none;
   background-color: var(--cor2);
   color: white;
