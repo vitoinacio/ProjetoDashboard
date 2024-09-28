@@ -1,0 +1,112 @@
+.planejamento{
+  display: flex;
+  flex-direction: row;
+}
+
+.info-planejamento{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.entrada-salario,
+.gastos-totais{
+  background: white;
+  width: 250px;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.entrada-salario h2,
+.gastos-totais h2{
+  font-size: 20px;
+}
+
+.entrada-salario input,
+.gastos-totais input{
+  width: 80%;
+  padding: 13px;
+  font-size: 15px;
+  border: none;
+  border-bottom: 2px solid var(--cor6);
+}
+
+.entrada-salario input:focus{
+  outline: none;
+}
+
+.entrada-salario button{
+  padding: 10px;
+  border: none;
+  color: white;
+  background: var(--cor2);
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.entrada-salario button:hover{
+  background-color: var(--cor3);
+}
+
+.containerLista{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: white ;
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.containerLista h2{
+  text-align: center;
+}
+
+.containerLista input{
+  padding: 8px;
+  font-size: 15px;
+  border: none;
+  border-bottom: 2px solid var(--cor6);
+}
+
+.form{
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.form p{
+  margin-left: 7px;
+}
+
+.containerLista input:focus{
+  outline: none;
+}
+
+.containerLista .identificacao{
+  width: 130px;
+}
+
+.containerLista .valor{
+  width: 100px;
+}
+
+.containerLista .vencimento{
+  width: 110px;
+  font-size: 12px;
+}
+
+.form .notf{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-left: 20px;
+}
+
