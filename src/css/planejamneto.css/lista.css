@@ -94,6 +94,10 @@
   width: 130px;
 }
 
+.containerLista .observacao{
+  width: 170px;
+}
+
 .containerLista .valor{
   width: 100px;
 }
@@ -110,3 +114,28 @@
   margin-left: 20px;
 }
 
+.btnAdd button{
+  background: white;
+  border: 2px solid var(--cor2);
+  color: var(--cor2);
+  font-weight: 900;
+  border-radius: 10px;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.btnAdd button i{
+  font-size: 22px;
+}
+
+.btnAdd button:hover{
+  color: white;
+  background-color: var(--cor3);
+  border-color: var(--cor3);
+}
+
+.btnAdd button:active{
+  box-shadow: none;
+}
