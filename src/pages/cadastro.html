@@ -29,20 +29,24 @@
           
           <i class="fa-regular fa-address-card"></i>
         </div>
-        <form>
+        <form class="formInfoPessoais">
           <div class="form-cadastro">
-            <input type="text" id="name" placeholder="Nome" required>
+            <input type="text" id="name" placeholder="Nome" minlength="10" maxlength="50" required>
             <div>
               <select name="sexo" id="sexo" required>
+                <option value="Masculino" selected disabled>Sexo</option>
                 <option value="Masculino">Masculino</option>
                 <option value="Feminino">Feminino</option>
+                <option value="Feminino">Transgênero</option>
+                <option value="Feminino">Não-binário</option>
+                <option value="Feminino">Outros..</option>
               </select>
               <input type="date" name="dataNasc" id="dataNasc" required>
             </div>
             <div>
               <input type="email" id="CadastroEmail" placeholder="Email" required>
-              <input type="password" id="Cadastrosenha" placeholder="Senha" required>
-              <input type="password" id="CadastroconfirmSenha" placeholder="Confirme sua senha" required>
+              <input type="password" id="Cadastrosenha" placeholder="Senha" minlength="8" maxlength="8" required>
+              <input type="password" id="CadastroconfirmSenha" placeholder="Confirme sua senha" minlength="8" maxlength="8" required>
             </div>
             <div>
               <button type="submit" id="btnAvancarCad">Avançar</button>
