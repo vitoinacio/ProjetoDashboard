@@ -1,0 +1,62 @@
+@media screen and (max-width: 1300px){
+  .entrada-salario,
+  .gastos-totais{
+    width: 220px;
+  }
+
+  .containerLista span p,
+  .containerLista span label{
+    font-size: 14px;
+  }
+
+}
+
+@media screen and (max-width: 900px){
+  .planejamento{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-planejamento{
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .gastos-totais{
+    display: flex;
+    height: 155px;
+    justify-content: space-around;
+  }
+
+  .containerLista .fomr{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .form .notf p {
+    margin-left: -25px;
+  }
+
+  .btnAdd{
+    margin-left: 10px;
+  }
+
+  .btnAdd button{
+    width: 100px;
+    font-size: 16px;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  .containerLista span p,
+  .containerLista span label{
+    font-size: 12px;
+  }
+
+  
+}
