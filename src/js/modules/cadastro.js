@@ -106,7 +106,15 @@ const validateCadastro = () => {
     };
 
     const validityFormAd = () => {
-      validityCpf()
+    if  (validityCpf()){
+      formAd[0][0].setCustomValidity("")
+    } else {
+      formAd[0][0].setCustomValidity("cpf inválido")
+    }
+    if (validityCpf() && cellMascara() && cepMascara()) {
+      setDadosAdicionais();
+    }
+
     };
 
     const setDados = () => {
@@ -128,29 +136,28 @@ const validateCadastro = () => {
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         if (JSON.parse(localStorage.getItem(key)).email === form[0][3].value) {
-          console.log(localStorage.key(i));
+          const dados = localStorage.key(i);
+          console.log(dados)
+          const updateDados = JSON.parse(localStorage.getItem(key));
+          updateDados.cpf = formAd[0][0].value
+          updateDados.telefone = formAd[0][1].value
+          updateDados.cep = formAd[0][2].value
+          updateDados.cidade = formAd[0][3].value
+          updateDados.bairro = formAd[0][4].value
+          updateDados.rua = formAd[0][5].value
+          updateDados.endNum = formAd[0][6].value
+          localStorage.setItem(dados, JSON.stringify(updateDados));
+          console.log(form[0][3].value)
         }
-        const id = localStorage.key(key);
-        const novoId = JSON.parse(localStorage.getItem(key));
-        console.log((novoId.idade = '21'));
-        console.log(novoId);
-        localStorage.setItem(id, JSON.stringify(novoId));
-        console.log(JSON.parse(localStorage.getItem(key)));
       }
     };
 
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      // if (JSON.parse(localStorage.getItem(key)).email === "ribeirokesia198@gmail.com") {
-      //   console.log(localStorage.key(i))
-      // }
-      // const id = localStorage.key(key)
-      // const novoId = JSON.parse(localStorage.getItem(key))
-      // console.log(novoId.idade = "21")
-      // console.log(novoId)
-      // localStorage.setItem(id, JSON.stringify(novoId))
-      // console.log(JSON.parse(localStorage.getItem(key)));
-    }
+    // for (let i = 0; i < localStorage.length; i++) {
+    //   const key = localStorage.key(i);
+    //   const id = JSON.parse(localStorage.getItem(key))
+    //   console.log(delete id.idade)
+    //   console.log(localStorage.setItem(key, JSON.stringify(id)))
+    // }
 
     const emailValidity = () => {
       const re = /\S+@\S+\.\S+/;
@@ -162,15 +169,14 @@ const validateCadastro = () => {
     };
 
     const cpfMaascara = () =>{
-      let cpfFormat = formAd[0][0].value;
+        let valor = formAd[0][0].value.replace(/\D/g, '');
 
-      if(isNaN(cpfFormat[cpfFormat.length-1])){ // impede entrar outro caractere que não seja número
-        formAd[0][0].value = cpfFormat.substring(0, cpfFormat.length-1);
-          return;
-      }
+        // Aplica a máscara
+        valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+        valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+        valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
 
-      if (cpfFormat.length == 3 || cpfFormat.length == 7) formAd[0][0].value += ".";
-      if (cpfFormat.length == 11) formAd[0][0].value += "-";
+        formAd[0][0].value = valor;
     }
 
     const cellMascara = () =>{
@@ -185,12 +191,61 @@ const validateCadastro = () => {
       valor = valor.replace(/(\d)(\d{4})$/, '$1-$2');
 
       formAd[0][1].value = valor;
+      if (formAd[0][1].value.length < 19) {
+        formAd[0][1].setCustomValidity('Digite um numero no formato +55 (99) 99999-9999')
+        return false
+      } else {
+        formAd[0][1].setCustomValidity("")
+        return true
+      }
+    }
+
+    const cepMascara = () =>{
+      formAd[0][2].value = formAd[0][2].value
+      .replace(/\D/g, '')
+      .replace(/^(\d{5})(\d)/, '$1-$2'); 
+      
+      if (formAd[0][2].value.length === 9) {
+        cepComplete();
+        return true
+      } else if (formAd[0][2].value.length < 9) {
+        limpaCep();
+        return false
+      }
     }
 
     const mascaraForm = () => {
       cpfMaascara();
-      cellMascara();
+      cellMascara()
+      cepMascara();
+      formAd[0][6].value = formAd[0][6].value.replace(/\D/g, '')
     };
+
+    const limpaCep = () => {
+      formAd[0][3].value = "";
+      formAd[0][4].value = "";
+      formAd[0][5].value = "";
+
+      formAd[0][3].disabled = false;
+      formAd[0][4].disabled = false;
+      formAd[0][5].disabled = false;
+
+    }
+
+    const cepComplete = () => {
+      fetch(`https://viacep.com.br/ws/${formAd[0][2].value.replace(/\D/g, '')}/json/`)
+        .then((cep)=> cep.json())
+        .then((cep) => {
+        formAd[0][3].value = cep.localidade;
+        formAd[0][4].value = cep.bairro;
+        formAd[0][5].value = cep.logradouro;
+
+        cep.localidade !== "" ? formAd[0][3].disabled = true: formAd[0][3].disabled = false;
+        cep.bairro !== "" ? formAd[0][3].disabled = true: formAd[0][3].disabled = false;
+        cep.logradouro !== "" ? formAd[0][3].disabled = true: formAd[0][3].disabled = false;
+        
+      })
+    }
 
     const formArray = new Array(form[0]).concat(new Array(formAd[0]));
 
@@ -199,7 +254,13 @@ const validateCadastro = () => {
     });
 
     form[0][6].addEventListener('click', validityForm);
+    form[0][6].addEventListener('submit', event =>{
+      event.preventDefault();
+    });
     formAd[0][7].addEventListener('click', validityFormAd);
+    formAd[0][7].addEventListener('submit', event => {
+      event.preventDefault();
+    });
   }
 };
 
