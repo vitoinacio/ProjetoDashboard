@@ -6,11 +6,11 @@
 }
 
 .infoPessoais{
-  display: flex;
+  display: none;
 }
 
 .infoAdicionais{
-  display: none;
+  display: flex;
 }
 
 .cadastro-header .logo-nav h2{
