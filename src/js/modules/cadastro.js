@@ -38,7 +38,7 @@ const validateCadastro = () => {
         if (
           form[0][0].validity.valid &&
           form[0][3].validity.valid &&
-          validitySenha()
+          validitySenha() && (form[0][4].value !== "")
         ) {
           event.preventDefault();
           setDados();
@@ -146,6 +146,8 @@ const validateCadastro = () => {
           updateDados.rua = formAd[0][5].value
           updateDados.endNum = formAd[0][6].value
           localStorage.setItem(dados, JSON.stringify(updateDados));
+          containerPessoais.style.display = 'flex';
+          containerAdicionais.style.display = 'none';
         }
       }
     };
@@ -243,6 +245,17 @@ const validateCadastro = () => {
     formArray.forEach((element) => {
       element.addEventListener('input', mascaraForm);
     });
+
+    form[0][3].addEventListener('input', ()=>{
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (JSON.parse(localStorage.getItem(key)).email === form[0][3].value){
+          form[0][3].setCustomValidity("Email ja cadastrado")
+          console.log("teste")
+          break
+        }
+      }
+    })
 
     form[0][6].addEventListener('click', validityForm);
     form[0][6].addEventListener('submit', event =>{
