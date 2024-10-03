@@ -113,3 +113,12 @@ button.limpar-btn-modal:hover {
   color: #888;
   font-size: 12px;
 }
+
+.emailNaoCad,
+.senhaIncorreta {
+  display: none;
+  color: red; 
+  font-size: 13px;
+  width: 100%; 
+  text-align: left;
+}

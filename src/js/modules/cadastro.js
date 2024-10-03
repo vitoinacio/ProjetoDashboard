@@ -137,7 +137,6 @@ const validateCadastro = () => {
         const key = localStorage.key(i);
         if (JSON.parse(localStorage.getItem(key)).email === form[0][3].value) {
           const dados = localStorage.key(i);
-          console.log(dados)
           const updateDados = JSON.parse(localStorage.getItem(key));
           updateDados.cpf = formAd[0][0].value
           updateDados.telefone = formAd[0][1].value
@@ -147,17 +146,9 @@ const validateCadastro = () => {
           updateDados.rua = formAd[0][5].value
           updateDados.endNum = formAd[0][6].value
           localStorage.setItem(dados, JSON.stringify(updateDados));
-          console.log(form[0][3].value)
         }
       }
     };
-
-    // for (let i = 0; i < localStorage.length; i++) {
-    //   const key = localStorage.key(i);
-    //   const id = JSON.parse(localStorage.getItem(key))
-    //   console.log(delete id.idade)
-    //   console.log(localStorage.setItem(key, JSON.stringify(id)))
-    // }
 
     const emailValidity = () => {
       const re = /\S+@\S+\.\S+/;

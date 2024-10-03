@@ -53,7 +53,7 @@
       <div class="modal-content">
         <span class="close" id="closeBtn"><i class="fa-solid fa-xmark"></i></span>
         <i class="fa-solid fa-chart-line"></i><p>Smart<strong>Wallet</strong></p>
-        <form>
+        <form action="#" method="post" class="loginForm">
           <input
             type="email"
             id="email"
@@ -63,6 +63,7 @@
             oninvalid="this.setCustomValidity('Digite seu Email')" 
             oninput="try{setCustomValidity('')}catch(e){}"
           />
+          <span class="emailNaoCad">Email não cadastrado</span>
           <a  href="#" class="recoverPassword" id="recoverPassword">Recuperar Senha</a>
           <input
             type="password"
@@ -73,8 +74,9 @@
             oninvalid="this.setCustomValidity('Digite sua Senha')" 
             oninput="try{setCustomValidity('')}catch(e){}"
           />
+          <span class="senhaIncorreta">Senha incorreta</span>
           <a href="#" class="criarConta" id="criarConta">Ainda não tenho conta</a>
-          <button type="submit" class="entrar-btn-modal">Entrar</button>
+          <button type="submit" onclick="event.preventDefault()" class="entrar-btn-modal">Entrar</button>
           <button type="reset" class="limpar-btn-modal">Limpar</button>
         </form>
       </div>
