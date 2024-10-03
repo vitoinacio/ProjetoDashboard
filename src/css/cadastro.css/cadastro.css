@@ -15,7 +15,6 @@
 
 .cadastro-header .logo-nav h2{
   color: white ;
-  margin-left: -100px;
 }
 
 .main-cadastro{
@@ -180,4 +179,9 @@
 
 .infoAdicionais .form-cadastro .btn{
   align-items: center;
+}
+
+.infoAdicionais.active .cadastro-progressBar::before{
+  width: 70%;
+  transform: transition 6s;
 }
