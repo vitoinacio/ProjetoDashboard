@@ -236,14 +236,14 @@ const validateCadastro = () => {
       fetch(`https://viacep.com.br/ws/${formAd[0][2].value.replace(/\D/g, '')}/json/`)
         .then((cep)=> cep.json())
         .then((cep) => {
-        formAd[0][3].value = cep.localidade;
-        formAd[0][4].value = cep.bairro;
-        formAd[0][5].value = cep.logradouro;
+        cep.localidade !== "" ? formAd[0][3].value = cep.localidade: formAd[0][3].value = formAd[0][3].value;
+        cep.bairro     !== "" ? formAd[0][4].value = cep.bairro    : formAd[0][4].value = formAd[0][4].value;
+        cep.logradouro !== "" ? formAd[0][5].value = cep.logradouro: formAd[0][5].value = formAd[0][5].value;
 
         cep.localidade !== "" ? formAd[0][3].disabled = true: formAd[0][3].disabled = false;
-        cep.bairro !== "" ? formAd[0][3].disabled = true: formAd[0][3].disabled = false;
-        cep.logradouro !== "" ? formAd[0][3].disabled = true: formAd[0][3].disabled = false;
-        
+        cep.bairro     !== "" ? formAd[0][4].disabled = true: formAd[0][4].disabled = false;
+        cep.logradouro !== "" ? formAd[0][5].disabled = true: formAd[0][5].disabled = false;
+
       })
     }
 
