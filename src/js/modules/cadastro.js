@@ -9,22 +9,27 @@ const validateCadastro = () => {
     const today = new Date(timeElapsed);
     const currentYear = +today.toLocaleDateString().split('/')[2];
 
-    const validityNasc = (event) => {
+    const validityNasc = () => {
       const nasc = +form[0][2].value.split('-').reverse()[2];
-      if (currentYear - nasc < 16) {
-        event.preventDefault();
+      console.log(currentYear - nasc)
+      if ((currentYear - nasc) < 16) {
         form[0][2].focus();
-        form[0][2].style.borderBottom = '1px solid red';
-        // form[0][2].setCustomValidity("Precisa ser maior de 16 anos");
+        form[0][2].style.borderBottom = '2px solid red';
+        form[0][2].setCustomValidity("Precisa ser maior de 16 anos");
+      } else {
+        form[0][2].setCustomValidity("");
+        form[0][2].style.borderBottom = '1px solid #e2dfdf';
       }
     };
 
     const validitySenha = () => {
       if (form[0][4].value !== form[0][5].value) {
         form[0][5].setCustomValidity('As senhas não coincidem');
+        form[0][5].style.borderBottom = '2px solid red';
         return false;
       } else {
         form[0][5].setCustomValidity('');
+        form[0][5].style.borderBottom = '1px solid #e2dfdf';
         return true;
       }
       return false;
@@ -108,8 +113,10 @@ const validateCadastro = () => {
     const validityFormAd = () => {
     if  (validityCpf()){
       formAd[0][0].setCustomValidity("")
+      formAd[0][0].style.borderBottom = '1px solid #e2dfdf';
     } else {
       formAd[0][0].setCustomValidity("cpf inválido")
+      formAd[0][0].style.borderBottom = '2px solid red';
     }
     if (validityCpf() && cellMascara() && cepMascara()) {
       setDadosAdicionais();
@@ -154,12 +161,26 @@ const validateCadastro = () => {
 
     const emailValidity = () => {
       const re = /\S+@\S+\.\S+/;
+      
+      
       if (re.test(form[0][3].value) === false) {
-        form[0][3].setCustomValidity('email errado');
+        form[0][3].setCustomValidity('email inválido');
+        form[0][3].style.borderBottom = '2px solid red';
       } else {
         form[0][3].setCustomValidity('');
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (JSON.parse(localStorage.getItem(key)).email === form[0][3].value){
+            form[0][3].setCustomValidity("Email ja cadastrado")
+            form[0][3].style.borderBottom = '2px solid red';
+            break
+          } else{
+            form[0][3].setCustomValidity('');
+            form[0][3].style.borderBottom = '1px solid #e2dfdf';
+          }
+        }
       }
-    };
+    }
 
     const cpfMaascara = () =>{
         let valor = formAd[0][0].value.replace(/\D/g, '');
@@ -186,9 +207,11 @@ const validateCadastro = () => {
       formAd[0][1].value = valor;
       if (formAd[0][1].value.length < 19) {
         formAd[0][1].setCustomValidity('Digite um numero no formato +55 (99) 99999-9999')
+        formAd[0][1].style.borderBottom = '2px solid red';
         return false
       } else {
         formAd[0][1].setCustomValidity("")
+        formAd[0][1].style.borderBottom = '1px solid #e2dfdf';
         return true
       }
     }
@@ -245,17 +268,6 @@ const validateCadastro = () => {
     formArray.forEach((element) => {
       element.addEventListener('input', mascaraForm);
     });
-
-    form[0][3].addEventListener('input', ()=>{
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (JSON.parse(localStorage.getItem(key)).email === form[0][3].value){
-          form[0][3].setCustomValidity("Email ja cadastrado")
-          console.log("teste")
-          break
-        }
-      }
-    })
 
     form[0][6].addEventListener('click', validityForm);
     form[0][6].addEventListener('submit', event =>{
