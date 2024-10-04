@@ -1,6 +1,7 @@
 .planejamento{
   display: flex;
   flex-direction: row;
+  gap: 15px;
 }
 
 .info-planejamento{
@@ -111,7 +112,22 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-left: 20px;
+  margin-left: 25px;
+}
+
+.form .notf p {
+  text-align: center;
+}
+
+.form .notf div {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.form .notf div label,
+.form .notf div label input{
+  cursor: pointer;
 }
 
 .btnAdd button{
@@ -120,6 +136,7 @@
   color: var(--cor2);
   font-weight: 900;
   border-radius: 10px;
+  margin-left: 20px;
   width: 80px;
   height: 80px;
   cursor: pointer;
