@@ -5,6 +5,7 @@ import sidebar from "./modules/sidebar.js";
 import buttonMenu from "./modules/buttonConfig.js";
 import loginBtn from "./modules/login.js";
 import validateCadastro from "./modules/cadastro.js";
+import logout from "./modules/logout.js";
 
 graficoDeBarra();
 graficoCircular();
@@ -13,3 +14,4 @@ sidebar();
 buttonMenu();
 loginBtn();
 validateCadastro();
+logout();

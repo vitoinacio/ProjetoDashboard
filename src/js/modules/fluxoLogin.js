@@ -11,6 +11,7 @@ export default function fluxoLogin() {
             JSON.parse(localStorage.getItem(key)).senha === form[0][1].value
           ) {
             window.location = 'src/pages/dashboard.html';
+            sessionStorage.setItem('logado', true)
           } else {
             document.querySelector('.senhaIncorreta').style.display = 'block';
             let senha = form[0][1].value.length;

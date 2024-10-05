@@ -153,6 +153,7 @@ const validateCadastro = () => {
           updateDados.rua = formAd[0][5].value
           updateDados.endNum = formAd[0][6].value
           localStorage.setItem(dados, JSON.stringify(updateDados));
+          sessionStorage.setItem('logado', true)
           containerPessoais.style.display = 'flex';
           containerAdicionais.style.display = 'none';
         }
