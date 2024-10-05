@@ -1,6 +1,7 @@
 .planejamento{
   display: flex;
   flex-direction: row;
+  gap: 15px;
 }
 
 .info-planejamento{
@@ -110,8 +111,19 @@
 .form .notf{
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-left: 20px;
+  gap: 5px;
+  margin-left: 25px;
+  justify-content: center;
+  align-items: center;
+}
+
+.form .notf p {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 14px;
+  margin-left: 0px;
 }
 
 .btnAdd button{
@@ -120,6 +132,7 @@
   color: var(--cor2);
   font-weight: 900;
   border-radius: 10px;
+  margin-left: 20px;
   width: 80px;
   height: 80px;
   cursor: pointer;
@@ -138,4 +151,8 @@
 
 .btnAdd button:active{
   box-shadow: none;
+}
+
+.containerListaMobile{
+  display: none;
 }
