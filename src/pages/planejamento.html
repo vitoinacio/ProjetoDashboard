@@ -85,18 +85,19 @@
           <p>R$ <input type="text" id="totaisGastos" placeholder=" 00.00" disabled></p>
         </div>
       </div>
-      <div class="containerLista">
+      <div class="containerLista desktop">
         <h2>Adicione seus debitos</h2>
         <div class="form">
           <span class="id"><p>Identificação </p><input class="identificacao" type="text" placeholder="Identificaçao"></span>
           <span class="obs"><p>Observação </p><input class="observacao" type="text" placeholder="Observaçao"></span>
           <span><p>Valor R$ </p><input class="valor" type="text" placeholder="Valor"></span>
           <span><p>Vencimento </p><input class="vencimento" type="text" name="vencimento" id="vencimento" placeholder="DD / MM / AAAA"></span>
-          <span class="notf"><p>Notificação <br>de vencimento</p>
-            <div>
-              <label for="notficacaoTrue">Sim <input type="radio" name="notficacao" id="notficacaoTrue" value="true"></label>
-              <label for="notficacaoFalse">Não <input type="radio" name="notficacao" id="notficacaoFalse" value="false"></label>
-            </div>
+          <span class="notf"><p>Notificação <br>de</p>
+            <select name="notficacao" id="notficacao">
+              <option value="" selected disabled>Vencimento</option>
+              <option value="sim">Sim</option>
+              <option value="nao">Não</option>
+            </select>
           </span>
           <div class="btnAdd"><button>adicionar<i class="fa-solid fa-plus"></i></button></div>
         </div>
@@ -104,6 +105,25 @@
           <ul>
             <li></li>
           </ul>
+        </div>
+      </div>
+      <div class="containerListaMobile">
+        <h2>Adicione seus debitos</h2>
+        <div class="formMobile">
+          <div class="">
+            <input class="identificacao" type="text" placeholder="Identificaçao">
+            <input class="observacao" type="text" placeholder="Observaçao">
+          </div>
+          <div>
+            <input class="valor" type="text" placeholder="Valor R$">
+            <input class="vencimento" type="text" name="vencimento" id="vencimento" placeholder="DD / MM / AAAA">
+          </div>
+          <select name="notficacao" id="notficacao">
+            <option value="" selected disabled>Notficação</option>
+            <option value="sim">Sim</option>
+            <option value="nao">Não</option>
+          </select>
+          <div><button>adicionar<i class="fa-solid fa-plus"></i></button></div>
         </div>
       </div>
     </div>

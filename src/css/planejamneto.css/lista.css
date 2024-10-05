@@ -111,23 +111,19 @@
 .form .notf{
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 5px;
   margin-left: 25px;
+  justify-content: center;
+  align-items: center;
 }
 
 .form .notf p {
-  text-align: center;
-}
-
-.form .notf div {
-  text-align: center;
   display: flex;
+  text-align: center;
   justify-content: center;
-}
-
-.form .notf div label,
-.form .notf div label input{
-  cursor: pointer;
+  width: 100%;
+  font-size: 14px;
+  margin-left: 0px;
 }
 
 .btnAdd button{
@@ -155,4 +151,8 @@
 
 .btnAdd button:active{
   box-shadow: none;
+}
+
+.containerListaMobile{
+  display: none;
 }
