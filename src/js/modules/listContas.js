@@ -111,14 +111,14 @@ export default function todoList() {
       } else {
         const [day, month, year] = form[0][3].value.split('/');
         const date = new Date(`${year}-${month}-${day}`);
-        if (
-          +day > 31 || +month > 12 || 
-          +year < currentYear || 
-          (+year === currentYear && +month < currentMonth) || 
-          (+year === currentYear && +month === currentMonth && +day < currentDay)
-        ) {
-          setError(form[0][3]);
-        }
+        // if (
+        //   +day > 31 || +month > 12 || 
+        //   +year < currentYear || 
+        //   (+year === currentYear && +month < currentMonth) || 
+        //   (+year === currentYear && +month === currentMonth && +day < currentDay)
+        // ) {
+        //   setError(form[0][3]);
+        // }
       }
       if (form[0][4].value === '') setError(form[0][4]);
     
