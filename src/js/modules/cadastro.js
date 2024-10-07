@@ -206,7 +206,7 @@ const validateCadastro = () => {
       valor = valor.replace(/(\d)(\d{4})$/, '$1-$2');
 
       formAd[0][1].value = valor;
-      if (formAd[0][1].value.length < 19) {
+      if (formAd[0][1].value.length < 19 && formAd[0][1].value.length > 17) {
         formAd[0][1].setCustomValidity('Digite um numero no formato +55 (99) 99999-9999')
         formAd[0][1].style.borderBottom = '2px solid red';
         return false

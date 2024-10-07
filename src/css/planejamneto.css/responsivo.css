@@ -1,4 +1,17 @@
-@media screen and (max-width: 1300px){
+@media screen and (max-width: 1360px){
+
+  .planejamento{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-planejamento{
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+  }
+
   .entrada-salario,
   .gastos-totais{
     width: 220px;
@@ -9,9 +22,19 @@
     font-size: 14px;
   }
 
+  .gastos-totais{
+    display: flex;
+    height: 155px;
+    justify-content: space-around;
+  }
+
+  .btnAdd button{
+    width: 75px;
+  }
+
 }
 
-@media screen and (max-width: 900px){
+@media screen and (max-width: 1020px){
   .planejamento{
     display: flex;
     flex-direction: column;
@@ -37,8 +60,8 @@
     align-items: center;
   }
 
-  .form .notf{
-    margin-left: -10px;
+  .formPLanejamento .notf{
+    margin-left: -2px;
   }
 
   .btnAdd{
@@ -53,7 +76,7 @@
 
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 985px) {
   .containerLista.desktop{
     display: none;
   }
@@ -143,7 +166,7 @@
   }
 }
 
-@media screen and (max-width: 330px){
+@media screen and (max-width: 350px){
 
   .info-planejamento{
     gap: 10px;
