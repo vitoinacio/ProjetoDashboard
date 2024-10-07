@@ -17,6 +17,7 @@
 @import url("./cadastro.css/cadastro.css");
 @import url("./planejamneto.css/lista.css");
 @import url("./planejamneto.css/responsivo.css");
+@import url("./user.css/user.css");
 
 * {
   margin: 0;
