@@ -56,7 +56,7 @@
   background-color: var(--cor3);
 }
 
-.containerLista{
+.containertodo{
   display: flex;
   flex-direction: column;
   gap: 20px;
