@@ -11,7 +11,8 @@
 }
 
 .entrada-salario,
-.gastos-totais{
+.gastos-totais,
+.IndiceGatos{
   background: white;
   width: 250px;
   height: max-content;
