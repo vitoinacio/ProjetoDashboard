@@ -67,8 +67,10 @@ export default function todoList() {
     const addContMobile = () => {
       const model = createModel(formMobile);
       if (validyInputs(formMobile)) {
-        addTodo(model, '.listtodoMobile');
+        addTodo(model, '.listtodo');
         addTotalGastos(formMobile);
+        const item = document.querySelector('.listtodo').lastElementChild;
+        checkDueDate(item);
         addEvents();
       }
     };
