@@ -7,6 +7,7 @@ import loginBtn from "./modules/login.js";
 import validateCadastro from "./modules/cadastro.js";
 import logout from "./modules/logout.js";
 import todoList from "./modules/listContas.js";
+import user from "./modules/user.js";
 
 graficoDeBarra();
 graficoCircular();
@@ -17,3 +18,4 @@ loginBtn();
 validateCadastro();
 logout();
 todoList();
+user();

@@ -11,7 +11,8 @@
 }
 
 .entrada-salario,
-.gastos-totais{
+.gastos-totais,
+.IndiceGatos{
   background: white;
   width: 250px;
   height: max-content;
@@ -56,7 +57,7 @@
   background-color: var(--cor3);
 }
 
-.containerLista{
+.containertodo{
   display: flex;
   flex-direction: column;
   gap: 20px;
