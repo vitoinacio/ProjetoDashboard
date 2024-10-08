@@ -18,6 +18,7 @@
 @import url("./planejamneto.css/lista.css");
 @import url("./planejamneto.css/responsivo.css");
 @import url("./user.css/user.css");
+@import url("./user.css/responsivo.css");
 
 * {
   margin: 0;

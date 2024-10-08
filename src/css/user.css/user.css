@@ -16,6 +16,7 @@
   background: white;
   gap: 60px;
   padding: 30px;
+  overflow: auto;
 }
 
 .userInfo .tituloUser{
@@ -57,11 +58,11 @@
 
 .userInfo label input{
   background: var(--cor6);
-  padding: 16px;
-  width: 500px;
+  padding: 15px;
+  width: 450px;
   border: none;
-  margin-right: 40px;
-  font-size: 22px;
+  margin-right: 20px;
+  font-size: 20px;
 }
 
 .userInfo label input:focus{
