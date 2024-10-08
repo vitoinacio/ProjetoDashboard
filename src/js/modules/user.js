@@ -1,8 +1,9 @@
 export default function user() {
   const form = document.querySelectorAll('form.formUser');
+  const key = sessionStorage.getItem('logedUser');
 
-  if (form.length) {
-    const userDados = localStorage.getItem(localStorage.key(0));
+  if (form.length && key !== null) {
+    const userDados = localStorage.getItem(key);
     if (userDados) {
       const user = JSON.parse(userDados);
       form[0].querySelector('#name').value = user.nome || '';

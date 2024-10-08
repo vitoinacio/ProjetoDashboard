@@ -27,6 +27,14 @@
   font-size: 30px;
 }
 
+.logo-nav h2 a{
+  text-decoration: none;
+}
+
+.logo-nav h2 a:active{
+  color: var(--cor2);
+}
+
 .logo-nav h2 i{
   margin-right: 10px;
 }
@@ -125,7 +133,7 @@
   }
 }
 
-.header-nav.active .logo-nav h2,
+.header-nav.active .logo-nav h2 a,
 .header-nav.active .menu-nav a{
   color: white;
 }
