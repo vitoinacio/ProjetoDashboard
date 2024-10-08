@@ -8,6 +8,7 @@ import validateCadastro from "./modules/cadastro.js";
 import logout from "./modules/logout.js";
 import todoList from "./modules/listContas.js";
 import user from "./modules/user.js";
+import cadastreSe from "./modules/cadastreSe.js";
 
 graficoDeBarra();
 graficoCircular();
@@ -19,3 +20,4 @@ validateCadastro();
 logout();
 todoList();
 user();
+cadastreSe();

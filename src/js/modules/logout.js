@@ -6,6 +6,7 @@ export default function logout(){
     const off = () =>{
       if (sessionStorage.getItem('logado') === 'true') {
         sessionStorage.setItem('logado', false)
+        sessionStorage.removeItem('logedUser')
         window.location = '.././../index.html'
       }
     }

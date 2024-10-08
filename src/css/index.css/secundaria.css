@@ -57,6 +57,18 @@
   box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
 }
 
+.card-info:hover{
+  scale: 1.1;
+  transition: 0.5s;
+}
+
+.card-info a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 .card-info i {
   font-size: 60px;
   background-image: linear-gradient(30deg , var(--cor2) ,rgb(71, 110, 161), white);

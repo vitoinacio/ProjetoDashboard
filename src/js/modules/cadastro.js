@@ -9,6 +9,13 @@ const validateCadastro = () => {
     const today = new Date(timeElapsed);
     const currentYear = +today.toLocaleDateString().split('/')[2];
 
+    const emailIndex = sessionStorage.getItem('emailIndex');
+
+    if (emailIndex !== null) {
+      form[0][3].value = emailIndex
+      console.log(emailIndex)
+    }
+
     const validityNasc = () => {
       const nasc = +form[0][2].value.split('-').reverse()[2];
       console.log(currentYear - nasc)
@@ -49,6 +56,7 @@ const validateCadastro = () => {
           setDados();
           containerAdicionais.style.display = 'flex';
           containerPessoais.style.display = 'none';
+          sessionStorage.removeItem('emailIndex')
           setTimeout(() => {
             containerAdicionais.classList.add('active');
           }, 300);
@@ -134,7 +142,7 @@ const validateCadastro = () => {
         senha: form[0][4].value,
       };
       window.localStorage.setItem(
-        `clientId=${localStorage.length + 1}`,
+        `user=${localStorage.length + 1}`,
         JSON.stringify(client)
       );
     };
@@ -154,6 +162,7 @@ const validateCadastro = () => {
           updateDados.endNum = formAd[0][6].value
           localStorage.setItem(dados, JSON.stringify(updateDados));
           sessionStorage.setItem('logado', true)
+          sessionStorage.setItem('logedUser', key)
           containerPessoais.style.display = 'flex';
           containerAdicionais.style.display = 'none';
         }

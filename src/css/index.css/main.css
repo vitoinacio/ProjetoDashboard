@@ -44,6 +44,14 @@
   font-size: 20px;
 }
 
+.invalidEmail{
+  position: absolute;
+  color: red;
+  font-size: 18px;
+  top: 70px;
+  left: 20px;
+}
+
 .input-chamada button{
   background-color: var(--cor2);
   color: white;
