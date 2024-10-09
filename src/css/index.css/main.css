@@ -54,14 +54,16 @@
 
 .input-chamada button{
   background-color: var(--cor2);
-  color: white;
+  color: var(--cor1);
   position: absolute;
+  font-weight: bold;
   border: none;
   font-size: 18px;
   width: 200px;
   padding: 20px;
   border-radius: 50px;
   right: 0%;
+  top: 1px;
 }
 
 .input-chamada button:hover{

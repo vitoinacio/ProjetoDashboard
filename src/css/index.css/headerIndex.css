@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: white;
+  background-color: var(--cor1);
   padding: 65px 70px;
   animation: background-before 0.5s forwards;
   z-index: 1;
@@ -15,7 +15,7 @@
     background-color: var(--cor2);
     padding: 40px 70px;
   }100%{
-    background-color: white;
+    background-color: var(--cor1);
     padding: 65px 70px;
   }
 }
@@ -98,7 +98,7 @@
   font-weight: bold;
   border: none;
   background-color: var(--cor2);
-  color: white;
+  color: var(--cor1);
 }
 
 .buttons-nav .btn-criarConta:hover{
@@ -109,13 +109,13 @@
 .buttons-nav .btn-entrar{
   width: 120px;
   border: 1px solid var(--cor2);
-  background-color: white;
+  background-color: var(--cor1);
   color: var(--cor2);
 }
 
 .buttons-nav .btn-entrar:hover{
   background-color: var(--cor3);
-  color: white;
+  color: var(--cor1);
   cursor: pointer;
 }
 
@@ -125,7 +125,7 @@
 
 @keyframes background{
   0%{
-    background-color: white;
+    background-color: var(--cor1);
     padding: 65px 70px;
   }100%{
     background-color: var(--cor2);
@@ -135,27 +135,27 @@
 
 .header-nav.active .logo-nav h2 a,
 .header-nav.active .menu-nav a{
-  color: white;
+  color: var(--cor1);
 }
 
 .header-nav.active .menu-nav a::after{
-  background-color: white;
+  background-color: var(--cor1);
 }
 
 .header-nav.active .buttons-nav .btn-criarConta {
-  background-color: white;
+  background-color: var(--cor1);
   color: var(--cor2);
 }
 
 .header-nav.active .buttons-nav .btn-criarConta:hover{
   background-color: var(--cor3);
-  color: white;
+  color: var(--cor1);
 }
 
 .header-nav.active .buttons-nav .btn-entrar{
   background-color: var(--cor2);
-  color: white;
-  border: 1px solid white;
+  color: var(--cor1);
+  border: 1px solid var(--cor1);
 }
 
 .header-nav.active .buttons-nav .btn-entrar:hover{
@@ -166,5 +166,5 @@
 .header-nav.active 
 .contentMenuMobile-index 
 .button-menuMobile{
-  background-color: white;
+  background-color: var(--cor1);
 }

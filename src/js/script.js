@@ -9,6 +9,7 @@ import logout from "./modules/logout.js";
 import todoList from "./modules/listContas.js";
 import user from "./modules/user.js";
 import cadastreSe from "./modules/cadastreSe.js";
+import theme from "./modules/theme.js";
 
 graficoDeBarra();
 graficoCircular();
@@ -21,3 +22,4 @@ logout();
 todoList();
 user();
 cadastreSe();
+theme();
