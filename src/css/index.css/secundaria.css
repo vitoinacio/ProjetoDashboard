@@ -1,5 +1,5 @@
 .info-secundaria{
-  background-color: #f5f3f3;
+  background-color: var(--cor1);
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -51,7 +51,7 @@
   text-align: center;
   justify-content: center;
   padding: 25px;
-  background-color: white;
+  background-color: var(--cor7);
   max-width: 300px;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
@@ -71,7 +71,7 @@
 
 .card-info i {
   font-size: 60px;
-  background-image: linear-gradient(30deg , var(--cor2) ,rgb(71, 110, 161), white);
+  background-image: linear-gradient(30deg , var(--cor2) ,rgb(71, 110, 161), var(--cor7));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

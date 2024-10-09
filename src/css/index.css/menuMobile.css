@@ -115,7 +115,7 @@
 
 .menuMobile-index .buttons .btn-criarConta{
   background-color: var(--cor2);
-  color: white;
+  color: var(--cor1);
   border: none;
 }
 
@@ -124,7 +124,7 @@
 }
 
 .menuMobile-index .buttons .btn-entrar{
-  background-color: white;
+  background-color: var(--cor1);
   color: var(--cor2);
   border: 2px solid var(--cor2);
   font-size: 20px;
@@ -132,7 +132,7 @@
 }
 
 .menuMobile-index .buttons .btn-entrar:hover{
-  color: white;
+  color: var(--cor1);
   background-color: var(--cor3);
   border: 2px solid var(--cor3);
 }

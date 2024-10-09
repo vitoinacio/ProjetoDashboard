@@ -10,6 +10,7 @@
 @import url("./index.css/secundaria.css");
 @import url("./index.css/login.css");
 @import url("./index.css/tabnav.css");
+@import url("./index.css/gestaoEQuemSomos.css");
 @import url("./index.css/footer.css");
 @import url("./index.css/responsivo.css");
 @import url("./index.css/menuMobile.css");
@@ -19,6 +20,7 @@
 @import url("./planejamneto.css/responsivo.css");
 @import url("./user.css/user.css");
 @import url("./user.css/responsivo.css");
+@import url("./theme/themeButton.css");
 
 * {
   margin: 0;
@@ -39,4 +41,6 @@ body {
   --cor4: #504f4f;
   --cor5: #6e6d6d;
   --cor6: #e2dfdf;
+  --cor7: #f8f6f6;
 }
+
