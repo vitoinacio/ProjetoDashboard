@@ -1,0 +1,34 @@
+body.dark header{
+  background: var(--cor3);
+  color: var(--cor5);
+}
+
+body.dark div.content{
+  background: var(--cor1);
+}
+
+body.dark .sidebar{
+  background: var(--cor8);
+  box-shadow: rgba(233, 232, 232, 0.45) 0px 5px 15px -5px;
+  z-index: 1;
+}
+
+body.dark .sidebar h3,
+body.dark .sidebar a{
+  color: var(--cor5);
+}
+
+body.dark .sidebar a.active,
+body.dark .sidebar a:hover{
+  background: var(--cor4);
+}
+
+body.dark .info-cash-box{
+  box-shadow: rgba(233, 232, 232, 0.45) 0px 5px 15px -5px;
+  color: var(--cor5);
+}
+
+body.dark .grafico-box{
+  background: var(--cor8);
+  box-shadow: rgba(233, 232, 232, 0.45) 0px 5px 15px -5px;
+}

@@ -1,9 +1,10 @@
-export default function graficoDeBarra() {
+export default function graficoDeBarra(theme) {
   
   const ctx = document.getElementById("graficoDeBarra");
-
+  
   if (ctx) {
     let data = [1,2,3,4,5,6,6,5,4,3,2,1];
+    Chart.defaults.color = theme;
 
   let graficoBarra = new Chart(ctx, {
     type: "bar",

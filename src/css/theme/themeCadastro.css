@@ -1,0 +1,8 @@
+body.dark .container-cadastro{
+  background: var(--cor8);
+  box-shadow: rgba(233, 232, 232, 0.45) 0px 5px 15px -5px;
+}
+
+body.dark .btnETermos label #termosCheckbox{
+  color: var(--cor5);
+}

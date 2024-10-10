@@ -122,7 +122,7 @@
 
   .formMobile div input{
     padding: 5px;
-    width: 48%;
+    width: 50%;
     font-size: 15px;
     border: none;
     border-bottom: 2px solid var(--cor6)

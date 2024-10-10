@@ -1,8 +1,9 @@
-export default function graficoCircular(){
+export default function graficoCircular(theme){
   
   const ctx = document.getElementById('graficoCircular');
   
   if (ctx) {
+    Chart.defaults.color = theme;
     let graficoBarra = new Chart(ctx, {
       type: 'doughnut',
       data: {

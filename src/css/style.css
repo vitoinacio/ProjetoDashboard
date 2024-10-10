@@ -20,8 +20,14 @@
 @import url("./planejamneto.css/responsivo.css");
 @import url("./user.css/user.css");
 @import url("./user.css/responsivo.css");
+
+/* Thema */
 @import url("./theme/themeButton.css");
-@import url("./theme/theme.css");
+@import url("./theme/themeIndex.css");
+@import url("./theme/themeCadastro.css");
+@import url("./theme/themeDashboard.css");
+@import url("./theme/themePlanejamento.css");
+@import url("./theme/themeUser.css");
 
 * {
   margin: 0;
@@ -43,5 +49,6 @@ body {
   --cor5: #6e6d6d;
   --cor6: #e2dfdf;
   --cor7: #f8f6f6;
+  --cor8: rgb(8, 8, 8);
 }
 
