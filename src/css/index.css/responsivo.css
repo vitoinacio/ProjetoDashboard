@@ -230,6 +230,9 @@
     width: 150px;
     font-size: 15px;
   }
+  .info-secundaria{
+    padding: 50px 40px 70px 40px;
+  }
 
   .titulo-secundaria{
     padding: 70px 0px;

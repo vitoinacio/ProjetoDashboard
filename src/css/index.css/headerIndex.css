@@ -28,6 +28,7 @@
 }
 
 .logo-nav h2 a{
+  color: var(--cor2);
   text-decoration: none;
 }
 
