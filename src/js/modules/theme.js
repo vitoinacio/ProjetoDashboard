@@ -7,7 +7,7 @@ export default function theme() {
       const isDarkMode = document.body.classList.contains('dark');
       if (isDarkMode) {
         document.body.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
+        sessionStorage.setItem('theme', 'light');
         document.querySelector('.themeContent').classList.remove('dark');
         
         // Alterar variáveis CSS para tema claro
@@ -22,7 +22,7 @@ export default function theme() {
         });
       } else {
         document.body.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
+        sessionStorage.setItem('theme', 'dark');
         document.querySelector('.themeContent').classList.add('dark');
         
         // Alterar variáveis CSS para tema escuro
@@ -40,7 +40,7 @@ export default function theme() {
 
     // Aplicar tema com base na preferência armazenada
     const applyStoredTheme = () => {
-      const storedTheme = localStorage.getItem('theme');
+      const storedTheme = sessionStorage.getItem('theme');
       if (storedTheme === 'dark') {
         document.body.classList.add('dark');
         document.querySelector('.themeContent').classList.add('dark');
