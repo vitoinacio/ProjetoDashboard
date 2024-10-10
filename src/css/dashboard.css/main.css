@@ -7,7 +7,7 @@
 .sidebar {
   width: 20%;
   background-color: var(--cor1);
-  height: 91%;
+  height: 100%;
 }
 
 .main .sidebar a.mobile{

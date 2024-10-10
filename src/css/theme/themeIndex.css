@@ -2,6 +2,16 @@ body.dark{
   background-color: black;
 }
 
+@keyframes background{
+  0%{
+    background-color: var(--cor1);
+    padding: 65px 70px;
+  }100%{
+    background-color: var(--cor3);
+    padding: 40px 70px;
+  }
+}
+
 body.dark .header-nav.active .logo-nav h2 a,
 body.dark .header-nav.active .menu-nav a{
   color: var(--cor5);
@@ -62,7 +72,7 @@ body.dark .section-chamada .input-chamada button{
 
 body.dark .card-info{
   box-shadow: rgba(233, 232, 232, 0.45) 0px 5px 15px -5px;
-  background: rgb(8, 8, 8);
+  background: var(--cor8);
   transition: 0.5s;
 }
 
@@ -74,6 +84,10 @@ body.dark .card-info:hover{
 body.dark .quem-somos-texto,
 body.dark .gestao-de-gastos-texto{
   color: var(--cor5);
+}
+
+body.dark footer{
+  background: var(--cor3);
 }
 
 body.dark .info-footer a{

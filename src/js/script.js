@@ -10,9 +10,19 @@ import todoList from "./modules/listContas.js";
 import user from "./modules/user.js";
 import cadastreSe from "./modules/cadastreSe.js";
 import theme from "./modules/theme.js";
+import handleTheme from "./modules/handleTheme.js";
 
-graficoDeBarra();
-graficoCircular();
+// muda a color dos graficos ao verificar o thema atual
+if (sessionStorage.getItem('theme') === 'dark') {
+  graficoDeBarra('#fff');
+  graficoCircular('#fff');
+} else {
+  graficoDeBarra('#504f4f');
+  graficoCircular('#504f4f');
+}
+
+handleTheme();
+
 menuMobile();
 sidebar();
 buttonMenu();
