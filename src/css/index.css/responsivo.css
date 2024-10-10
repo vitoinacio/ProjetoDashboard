@@ -79,26 +79,25 @@
   /* HEADER FIM */
   /* INICIO MAIN */
   .container{
-    flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 100px 0px;
+    padding: 30px 50px;
   }
 
   .section-chamada{
-    margin-top: 0px;
-    gap: 70px;
+    margin-top: 50px;
+    gap: 40px;
   }
 
   .section-image{
-    flex: 100%;
-    margin-top: 30px;
+    flex: 50%;
+    margin-top: 50px;
   }
 
   .section-image img{
-    width: 700px;
-    height: 700px;
+    width: 400px;
+    height: 400px;
   }
 
   .input-chamada{
@@ -107,7 +106,6 @@
 
   .titulo-secundaria h2{
     font-size: 30px;
-    margin-top: 190px;
   }
 
   .container-card{
@@ -193,18 +191,18 @@
 
   .section-chamada{
     margin-top: 0px;
-    gap: 70px;
+    gap: 20px;
     align-items: center;
   }
 
   .section-image{
-    flex: 100%;
-    margin-top: 30px;
+    flex: 50%;
+    margin-top: 40px;
   }
 
   .section-image img{
-    width: 400px;
-    height: 400px;
+    width: 250px;
+    height: 250px;
   }
 
   .section-chamada .text-chamada h1{
@@ -233,16 +231,8 @@
     font-size: 15px;
   }
 
-  .info-secundaria{
-    padding: 150px 40px 50px 40px;
-  }
-
   .titulo-secundaria{
     padding: 70px 0px;
-  }
-
-  .titulo-secundaria h2{
-    margin-top: -30px;
   }
 
   .titulo-secundaria p {

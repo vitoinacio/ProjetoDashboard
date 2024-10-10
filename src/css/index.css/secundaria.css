@@ -1,13 +1,16 @@
 .info-secundaria{
+  position: relative;
   background-color: var(--cor1);
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 150px 90px 50px 90px;
+  padding: 50px 90px;
   align-items: center;
+  gap: 50px;
 }
 
 .titulo-secundaria{
+  padding: 70px 0 20px 0;
   display: flex;
   flex-direction: column;
   text-align: center;
