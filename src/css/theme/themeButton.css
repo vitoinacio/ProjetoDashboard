@@ -1,6 +1,6 @@
 .themeContent{
   display: flex;
-  width: 100px;
+  width: 60px;
   background-color: var(--cor2);
   border-radius: 20px;
   box-shadow: rgba(3, 3, 15, 0.938) 0px 30px 60px -12px inset;
@@ -8,28 +8,29 @@
 }
 
 #theme{
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--cor2);
   background: white;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border: 1px solid var(--cor2);
   cursor: pointer;
   transition: .5s;
 }
 
-.themeContent #theme i{
+#theme i{
   rotate: -360deg;
   transition: .5s;
 }
 
-.themeContent.dark #theme i{
+body.dark #theme i{
   rotate: 360deg;
   transition: .5s;
 }
 
-.themeContent.dark #theme{
-  margin-left: calc(100% - 40px);
+body.dark #theme{
+  margin-left: calc(100% - 30px);
 }

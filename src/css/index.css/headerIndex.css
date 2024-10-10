@@ -79,11 +79,11 @@
 .buttons-nav{
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 20px;
 }
 
 .buttons-nav button{
-  padding: 13px;
+  padding: 12px;
   font-size: 16px;
   border-radius: 30px;
   font-weight: bolder;
@@ -91,14 +91,15 @@
 
 .buttons-nav .btn-criarConta{
   text-decoration: none;
-  width: 200px;
-  padding: 15px;
+  width: 170px;
+  padding: 13px;
   border-radius: 30px;
   text-align: center;
   font-weight: bold;
   border: none;
   background-color: var(--cor2);
   color: var(--cor1);
+  transition: .2s;
 }
 
 .buttons-nav .btn-criarConta:hover{
@@ -111,6 +112,7 @@
   border: 1px solid var(--cor2);
   background-color: var(--cor1);
   color: var(--cor2);
+  transition: .2s;
 }
 
 .buttons-nav .btn-entrar:hover{
@@ -145,6 +147,7 @@
 .header-nav.active .buttons-nav .btn-criarConta {
   background-color: var(--cor1);
   color: var(--cor2);
+  transition: .2s;
 }
 
 .header-nav.active .buttons-nav .btn-criarConta:hover{
@@ -156,6 +159,7 @@
   background-color: var(--cor2);
   color: var(--cor1);
   border: 1px solid var(--cor1);
+  transition: .2s;
 }
 
 .header-nav.active .buttons-nav .btn-entrar:hover{
@@ -167,4 +171,8 @@
 .contentMenuMobile-index 
 .button-menuMobile{
   background-color: var(--cor1);
+}
+
+.themeContent.themeContentMobile{
+  display: none;
 }

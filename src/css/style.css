@@ -21,6 +21,7 @@
 @import url("./user.css/user.css");
 @import url("./user.css/responsivo.css");
 @import url("./theme/themeButton.css");
+@import url("./theme/theme.css");
 
 * {
   margin: 0;
