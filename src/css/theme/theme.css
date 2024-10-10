@@ -1,3 +1,7 @@
+body.dark{
+  background-color: black;
+}
+
 body.dark .header-nav.active .logo-nav h2 a,
 body.dark .header-nav.active .menu-nav a{
   color: var(--cor5);
