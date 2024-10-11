@@ -2,7 +2,11 @@ body.dark{
   background-color: black;
 }
 
-@keyframes background{
+body.dark .header-nav.active{
+  animation: backgroundDark 0.5s forwards;
+}
+
+@keyframes backgroundDark{
   0%{
     background-color: var(--cor1);
     padding: 65px 70px;

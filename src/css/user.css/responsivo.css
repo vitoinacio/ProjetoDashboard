@@ -18,6 +18,10 @@
     flex-direction: column;
   }
 
+  .userPerfil{
+    align-items: center;
+  }
+
   .userInfo{
     padding: 15px;
     overflow: initial;

@@ -3,6 +3,24 @@ body.dark header{
   color: var(--cor5);
 }
 
+body.dark header .info-header .button-plano button{
+  color: var(--cor5);
+  background: var(--cor3);
+}
+
+body.dark header .info-header .button-plano button:hover{
+  background: var(--cor1);
+}
+
+body.dark header .info-header .login h5{
+  color: var(--cor5);
+}
+
+body.dark header .info-header .buttons-menu button{
+  color: var(--cor5);
+  background: var(--cor1);
+}
+
 body.dark div.content{
   background: var(--cor1);
 }
