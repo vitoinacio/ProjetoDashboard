@@ -11,6 +11,7 @@ import user from "./modules/user.js";
 import cadastreSe from "./modules/cadastreSe.js";
 import theme from "./modules/theme.js";
 import handleTheme from "./modules/handleTheme.js";
+import editDadosUser from "./modules/editDadosUser.js";
 
 // muda a color dos graficos ao verificar o thema atual
 if (sessionStorage.getItem('theme') === 'dark') {
@@ -33,3 +34,4 @@ todoList();
 user();
 cadastreSe();
 theme();
+editDadosUser();

@@ -13,7 +13,6 @@ const validateCadastro = () => {
 
     if (emailIndex !== null) {
       form[0][3].value = emailIndex
-      console.log(emailIndex)
     }
 
     const validityNasc = () => {
@@ -138,7 +137,7 @@ const validateCadastro = () => {
         nome: form[0][0].value,
         sexo: form[0][1].value,
         dataNasc: nasc,
-        email: form[0][3].value,
+        emailUser: form[0][3].value,
         senha: form[0][4].value,
       };
       window.localStorage.setItem(
