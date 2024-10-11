@@ -149,7 +149,7 @@ const validateCadastro = () => {
     const setDadosAdicionais = () => {
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        if (JSON.parse(localStorage.getItem(key)).email === form[0][3].value) {
+        if (JSON.parse(localStorage.getItem(key)).emailUser === form[0][3].value) {
           const dados = localStorage.key(i);
           const updateDados = JSON.parse(localStorage.getItem(key));
           updateDados.cpf = formAd[0][0].value
@@ -160,10 +160,10 @@ const validateCadastro = () => {
           updateDados.rua = formAd[0][5].value
           updateDados.endNum = formAd[0][6].value
           localStorage.setItem(dados, JSON.stringify(updateDados));
-          sessionStorage.setItem('logado', true)
           sessionStorage.setItem('logedUser', key)
           containerPessoais.style.display = 'flex';
           containerAdicionais.style.display = 'none';
+          sessionStorage.setItem('logado', true)
         }
       }
     };
@@ -179,7 +179,7 @@ const validateCadastro = () => {
         form[0][3].setCustomValidity('');
         for (let i = 0; i < localStorage.length; i++) {
           const key = localStorage.key(i);
-          if (JSON.parse(localStorage.getItem(key)).email === form[0][3].value){
+          if (JSON.parse(localStorage.getItem(key)).emailUser === form[0][3].value){
             form[0][3].setCustomValidity("Email ja cadastrado")
             form[0][3].style.borderBottom = '2px solid red';
             break

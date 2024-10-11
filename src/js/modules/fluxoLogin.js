@@ -7,7 +7,8 @@ export default function fluxoLogin() {
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         const storedUser = JSON.parse(localStorage.getItem(key));
-        if (storedUser.email === form[0][0].value) {
+        console.log(storedUser.emailUser)
+        if (storedUser.emailUser === form[0][0].value) {
           document.querySelector('.emailNaoCad').style.display = 'none';
           if (storedUser.senha === form[0][1].value) {
             sessionStorage.setItem('logado', true);
