@@ -5,12 +5,13 @@
   position: initial;
 }
 
-.infoPessoais{
+div .pessoais{
   display: flex;
 }
 
-.infoAdicionais{
+div.adicionais{
   display: none;
+  gap: 10px;
 }
 
 .cadastro-header .logo-nav h2{
@@ -141,6 +142,7 @@
   align-items: center;
 }
 
+
 .form-cadastro div button{
   width: 300px;
   padding: 12px;
@@ -163,24 +165,27 @@
   width: 30px;
 }
 
-.infoAdicionais .form-cadastro div{
-  flex-direction: column;
-}
-
-.infoAdicionais .form-cadastro .endereco{
+.form-cadastro #btnAvancarCad{
   display: flex;
-  flex-direction: row;
-}
-
-.infoAdicionais .form-cadastro .endereco input:nth-child(2){
-  width: 100px;
-}
-
-.infoAdicionais .form-cadastro .btn{
+  justify-content: center;
   align-items: center;
+  width: 300px;
+  padding: 12px;
+  border: 2px solid var(--cor3);
+  border-radius: 20px;
+  color: var(--cor3);
+  background-color: var(--cor7);
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.infoAdicionais.active .cadastro-progressBar::before{
-  width: 70%;
-  transform: transition 6s;
+.form-cadastro #btnAvancarCad:hover{
+  background-color: var(--cor3);
+  color: white;
+}
+
+div.adicionais input{
+  font-size: 13px;
+  padding: 8px;
 }
