@@ -73,6 +73,10 @@
     display: flex;
   }
 
+  .FontSizeContent.FontSizeContentMobile{
+    display: flex;
+  }
+
   .modal-content a{
     margin-left: 90px;
   }
