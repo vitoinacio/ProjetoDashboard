@@ -9,7 +9,7 @@
       crossorigin="anonymous"
     ></script>
     <script type="module" src="../js/script.js" defer></script>
-    <title>Análise</title>
+    <title>Configurações</title>
   </head>
   <body>
     <!-- INICIO HEADER -->
@@ -26,33 +26,33 @@
       </div>
       <div class="info-header">
         <i class="fa-solid fa-bell"></i>
-        <i class="fa-solid fa-gear"></i>
+        <a href="config.html"><i class="fa-solid fa-gear"></i></a>
         <div class="dropdown-menu">
           <div class="perfil-menu">
-            <img id="fotoPerfil" src="../img/perfil.png" alt="Perfil Usuario" />
+            <img id="fotoPerfil" src="../img/perfil.png" alt="Perfil Usuario">
             <div class="info-perfil">
-              <h4>Usuario</h4>
+              <h4 id="NomeUsuario">Usuario</h4>
               <h5>Plano Completo</h5>
             </div>
           </div>
-          <hr />
+          <hr>
           <div class="button-plano">
-            <button>Configurações da Conta e Plano</button>
+            <button>Configurações da Conta</button>
           </div>
-          <hr />
+          <hr>
           <div class="logout">
-            <img id="fotoPerfil" src="../img/perfil.png" alt="Perfil Usuario" />
+            <img id="fotoPerfil" src="../img/perfil.png" alt="Perfil Usuario">
             <div class="login">
               <p>Logado como:</p>
-              <h5>victor.hugo.ina10@gmail.com</h5>
+              <h5 id="emailConfig">victor.hugo.ina10@gmail.com</h5>
             </div>
             <div class="buttons-menu">
-              <button><i class="fa-solid fa-gear"></i></button>
-              <button id="btnlogout"><i class="fa-solid fa-power-off"></i></button>
+              <Button><i class="fa-solid fa-gear"></i></Button>
+              <Button id="btnlogout"><i class="fa-solid fa-power-off"></i></Button>
             </div>
           </div>
         </div>
-        <img id="fotoPerfil" class="menu-config" src="../img/perfil.png" alt="foto-perfil" />
+        <img class="menu-config" id="fotoPerfil" src="../img/perfil.png" alt="foto-perfil" />
       </div>
     </header>
     <!-- FIM HEADER -->
@@ -62,20 +62,16 @@
       <!-- SIDEBAR -->
       <div class="sidebar">
         <h3>Home</h3>
-        <a href="dashboard.html"
-          ><i class="fa-solid fa-chart-line"></i> Dashboard</a
+        <a href="dashboard.html">
+          <i class="fa-solid fa-chart-line"></i> Dashboard</a
         >
         <a href="planejamento.html"><i class="fa-solid fa-clipboard-list"></i> Planejamento</a>
-        <a href="analise.html"><i class="fa-solid fa-sliders"></i> Análise</a>
         <a href="user.html"><i class="fa-regular fa-circle-user"></i> User</a>
         <a href="config.html" class="mobile"
           ><i class="fa-solid fa-gear"></i> Configurações</a
         >
         <a href="#" class="mobile"
           ><i class="fa-solid fa-bell"></i> Notficações</a
-        >
-        <a href="#" class="mobile"
-          ><i class="fa-solid fa-money-check"></i> Plano</a
         >
         <a href="../../index.html" class="mobile" id="btnlogout"
           ><i class="fa-solid fa-power-off"></i> Logout</a
@@ -84,7 +80,12 @@
       </div>
       <!-- CONTENT -->
       <div class="content">
-        
+        <div class="containerNotfi">
+          <h4 class="tituloNotfi">Notficaçoes</h4>
+          <div class="notficacoesContainer">
+            <p class="semNofi">Sem Notficações</p>
+          </div>
+        </div>
       </div>
     </section>
     <!-- FIM MAIN -->

@@ -28,6 +28,11 @@
 @import url("./theme/themeDashboard.css");
 @import url("./theme/themePlanejamento.css");
 @import url("./theme/themeUser.css");
+@import url("./theme/themeConfig.css");
+
+@import url("./configuracoes.css/configuracoes.css");
+@import url("./notficacoes.css/notficacoes.css");
+@import url("./fontSize.css/fontSize.css");
 
 * {
   margin: 0;

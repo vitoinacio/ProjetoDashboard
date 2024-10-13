@@ -3,6 +3,7 @@
   animation: none;
   padding: 40px 0px;
   position: initial;
+  justify-content: center;
 }
 
 div .pessoais{
@@ -200,6 +201,11 @@ div.adicionais{
 .form-cadastro #btnAvancarCad:hover{
   background-color: var(--cor3);
   color: white;
+}
+
+.btnETermos {
+  display: flex;
+  align-items: center;
 }
 
 div.adicionais input{

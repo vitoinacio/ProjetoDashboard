@@ -3,6 +3,22 @@ body.dark .container-cadastro{
   box-shadow: rgba(233, 232, 232, 0.45) 0px 5px 15px -5px;
 }
 
+body.dark{
+  background-color: var(--cor1);
+}
+
 body.dark .btnETermos label #termosCheckbox{
   color: var(--cor5);
+}
+
+body.dark .btnETermos #btnAvancarCad{
+  background: var(--cor5);
+}
+
+body.dark input#localidade:disabled,
+body.dark input#bairro:disabled,
+body.dark input#logradouro:disabled,
+body.dark input#numCasa:disabled{
+  background-color: var(--cor6);
+  color: var(--cor8);
 }

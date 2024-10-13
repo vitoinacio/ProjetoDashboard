@@ -29,6 +29,8 @@
     display: block;
     position: absolute;
     width: 50%;
+    z-index: 1;
+    height: 90vh;
   }
 
 }
