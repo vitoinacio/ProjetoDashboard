@@ -17,6 +17,10 @@ header {
   align-items: center;
 }
 
+.info-header a i {
+  color: var(--cor6);
+}
+
 .info-header img, i, h3{
   cursor: pointer;
 }
