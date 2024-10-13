@@ -76,6 +76,20 @@ div.adicionais{
   transition: 1s;
 }
 
+.cadastro-progressBar.active::before{
+  width: 70%;
+}
+
+.cadastro-progressBar.active.activePlus::before{
+  width: 100%;
+}
+
+.cadastro-progressBar.active i:nth-child(2){
+  background-color: rgb(9, 204, 9);
+  transition: 1.2s;
+  color: white;
+}
+
 .cadastro-progressBar::after{
   content: "";
   width: 100%;
@@ -100,8 +114,7 @@ div.adicionais{
   flex-direction: column;
   gap: 20px;
 }
-
-.form-cadastro div:nth-child(2){
+.form-cadastro .formDiv1{ 
   flex-direction: row;
 }
 
@@ -110,6 +123,10 @@ div.adicionais{
   border: 0;
   border-bottom: 1px solid var(--cor6);
   font-size: 16px;
+}
+
+.error {
+  position: absolute;
 }
 
 .form-cadastro input:focus{
@@ -136,10 +153,9 @@ div.adicionais{
   cursor: pointer;
 }
 
-.form-cadastro div:nth-child(4){
+.form-cadastro .formDiv2{
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 
@@ -179,6 +195,7 @@ div.adicionais{
   font-weight: bold;
   cursor: pointer;
 }
+
 
 .form-cadastro #btnAvancarCad:hover{
   background-color: var(--cor3);

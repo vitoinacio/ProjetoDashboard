@@ -8,9 +8,9 @@ export default function Theme() {
       document.body.classList.add('dark');
       
       // Aplicar variáveis CSS para tema escuro
-      document.documentElement.style.setProperty('--cor1', '#000000');
+      document.documentElement.style.setProperty('--cor1', '#18191A');
       document.documentElement.style.setProperty('--cor5', '#ffffff');
-      document.documentElement.style.setProperty('--cor7', '#333333');
+      document.documentElement.style.setProperty('--cor7', '#333333')
       // Atualizar estilo dos botões
       if(btnThemes){
         btnThemes.forEach(btn => {
@@ -62,7 +62,7 @@ export default function Theme() {
         // document.querySelector('.themeContent').classList.add('dark');
         
         // Alterar variáveis CSS para tema escuro
-        document.documentElement.style.setProperty('--cor1', '#000000');
+        document.documentElement.style.setProperty('--cor1', '#18191A');
         document.documentElement.style.setProperty('--cor5', '#ffffff');
         document.documentElement.style.setProperty('--cor7', '#333333');
         
