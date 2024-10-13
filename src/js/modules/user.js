@@ -2,6 +2,22 @@ export default function user() {
   const form = document.querySelectorAll('form.formUser');
   const key = sessionStorage.getItem('logedUser');
 
+  if (key !== null) {
+    const userDados = localStorage.getItem(key);
+    if (userDados) {
+      const user = JSON.parse(userDados);
+
+      // Exibir foto de perfil se existir
+      if (user.fotoPerfil) {
+        const imgElement = document.querySelectorAll('#fotoPerfil');
+        imgElement.forEach((img)=>{
+          img.src = user.fotoPerfil;
+          img.alt = 'Foto de Perfil';
+        })
+      }
+    }
+  }
+
   if (form.length && key !== null) {
     const userDados = localStorage.getItem(key);
     if (userDados) {
@@ -26,14 +42,14 @@ export default function user() {
       form[0].querySelector('#rua').value = user.rua || '';
       form[0].querySelector('#endNum').value = user.endNum || '';
 
-      // Exibir foto de perfil se existir
-      if (user.fotoPerfil) {
-        const imgElement = document.querySelectorAll('#fotoPerfil');
-        imgElement.forEach((img)=>{
-          img.src = user.fotoPerfil;
-          img.alt = 'Foto de Perfil';
-        })
-      }
+      // // Exibir foto de perfil se existir
+      // if (user.fotoPerfil) {
+      //   const imgElement = document.querySelectorAll('#fotoPerfil');
+      //   imgElement.forEach((img)=>{
+      //     img.src = user.fotoPerfil;
+      //     img.alt = 'Foto de Perfil';
+      //   })
+      // }
 
       // Adicionar evento de upload de foto
       const fotoInput = document.querySelector('#fotoPerfilInput');
