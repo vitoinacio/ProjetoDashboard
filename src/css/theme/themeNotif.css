@@ -1,0 +1,12 @@
+body.dark .containerNotfi{
+  background: var(--cor8);
+  color: var(--cor5);
+} 
+
+body.dark .tituloNotfi::before{
+  background: var(--cor5);
+}
+
+body.dark .containerNotfi .notficacoesContainer{
+  background: var(--cor8);
+}

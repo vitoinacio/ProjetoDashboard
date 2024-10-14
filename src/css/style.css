@@ -30,10 +30,15 @@
 @import url("./theme/themeUser.css");
 @import url("./theme/themeConfig.css");
 @import url("./theme/themeButtonFont.css");
+@import url("./theme/themeNotif.css");
 
 @import url("./configuracoes.css/configuracoes.css");
 @import url("./notficacoes.css/notficacoes.css");
 @import url("./fontSize.css/fontSize.css");
+
+@import url("./termosDeUso.css/termosDeUso.css");
+@import url("./politicaEPrivacidade.css/politicaEPrivacidade.css");
+@import url("./contato.css/contato.css");
 
 * {
   margin: 0;
