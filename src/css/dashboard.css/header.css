@@ -21,6 +21,14 @@ header {
   color: var(--cor6);
 }
 
+.dropdown-menu button a i{
+  color: var(--cor8);
+}
+
+.dropdown-menu button a {
+  text-decoration: none;
+}
+
 .info-header img, i, h3{
   cursor: pointer;
 }

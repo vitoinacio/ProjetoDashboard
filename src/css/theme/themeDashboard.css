@@ -3,6 +3,10 @@ body.dark header{
   color: var(--cor5);
 }
 
+body.dark .dropdown-menu button a i{
+  color: var(--cor5);
+}
+
 body.dark header .info-header .button-plano button{
   color: var(--cor5);
   background: var(--cor3);

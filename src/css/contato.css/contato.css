@@ -1,0 +1,44 @@
+.containerTelasAdcionais .contatoForm form{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 400px;
+}
+
+.containerTelasAdcionais a.back{
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+}
+
+.containerTelasAdcionais a.back:hover{
+  color: var(--cor3);
+}
+
+.containerTelasAdcionais .back i {
+  font-size: 30px;
+}
+
+
+.containerTelasAdcionais .contatoForm form #emailContato{
+  padding: 10px;
+}
+
+.containerTelasAdcionais .contatoForm form #mensagemFeeback{
+  padding: 10px;
+}
+
+.containerTelasAdcionais .contatoForm form #btnContato{
+  padding: 10px;
+  color: var(--cor1);
+  background: var(--cor2);
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.containerTelasAdcionais .contatoForm form #btnContato:hover{
+  background: var(--cor3);
+}
