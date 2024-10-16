@@ -38,7 +38,6 @@ export default function menuMobile() {
         window.removeEventListener("scroll", scrollMenu);
       } else if (positionScroll != window.scrollY) {
         menuIndex.classList.remove(activeClass);
-        console.log(positionScroll);
       }
     }
 
