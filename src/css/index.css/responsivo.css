@@ -234,6 +234,10 @@
     width: 80%;
   }
 
+  .input-chamada .error{
+    top: 50px !important;
+  }
+
   .input-chamada input{
     padding: 15px;
     font-size: 15px;
