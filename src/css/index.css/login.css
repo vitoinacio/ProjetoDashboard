@@ -1,6 +1,5 @@
 .login-container {
   width: 100%;
-  height: 100vh;
 }
 
 .modal {
@@ -17,12 +16,12 @@
 }
 
 .modal-content {
+  position: relative;
   display: flex;
-  position: absolute;
   flex-direction: column;
   align-items: center;
   background-color: var(--cor1);
-  padding: 60px;
+  padding:  61px 60px;
   max-width: 400px;
   border-radius: 20px;
 }
@@ -98,27 +97,54 @@ button.limpar-btn-modal:hover {
   color: var(--cor1);
 }
 
-.recoverPassword {
-  position: absolute;
-  margin: 115px 0 0 240px;
+.modal-content .recoverPassword {
+  text-decoration: none;
+  width: 100%;
+  font-size: 12px !important;
+  cursor: pointer;
+  margin: -10px;
+  z-index: 1;
+  color: var(--cor5);
 }
-.criarConta {
-  position: absolute;
-  margin: 50px 0 0 215px;
+.modal-content .criarConta {
+  text-decoration: none;
+  width: 100%;
+  font-size: 12px !important;
+  cursor: pointer;
+  margin: -10px;
+  color: var(--cor5);
+}
+
+.modal-content .criarConta:hover,
+.modal-content .recoverPassword:hover{
+  color: var(--cor4);
+
 }
 
 .modal-content a {
   text-align: end;
   right: 50px;
-  color: #888;
   font-size: 12px;
 }
 
-.emailNaoCad,
-.senhaIncorreta {
+
+.modal-content .emailNaoCad,
+.modal-content .senhaIncorreta {
   display: none;
   color: red; 
   font-size: 13px;
   width: 100%; 
   text-align: left;
+}
+
+.emailNaoCad{
+    position: absolute;
+    left: 55px;
+    top: 175px;
+  }
+
+.senhaIncorreta{
+  position: absolute;
+  left: 55px;
+  top: 250px;
 }
