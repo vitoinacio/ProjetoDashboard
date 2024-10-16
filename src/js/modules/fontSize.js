@@ -55,7 +55,7 @@ export default function fontSize() {
   if (increment && decrement) {
     const fontSizeButton = (event) => {
       if (event.target.id === 'increment') {
-        tam = Math.min(tam + 1, 30);
+        tam = Math.min(tam + 1, 27);
       } else if (event.target.id === 'decrement') {
         tam = Math.max(tam - 1, 18);
       }

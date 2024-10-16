@@ -23,12 +23,12 @@ export default function validateCadastro() {
     function setError(reference, text) {
       // Obtém a posição do elemento de referência
       const posi = reference.getBoundingClientRect();
-    
+
       // Cria o elemento de erro
       const error = document.createElement('p');
       error.classList.add('error');
       error.innerText = text;
-    
+      
       // Define o estilo do elemento de erro
       error.style.position = 'absolute';
       error.style.color = 'red';
@@ -37,6 +37,11 @@ export default function validateCadastro() {
       error.style.top = `${reference.offsetTop + 40}px`;
       error.style.left = `${Math.trunc(posi.x)}px`;
     
+      window.onresize = () => {
+        const posi = reference.getBoundingClientRect();
+        error.style.top = `${reference.offsetTop + 40}px`;
+        error.style.left = `${Math.trunc(posi.x)}px`;
+      }
       // Insere o elemento de erro após o elemento de referência
       reference.parentNode.insertBefore(error, reference.nextSibling);
     }
@@ -53,6 +58,7 @@ export default function validateCadastro() {
 
     const validadeNome = () => {
       if (form.name.value.length < 10) {
+        removeError(form.name);
         form.name.focus();
         form.name.style.borderBottom = '2px solid red';
         setError(form.name,'Insira seu nome e sobrenome');

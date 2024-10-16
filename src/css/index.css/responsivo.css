@@ -177,7 +177,17 @@
 
   .modal-content{
     width: 350px;
-    padding: 70px;
+    padding: 60px 30px;
+  }
+
+  .emailNaoCad{
+    left: 30px;
+    top: 185px;
+  }
+
+  .senhaIncorreta{
+    left: 30px;
+    top: 260px;
   }
 
   .modal-content a{
@@ -346,9 +356,18 @@
     width: 250px;
   }
 
-  #email, #password{
-    padding: 10px;
+  #emailLogin, #password{
     width: 200px;
+  }
+
+  .emailNaoCad{
+    top: 175px;
+    font-size: 10px;
+  }
+
+  .senhaIncorreta{
+    font-size: 10px;
+    top: 235px;
   }
 
   .modal-content button {
@@ -356,7 +375,7 @@
   }
 
   .modal-content a{
-    display: none;
+    font-size: 10px;
   }
 
   .section-image img{
