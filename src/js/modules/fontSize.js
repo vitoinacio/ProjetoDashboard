@@ -1,7 +1,7 @@
 export default function fontSize() {
   const fontSize = document.querySelector('#fontSizeConfig');
-  const increment = document.querySelector('#increment');
-  const decrement = document.querySelector('#decrement');
+  const increment = document.querySelectorAll('#increment');
+  const decrement = document.querySelectorAll('#decrement');
 
   const p = document.querySelectorAll('p');
   const a = document.querySelectorAll('a');
@@ -52,7 +52,7 @@ export default function fontSize() {
     });
   };
 
-  if (increment && decrement) {
+  if (increment.length && decrement.length) {
     const fontSizeButton = (event) => {
       if (event.target.id === 'increment') {
         tam = Math.min(tam + 1, 27);
@@ -62,8 +62,12 @@ export default function fontSize() {
       sessionStorage.setItem('fontSize', tam);
       updateFontSize();
     };
-    increment.addEventListener('click', fontSizeButton);
-    decrement.addEventListener('click', fontSizeButton);
+    increment.forEach((increment) => {
+      increment.addEventListener('click', fontSizeButton);
+    });
+    decrement.forEach((decrement) => {
+      decrement.addEventListener('click', fontSizeButton);
+    });
   }
 
   if (fontSize) {
