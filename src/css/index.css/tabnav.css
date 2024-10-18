@@ -6,6 +6,3 @@ html{
   scroll-margin-top: 3rem;
 }
 
-#oqueOferecemos:target{
-  scroll-margin-top: -1rem;
-}
