@@ -51,33 +51,30 @@ fk_id_usuario int, foreign key (fk_id_usuario) references usuario(id)
 
 
 
-Delimiter //
+delimiter //
+
 create trigger atualiza_total_ent after insert on ent_financeira for each row
 begin
 	update relatorio
-    set total_ent = (
-			select sum(valor_ent) 
-			from ent_financeira 
-            where fk_id_usuario = new.fk_id_usuario
-            )
-    where fk_id_usuario = NEW.fk_id_usuario;
-    end;
+	set total_ent = total_ent + NEW.valor_ent
+	where fk_id_usuario = NEW.fk_id_usuario;
+end //
 
+delimiter ;
+
+
+
+delimiter //
 
 create trigger atualiza_total_deb after insert on debito for each row
 begin
 	update relatorio
-    set total_deb = (
-		select sum(valor_deb)
-        from debito
-        where fk_id_usuario = new.fk_id_usuario
-        )
-	where fk_id_usuario = new.fk_id_usuario;
-    end;
-    
-delimiter//
+	set total_deb = total_deb + NEW.valor_deb
+	where fk_id_usuario = NEW.fk_id_usuario;
+end //
 
-show triggers;
+delimiter ;
+
    
     
 
