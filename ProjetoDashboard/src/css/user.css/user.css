@@ -1,0 +1,136 @@
+.sidebar{
+  height: auto;
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+}
+
+.userPerfil{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.userPerfil img{
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+
+.userPerfil label{
+  display: flex;
+  background-color: var(--cor7);
+  border: 1px solid var(--cor4);
+  padding: 15px;
+  justify-content: center;
+  color: var(--cor4);
+  width: 250px;
+  gap: 4px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.userPerfil label:hover{
+  background: var(--cor5);
+  color: var(--cor7);
+}
+
+.userPerfil #fotoPerfilInput{
+  display: none;
+}
+
+.userInfo{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: white;
+  gap: 60px;
+  padding: 30px;
+  overflow: auto;
+}
+
+.userInfo .tituloUser{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 5px 0px;
+}
+
+.userInfo .tituloUser h2{
+  font-size: 28px;
+  position: relative;
+}
+
+.userInfo .tituloUser h2::after{
+  content: "";
+  position: absolute;
+  display: block;
+  width: 250px;
+  height: 2px;
+  margin-top: 15px;
+  background-color: var(--cor5);
+}
+
+.userInfo form{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  overflow: auto;
+}
+
+.userInfo label{
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  width: 100%;
+  justify-content: center;
+}
+
+.userInfo div{
+  display: flex;
+}
+
+.userInfo label input{
+  background: var(--cor6);
+  padding: 11px;
+  width: 350px;
+  border: none;
+  margin-right: 20px;
+  font-size: 14px;
+}
+
+.userInfo label input:focus{
+  outline: 1px  solid var(--cor5);
+}
+
+.userInfo label div button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin-left: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--cor5);
+}
+
+.userInfo label div button:active{
+  color: black;
+}
+
+.userInfo label div button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userInfo .cancelEdit,
+.userInfo .confirmUser{
+  display: none;
+}

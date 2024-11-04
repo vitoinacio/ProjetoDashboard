@@ -1,0 +1,108 @@
+body.dark{
+  background-color: black;
+}
+
+body.dark .header-nav.active{
+  animation: backgroundDark 0.5s forwards;
+}
+
+@keyframes backgroundDark{
+  0%{
+    background-color: var(--cor1);
+    padding: 65px 70px;
+  }100%{
+    background-color: var(--cor3);
+    padding: 40px 70px;
+  }
+}
+
+body.dark .header-nav.active .logo-nav h2 a,
+body.dark .header-nav.active .menu-nav a{
+  color: var(--cor5);
+}
+
+body.dark .header-nav.active .buttons-nav .btn-criarConta {
+  background-color: var(--cor1);
+  color: var(--cor5);
+  border: 1px solid var(--cor4);
+}
+
+body.dark .header-nav.active .buttons-nav .btn-criarConta:hover{
+  background-color: var(--cor3);
+  color: var(--cor5);
+}
+
+body.dark .header-nav.active .buttons-nav .btn-entrar{
+  background-color: var(--cor2);
+  color: var(--cor5);
+  border: 1px solid var(--cor5);
+}
+
+body.dark .header-nav .buttons-nav .btn-entrar:hover{
+  background-color: var(--cor2);
+  transition: .2s;
+}
+
+
+body.dark .buttons-nav .btn-criarConta{
+  background-color: var(--cor2);
+  color: var(--cor5);
+}
+
+body.dark .header-nav .buttons-nav .btn-criarConta:hover{
+  background-color: var(--cor3);
+  transition: .2s;
+}
+body.dark .buttons-nav .btn-entrar{
+  border: 1px solid var(--cor5);
+  background-color: var(--cor1);
+  color: var(--cor5);
+}
+
+body.dark .main .container{
+  background: url('../../img/fundoDark.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+body.dark .section-chamada .text-chamada p{
+  color: var(--cor5);
+}
+
+body.dark .section-chamada .input-chamada button{
+  color: var(--cor5);
+}
+
+
+body.dark .card-info{
+  box-shadow: rgba(233, 232, 232, 0.45) 0px 5px 15px -5px;
+  background: var(--cor8);
+  transition: 0.5s;
+}
+
+body.dark .card-info:hover{
+  box-shadow: rgba(233, 232, 232, 0.45) 0px 1px 1px -5px;
+  transition: .5s;
+}
+
+body.dark .quem-somos-texto,
+body.dark .gestao-de-gastos-texto{
+  color: var(--cor5);
+}
+
+body.dark footer{
+  background: var(--cor3);
+}
+
+body.dark .info-footer a{
+  color: var(--cor5);
+}
+
+body.dark .info-footer a::after{
+  background-color: var(--cor5);
+}
+
+body.dark .redes-sociais a i,
+body.dark .copy{
+  color: var(--cor5);
+}
