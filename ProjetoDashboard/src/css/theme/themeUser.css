@@ -1,0 +1,14 @@
+body.dark .userInfo{
+  background: var(--cor8);
+  box-shadow: rgba(233, 232, 232, 0.45) 0px 5px 15px -5px;
+  color: var(--cor5);
+}
+
+body.dark .userPerfil label {
+  color: var(--cor5);
+}
+
+body.dark .userPerfil label:hover{
+  background: var(--cor6);
+  color: var(--cor4);
+}

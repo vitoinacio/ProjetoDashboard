@@ -1,0 +1,405 @@
+@media screen and (max-width: 1300px) {
+
+/* HEADER INICIO */
+  .header-nav{
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logo-nav h2{
+    font-size: 25px;
+  }
+
+  .logo-nav h2 i{
+    margin-right: 5px;
+  }
+
+  .menu-nav{
+    display: flex;
+    gap: 20px;
+  }
+
+  .header-nav .menu-nav a{
+    font-size: 16px;
+  }
+
+  .buttons-nav{
+    gap: 20px;
+  }
+
+  .buttons-nav button{
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 30px;
+    font-weight: bolder;
+  }
+
+  .modal{
+    height: 100vh;
+    position: fixed;
+  }
+
+  .modal-content{
+    position: fixed;
+  }
+
+  .modal-content a{
+    margin-left: 90px;
+  }
+
+}
+
+@media screen and (max-width: 1220px) {
+
+  /* HEADER INICIO */
+  .header-nav{
+    justify-content: space-between;
+  }
+
+  .menu-nav{
+    display: none;
+  }
+
+  .buttons-nav{
+    display: none;
+  }
+
+  .header-nav .contentMenuMobile-index{
+    display: flex;
+  }
+
+  .themeContent.themeContentMobile{
+    display: flex;
+  }
+
+  .FontSizeContent.FontSizeContentMobile{
+    display: flex;
+  }
+
+  .modal-content a{
+    margin-left: 90px;
+  }
+  /* HEADER FIM */
+  /* INICIO MAIN */
+  .container{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px 50px;
+  }
+
+  .section-chamada{
+    margin-top: 50px;
+    gap: 40px;
+  }
+
+  .section-image{
+    flex: 50%;
+    margin-top: 50px;
+  }
+
+  .section-image img{
+    width: 400px;
+    height: 400px;
+  }
+
+  .input-chamada{
+    width: 100%;
+  }
+
+  .titulo-secundaria h2{
+    font-size: 30px;
+  }
+
+  .container-card{
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .card-info{
+    max-width: 100%;
+    gap: 20px;
+    padding: 50px;
+  }
+
+  .titulo-secundaria{
+    padding: 70px 0px;
+  }
+
+  .gestao-de-gastos-texto div{
+    gap: 5%;
+  }
+
+  .gestao-de-gastos-texto .text-primary{
+    font-size: 17px;
+  }
+
+  .gestao-de-gastos-texto .text{
+    width: 390px;
+    font-size: 16px;
+  }
+
+  .gestao-de-gastos-texto img{
+    max-width: 300px;
+    max-height: 150px;
+  }
+  /* FIM MAIN */
+  
+  }
+
+@media screen and (max-width: 800px) {
+
+  @keyframes background-before{
+    0%{
+      background-color: var(--cor2);
+      padding: 40px 40px;
+    }100%{
+      background-color: var(--cor1);
+      padding: 65px 40px;
+    }
+  }
+
+  @keyframes background{
+    0%{
+      background-color: var(--cor1);
+      padding: 65px 40px;
+    }100%{
+      background-color: var(--cor2);
+      padding: 40px 40px;
+    }
+  }
+
+  /* HEADER INICIO */
+  .header-nav .logo-nav h2 a{
+    font-size: 22px;
+  }
+
+  .modal-content{
+    width: 350px;
+    padding: 60px 30px;
+  }
+
+  .emailNaoCad{
+    left: 30px;
+    top: 185px;
+  }
+
+  .senhaIncorreta{
+    left: 30px;
+    top: 260px;
+  }
+
+  .modal-content a{
+    margin-right: -20px;
+  }
+  /* HEADER FIM */
+  /* INICIO MAIN */
+  .container{
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 0px;
+  }
+
+  .section-chamada{
+    margin-top: 0px;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .section-image{
+    flex: 50%;
+    margin-top: 40px;
+  }
+
+  .section-image img{
+    width: 250px;
+    height: 250px;
+  }
+
+  .section-chamada .text-chamada h1{
+    padding: 0px 20px;
+    font-size: 28px;
+    font-weight: 800;
+  }
+
+  .section-chamada .text-chamada p{
+    font-size: 22px;
+  }
+
+  .input-chamada{
+    display: flex;
+    width: 80%;
+  }
+
+  .input-chamada .error{
+    top: 48px !important;
+  }
+
+  .input-chamada input{
+    padding: 15px;
+    font-size: 15px;
+  }
+
+  .input-chamada button{
+    padding: 15px;
+    width: 150px;
+    font-size: 15px;
+  }
+  .info-secundaria{
+    padding: 50px 40px 70px 40px;
+  }
+
+  .titulo-secundaria{
+    padding: 70px 0px;
+  }
+
+  .titulo-secundaria p {
+    font-size: 22px;
+  }
+
+  .container-card{
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .card-info{
+    max-width: 100%;
+    gap: 20px;
+    padding: 30px;
+  }
+
+  .gestao-de-gastos{
+    padding: 60px 20px;
+  }
+
+  .container-gastos h2{
+    font-size: 30px;
+  }
+
+  .gestao-de-gastos-texto div{
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .gestao-de-gastos-texto div:nth-child(2){
+    flex-direction: column-reverse;
+  }
+  .gestao-de-gastos-texto div:nth-child(4){
+    flex-direction: column-reverse;
+  }
+
+  .gestao-de-gastos-texto .text-primary{
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .gestao-de-gastos-texto .text{
+    width: 300px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .gestao-de-gastos-texto img{
+    max-width: 300px;
+    max-height: 150px;
+  }
+
+  .quem-somos-texto{
+    text-align: center;
+  }
+/* FIM MAIN */
+/* INICIO FOOTER */
+  footer{
+    height: auto;
+    align-items: center;
+    text-align: center;
+  }
+
+  .info-footer{
+    flex-direction: column;
+    align-items: center;
+  }
+/* FIM FOOTER */
+} 
+
+@media screen and (max-width: 376px) {
+
+  @keyframes background-before{
+    0%{
+      background-color: var(--cor2);
+      padding: 40px 30px;
+    }100%{
+      background-color: var(--cor1);
+      padding: 65px 30px;
+    }
+  }
+
+  @keyframes background{
+    0%{
+      background-color: var(--cor1);
+      padding: 65px 30px;
+    }100%{
+      background-color: var(--cor2);
+      padding: 40px 30px;
+    }
+  }
+
+  .header-nav .logo-nav h2 a{
+    font-size: 16px;
+  }
+
+  .button-menuMobile{
+    width: 25px;
+    height: 2px;
+  }
+
+  .modal-content{
+    width: 250px;
+  }
+
+  #emailLogin, #password{
+    width: 200px;
+  }
+
+  .emailNaoCad{
+    top: 175px;
+    font-size: 10px;
+  }
+
+  .senhaIncorreta{
+    font-size: 10px;
+    top: 235px;
+  }
+
+  .modal-content button {
+    width: 200px;
+  }
+
+  .modal-content a{
+    font-size: 10px;
+  }
+
+  .section-image img{
+    width: 300px;
+    height: 300px;
+  }
+  .titulo-secundaria p::after{
+    left: 20%;
+  }
+
+  .container-quemSomos h2{
+    font-size: 29px;
+  }
+
+  .gestao-de-gastos-texto .text{
+    width: 250px;
+  }
+
+  .gestao-de-gastos-texto img{
+    max-width: 250px;
+    max-height: 125px;
+  }
+}

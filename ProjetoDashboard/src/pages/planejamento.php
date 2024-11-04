@@ -1,0 +1,155 @@
+<?php
+  session_start();
+  print_r($_SESSION['email']);
+  if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
+  {
+    unset($_SESSION['email']);
+    unset($_SESSION['senha']);
+    header('Location: ../../index.html');
+  }
+  $logado = $_SESSION['email'];
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="https://kit.fontawesome.com/7414161b6e.js" crossorigin="anonymous"></script>
+  <script type="module" src="../js/script.js" defer></script>
+  <title>Planejamento</title>
+</head>
+
+<body>
+  <!-- INICIO HEADER -->
+  <header>
+    <div class="info-header">
+      <div class="logo">
+        <div class="contentMenuMobile">
+          <span class="menuMobile"></span>
+          <span class="menuMobile"></span>
+          <span class="menuMobile"></span>
+        </div>
+        <h3>SmartWallet</h3>
+      </div>
+    </div>
+    <div class="info-header">
+      <a href="notificacoes.php"><i class="fa-solid fa-bell"></i></a>
+      <a href="config.php"><i class="fa-solid fa-gear"></i></a>
+      <div class="dropdown-menu">
+        <div class="perfil-menu">
+          <img  id="fotoPerfil" src="../img/perfil.jpg" alt="Perfil Usuario" />
+          <div class="info-perfil">
+            <h4 id="NomeUsuario">Usuario</h4>
+            <h5>Plano Completo</h5>
+          </div>
+        </div>
+        <hr />
+        <div class="logout">
+          <img id="fotoPerfil" src="../img/perfil.jpg" alt="Perfil Usuario" />
+          <div class="login">
+            <p>Logado como:</p>
+            <h5><?php print_r($_SESSION['email'])?></h5>
+          </div>
+          <div class="buttons-menu">
+            <Button><a href="config.php"><i class="fa-solid fa-gear"></i></a></Button>
+            <button><a href="../php/sair.php"><i class="fa-solid fa-power-off"></i></a></button>
+          </div>
+        </div>
+      </div>
+      <img class="menu-config" id="fotoPerfil" src="../img/perfil.jpg" alt="foto-perfil" />
+    </div>
+  </header>
+  <!-- FIM HEADER -->
+
+  <!-- INICIO MAIN -->
+  <section class="main">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <h3>Home</h3>
+      <a href="dashboard.php"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+      <a href="#"><i class="fa-solid fa-clipboard-list"></i> Planejamento</a>
+      <a href="user.php"><i class="fa-regular fa-circle-user"></i> User</a>
+      <a href="config.php" class="mobile"><i class="fa-solid fa-gear"></i> Configurações</a>
+      <a href="notificacoes.php" class="mobile"><i class="fa-solid fa-bell"></i> Notficações</a>
+      <a href="../php/sair.php" class="mobile"><i class="fa-solid fa-power-off"></i> Logout</a>
+      <hr />
+    </div>
+    <!-- CONTENT -->
+    <div class="content planejamento">
+      <div class="info-planejamento">
+        <div class="entrada-salario">
+          <h2>Salário bruto total</h2>
+          <p>R$ <input type="text" id="entradaSalario" placeholder=" 00.00"></p>
+          <button type="submit">Adicionar</button>
+        </div>
+        <div class="gastos-totais">
+          <h2>Gastos Totais</h2>
+          <p>R$ <input type="text" id="totaisGastos" placeholder=" 00.00" disabled></p>
+        </div>
+      </div>
+      <div class="containertodo">
+        <div class="containerLista desktop">
+          <h2>Adicione seus debitos</h2>
+          <form class="formPLanejamento">
+            <span class="id">
+              <p>Identificação </p><input class="identificacao" type="text" placeholder="Identificaçao" maxlength="15" required>
+            </span>
+            <span class="obs">
+              <p>Observação </p><input class="observacao" type="text" placeholder="Observaçao" maxlength="100">
+            </span>
+            <span>
+              <p>Valor R$ </p><input class="valor" type="text" placeholder="Valor R$" max="15" required>
+            </span>
+            <span>
+              <p>Vencimento </p><input class="vencimento" type="text" name="vencimento" id="vencimento" placeholder="DD / MM / AAAA" maxlength="10" minlength="10" required>
+            </span>
+            <span class="notf">
+              <p>Notificação <br>de</p>
+              <select name="notficacao" id="notficacao" required>
+                <option value="" selected disabled>Vencimento</option>
+                <option value="sim">Sim</option>
+                <option value="nao">Não</option>
+              </select>
+            </span>
+            <div class="btnAdd"><button type="submit" onclick="event.preventDefault()">adicionar<i class="fa-solid fa-plus"></i></button></div>
+          </form>
+        </div>
+        <div class="containerListaMobile">
+          <h2>Adicione seus debitos</h2>
+          <form class="formMobile">
+            <div class="">
+              <input class="identificacao" type="text" placeholder="Identificaçao" maxlength="15" required>
+              <input class="observacao" type="text" placeholder="Observaçao" maxlength="100">
+            </div>
+            <div>
+              <input class="valor" type="text" placeholder="Valor R$" max="15" required>
+              <input class="vencimento" type="text" name="vencimento" id="vencimento" placeholder="DD / MM / AAAA" maxlength="10" minlength="10" required>
+            </div>
+            <select name="notficacao" id="notficacao" required>
+              <option value="" selected disabled>Notficação</option>
+              <option value="sim">Sim</option>
+              <option value="nao">Não</option>
+            </select>
+            <div><button type="submit" onclick="event.preventDefault()">adicionar<i class="fa-solid fa-plus"></i></button></div>
+          </form>
+        </div>
+        <ul class="listtodo">
+          <li class="todo">
+            <h3 class="identif">Identificação</h3>
+            <h3 class="obstodo">Observação</>
+              <h3 class="precotodo">Preço</h3>
+              <h3 class="vencimentotodo">Vencimento</>
+                <h3 class="notftodo">Notificações</h3>
+                <h3 class="btnstodo"></h3>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!-- FIM MAIN -->
+</body>
+
+</html>

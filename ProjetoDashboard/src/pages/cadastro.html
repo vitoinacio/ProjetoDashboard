@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="https://kit.fontawesome.com/7414161b6e.js" crossorigin="anonymous"></script>
+  <script type="module" src="../js/script.js" defer></script>
+  <title>Cadastro</title>
+</head>
+
+<body style="overflow-x: hidden;">
+  <!-- INICIO HEADER -->
+  <header class="header-nav cadastro-header">
+    <div class="logo-nav">
+      <h2>
+        <i class="fa-solid fa-chart-line"></i>Smart<strong>Wallet</strong>
+      </h2>
+    </div>
+  </header>
+  <!-- FIM HEADER -->
+  <!-- INICIO MAIN -->
+  <main class="main-cadastro">
+    <section class="section-cadastro infoPessoais">
+      <div class="container-cadastro">
+        <div class="cadastro-progressBar">
+          <i class="fa-regular fa-address-book"></i>
+          
+          <i class="fa-regular fa-address-card"></i>
+        </div>
+        <form class="formInfoPessoais" action="../php/cadastro.php" method="post">
+          <div class="form-cadastro pessoais">
+            <input type="text" name="nome" id="name" placeholder="Nome" minlength="10" maxlength="50" required>
+            <div class="formDiv1">
+              <select name="sexo" id="sexo" required>
+                <option value="" selected disabled>Sexo</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Feminino">Transgênero</option>
+                <option value="Feminino">Não-binário</option>
+                <option value="Feminino">Outros..</option>
+              </select>
+              <input type="date" name="dataNasc" id="dataNasc" required>
+            </div>
+            <div class="formDiv2">
+              <input type="email" name="email" id="email" placeholder="Email" required>
+              <input type="password" name="senha" id="senha" placeholder="Senha" minlength="8" maxlength="8" required>
+              <input type="password" id="confirmSenha" placeholder="Confirme sua senha" minlength="8" maxlength="8" required>
+            </div>
+            <div class="btnETermos">
+              <span id="btnAvancarCad">Avançar</span>
+              <label for="termos">
+                <p id="termosCheckbox"><input type="checkbox" name="Termos" id="termos" required> Ao avançar você concorda com nossos <a href="#">Termos de uso</a> e <a href="#">Politica de privacidade</a></p>
+              </label>
+            </div>
+          </div>
+          <div class="form-cadastro adicionais">
+            <div>
+              <input type="text" name="cpf" id="cpf" placeholder="CPF" required minlength="14" maxlength="14">
+              <input type="text" name="tel" id="celular" placeholder="Tel +55 (99) 99999-9999" minlength="18" maxlength="19">
+              <input type="text" name="cep" id="cep" placeholder="CEP" maxlength="9" minlength="8">
+              <input type="text" name="cidade" id="localidade" placeholder="Cidade" required>
+              <input type="text" name="bairro" id="bairro" placeholder="Bairro" required>
+              <div class="endereco">
+                <input type="text" name="rua" id="logradouro" placeholder="Rua" required>
+                <input type="text" name="numeroCasa" id="numCasa" placeholder="Numero" maxlength="5" required>
+              </div>
+            </div>
+            <div class="btn">
+              <button type="submit" id="btnCadastro">Cadastrar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+  <!-- FIM MAIN -->

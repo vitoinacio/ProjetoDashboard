@@ -1,0 +1,7 @@
+body.dark .FontSizeContent button{
+  background: var(--cor5);
+}
+
+body.dark .FontSizeContent button:hover{
+  background: var(--cor2);
+}
