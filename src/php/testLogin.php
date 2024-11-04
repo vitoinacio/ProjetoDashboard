@@ -12,7 +12,7 @@
         // print_r('Senha: ' . $senha);
         $sql = "SELECT * FROM usuario WHERE email = '$email' and senha = '$senha'";
 
-        $result = $conexao->query($sql);
+        $result = $conn->query($sql);
 
         // print_r($result);
         

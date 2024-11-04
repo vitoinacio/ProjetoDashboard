@@ -1,10 +1,10 @@
 <?php
 $dbHost = 'Localhost';
 $dbUsername = 'root';
-$dbPassword = '2706';
+$dbPassword = '';
 $dbName = 'dashboard';
 
-$conexao = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+$conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
 
 // if($conexao->connect_errno)
 // {
