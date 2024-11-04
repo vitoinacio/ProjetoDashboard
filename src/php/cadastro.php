@@ -1,4 +1,5 @@
 <?php
+    require_once "conexao.php";
 //   function inverteData($data){
 //     if(count(explode("-",$data)) > 1){
 //         return implode("",array_reverse(explode("-",$data)));
@@ -6,7 +7,7 @@
 //         return implode("-",array_reverse(explode("",$data)));
 //     }
 // }
-  $nome = $_POST["nome"];
+  $nome = $_POST["name"];
   $sexo = $_POST["sexo"];
   $dataNasc =$_POST["dataNasc"];
   $email = $_POST["email"];
@@ -20,7 +21,7 @@
   $numeroCasa = $_POST["numeroCasa"];
 
   //Database connection.
-    $conn = new mysqli('localhost', 'root', '2706', 'dashboard');
+    // $conn = new mysqli('localhost', 'root', '', 'dashboard');
     if ($conn->connect_error){
         die ('Connection Failed  :  '.$conn->connect_error);
     }else {

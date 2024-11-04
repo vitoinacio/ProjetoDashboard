@@ -93,18 +93,18 @@
       <div class="containertodo">
         <div class="containerLista desktop">
           <h2>Adicione seus debitos</h2>
-          <form class="formPLanejamento">
+          <form class="formPLanejamento" action="../php/planejamento.php" method="POST">
             <span class="id">
-              <p>Identificação </p><input class="identificacao" type="text" placeholder="Identificaçao" maxlength="15" required>
+              <p>Identificação </p><input class="identificacao" name="ident_deb"  type="text" placeholder="Identificaçao" maxlength="15" required>
             </span>
             <span class="obs">
-              <p>Observação </p><input class="observacao" type="text" placeholder="Observaçao" maxlength="100">
+              <p>Observação </p><input class="observacao" name="obs_deb" type="text" placeholder="Observaçao" maxlength="100">
             </span>
             <span>
-              <p>Valor R$ </p><input class="valor" type="text" placeholder="Valor R$" max="15" required>
+              <p>Valor R$ </p><input class="valor" name="valor_deb" type="text" placeholder="Valor R$" max="15" required>
             </span>
             <span>
-              <p>Vencimento </p><input class="vencimento" type="text" name="vencimento" id="vencimento" placeholder="DD / MM / AAAA" maxlength="10" minlength="10" required>
+              <p>Vencimento </p><input class="vencimento" type="text" name="data_venc" id="vencimento" placeholder="DD / MM / AAAA" maxlength="10" minlength="10" required>
             </span>
             <span class="notf">
               <p>Notificação <br>de</p>
@@ -114,26 +114,26 @@
                 <option value="nao">Não</option>
               </select>
             </span>
-            <div class="btnAdd"><button type="submit" onclick="event.preventDefault()">adicionar<i class="fa-solid fa-plus"></i></button></div>
+            <div class="btnAdd"><button type="submit" >adicionar<i class="fa-solid fa-plus"></i></button></div>
           </form>
         </div>
         <div class="containerListaMobile">
           <h2>Adicione seus debitos</h2>
-          <form class="formMobile">
+          <form class="formMobile" action="../php/planejamento.php" method="POST">
             <div class="">
-              <input class="identificacao" type="text" placeholder="Identificaçao" maxlength="15" required>
-              <input class="observacao" type="text" placeholder="Observaçao" maxlength="100">
+              <input class="identificacao" name="ident_deb" type="text" placeholder="Identificaçao" maxlength="15" required>
+              <input class="observacao" name="obs_deb" type="text" placeholder="Observaçao" maxlength="100">
             </div>
             <div>
-              <input class="valor" type="text" placeholder="Valor R$" max="15" required>
-              <input class="vencimento" type="text" name="vencimento" id="vencimento" placeholder="DD / MM / AAAA" maxlength="10" minlength="10" required>
+              <input class="valor" name="valor_deb" type="text" placeholder="Valor R$" max="15" required>
+              <input class="vencimento" type="text" name="data_venc" id="vencimento" placeholder="DD / MM / AAAA" maxlength="10" minlength="10" required>
             </div>
             <select name="notficacao" id="notficacao" required>
               <option value="" selected disabled>Notficação</option>
               <option value="sim">Sim</option>
               <option value="nao">Não</option>
             </select>
-            <div><button type="submit" onclick="event.preventDefault()">adicionar<i class="fa-solid fa-plus"></i></button></div>
+            <div><button type="submit">adicionar<i class="fa-solid fa-plus"></i></button></div>
           </form>
         </div>
         <ul class="listtodo">
