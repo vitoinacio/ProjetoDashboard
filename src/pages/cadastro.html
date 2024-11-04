@@ -29,9 +29,9 @@
           
           <i class="fa-regular fa-address-card"></i>
         </div>
-        <form class="formInfoPessoais">
+        <form class="formInfoPessoais" action="../php/cadastro.php" method="post">
           <div class="form-cadastro pessoais">
-            <input type="text" id="name" placeholder="Nome" minlength="10" maxlength="50" required>
+            <input type="text" name="nome" id="name" placeholder="Nome" minlength="10" maxlength="50" required>
             <div class="formDiv1">
               <select name="sexo" id="sexo" required>
                 <option value="" selected disabled>Sexo</option>
@@ -44,8 +44,8 @@
               <input type="date" name="dataNasc" id="dataNasc" required>
             </div>
             <div class="formDiv2">
-              <input type="email" id="email" placeholder="Email" required>
-              <input type="password" id="senha" placeholder="Senha" minlength="8" maxlength="8" required>
+              <input type="email" name="email" id="email" placeholder="Email" required>
+              <input type="password" name="senha" id="senha" placeholder="Senha" minlength="8" maxlength="8" required>
               <input type="password" id="confirmSenha" placeholder="Confirme sua senha" minlength="8" maxlength="8" required>
             </div>
             <div class="btnETermos">
@@ -57,14 +57,14 @@
           </div>
           <div class="form-cadastro adicionais">
             <div>
-              <input type="text" id="cpf" placeholder="CPF" required minlength="14" maxlength="14">
-              <input type="text" id="celular" placeholder="Tel +55 (99) 99999-9999" minlength="18" maxlength="19">
-              <input type="text" id="cep" placeholder="CEP" maxlength="9" minlength="8">
-              <input type="text" id="localidade" placeholder="Cidade" required>
-              <input type="text" id="bairro" placeholder="Bairro" required>
+              <input type="text" name="cpf" id="cpf" placeholder="CPF" required minlength="14" maxlength="14">
+              <input type="text" name="tel" id="celular" placeholder="Tel +55 (99) 99999-9999" minlength="18" maxlength="19">
+              <input type="text" name="cep" id="cep" placeholder="CEP" maxlength="9" minlength="8">
+              <input type="text" name="cidade" id="localidade" placeholder="Cidade" required>
+              <input type="text" name="bairro" id="bairro" placeholder="Bairro" required>
               <div class="endereco">
-                <input type="text" id="logradouro" placeholder="Rua" required>
-                <input type="text" id="numCasa" placeholder="Numero" maxlength="5" required>
+                <input type="text" name="rua" id="logradouro" placeholder="Rua" required>
+                <input type="text" name="numeroCasa" id="numCasa" placeholder="Numero" maxlength="5" required>
               </div>
             </div>
             <div class="btn">

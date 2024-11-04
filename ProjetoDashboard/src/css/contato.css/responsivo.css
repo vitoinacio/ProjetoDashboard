@@ -1,8 +1,0 @@
-@media screen and (max-width: 570px){
-  .containerTelasAdcionais{
-    padding: 20px 40px;
-  }
-  .containerTelasAdcionais .contatoForm form{
-    max-width: 100%;
-  }
-}

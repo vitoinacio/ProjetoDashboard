@@ -1,10 +1,10 @@
-function getLoginForm() {
-  return document.querySelector('form.loginForm');
-}
+// function getLoginForm() {
+//   return document.querySelector('form.loginForm');
+// }
 
-function getStoredUser(key) {
-  return JSON.parse(localStorage.getItem(key));
-}
+// function getStoredUser(key) {
+//   return JSON.parse(localStorage.getItem(key));
+// }
 
 function setError(reference, text) {
   //obtem o item content do form
@@ -48,9 +48,9 @@ const removeError = () => {
   }
 };
 
-function redirectToDashboard() {
-  window.location = 'src/pages/dashboard.html';
-}
+// function redirectToDashboard() {
+//   window.location = 'src/pages/dashboard.html';
+// }
 
 function handleInput(form) {
   form[0].addEventListener('input', () => {

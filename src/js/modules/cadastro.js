@@ -5,7 +5,6 @@ export default function validateCadastro() {
     if (sessionStorage.getItem('logado') === 'true'){
       // Redireciona o usuário para a página de planejamento
       window.location = ' /src/pages/planejamento.html';
-      console.log('teste')
     }
     
     const containerPessoais = document.querySelector('div .pessoais');
@@ -131,11 +130,11 @@ export default function validateCadastro() {
         form.email.style.borderBottom = '1px solid #e2dfdf';
         for (let i = 0; i < localStorage.length; i++) {
           const key = localStorage.key(i);
-          if (JSON.parse(localStorage.getItem(key)).emailUser === form.email.value) {
-            setError(form.email,'Email já cadastrado');
-            form.email.style.borderBottom = '2px solid red';
-            return false;
-          }
+          // if (JSON.parse(localStorage.getItem(key)).emailUser === form.email.value) {
+          //   setError(form.email,'Email já cadastrado');
+          //   form.email.style.borderBottom = '2px solid red';
+          //   return false;
+          // }
         }
         form.email.style.borderBottom = '1px solid #e2dfdf';
         return true;
@@ -291,9 +290,9 @@ export default function validateCadastro() {
           if (cep.localidade) form.localidade.value = cep.localidade;
           if (cep.bairro) form.bairro.value = cep.bairro;
           if (cep.logradouro) form.logradouro.value = cep.logradouro;
-          form.localidade.disabled = !!cep.localidade;
-          form.bairro.disabled = !!cep.bairro;
-          form.logradouro.disabled = !!cep.logradouro;
+          // form.localidade.disabled = !!cep.localidade;
+          // form.bairro.disabled = !!cep.bairro;
+          // form.logradouro.disabled = !!cep.logradouro;
         });
     };
 
@@ -383,11 +382,11 @@ export default function validateCadastro() {
         rua: form.logradouro.value,
         endNum: form.numCasa.value,
       };
-      window.localStorage.setItem(`user=${localStorage.length + 1}`, JSON.stringify(client));
-      sessionStorage.setItem('logedUser', `user=${localStorage.length}`);
-      sessionStorage.setItem('logado', true);
-      progressBar.classList.remove('active');
-      progressBar.classList.remove('activePlus');
+    //   window.localStorage.setItem(`user=${localStorage.length + 1}`, JSON.stringify(client));
+    //   sessionStorage.setItem('logedUser', `user=${localStorage.length}`);
+    //   sessionStorage.setItem('logado', true);
+    //   progressBar.classList.remove('active');
+    //   progressBar.classList.remove('activePlus');
     };
     
     const validadeForm = (event) => {

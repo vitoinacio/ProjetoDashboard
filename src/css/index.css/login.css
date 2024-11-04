@@ -80,6 +80,20 @@
   border: none;
   margin-top: 20px;
 }
+.entrar-btn-modal {
+  padding: 13px;
+  font-size: 18px;
+  width: 300px;
+  border-radius: 20px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  background-color: var(--cor2);
+  color: var(--cor1);
+  border: none;
+  margin-top: 20px;
+}
+
 
 button.limpar-btn-modal {
   padding: 11px;

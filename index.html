@@ -63,22 +63,22 @@
       <div class="modal-content">
         <span class="close" id="closeBtn"><i class="fa-solid fa-xmark"></i></span>
         <i class="fa-solid fa-chart-line"></i><p>Smart<strong>Wallet</strong></p>
-        <form action="#" id="loginForm" class="loginForm">
+        <form action="./src/php/testLogin.php" id="loginForm" class="loginForm" method="post">
           <input
             type="email"
             id="emailLogin"
-            name="emailLogin"
+            name="email"
             placeholder="Email"
           />
           <a href="src/pages/cadastro.html" class="criarConta" id="criarConta">Ainda não tenho conta</a>
           <input
             type="password"
             id="password"
-            name="password"
+            name="senha"
             placeholder="Senha"
           />
           <a  href="#" class="recoverPassword" id="recoverPassword">Recuperar Senha</a>
-          <button type="submit" id="entrarLogin" class="entrar-btn-modal">Entrar</button>
+          <input type="submit" name="submit" id="entrarLogin" class="entrar-btn-modal" value="Enviar"/>
           <button type="reset" class="limpar-btn-modal">Limpar</button>
         </form>
       </div>
