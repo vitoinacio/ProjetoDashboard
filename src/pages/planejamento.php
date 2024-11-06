@@ -1,6 +1,6 @@
 <?php
   session_start();
-  print_r($_SESSION['email']);
+  // print_r($_SESSION['email']);
   if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
   {
     unset($_SESSION['email']);
@@ -93,7 +93,7 @@
       <div class="containertodo">
         <div class="containerLista desktop">
           <h2>Adicione seus debitos</h2>
-          <form class="formPLanejamento" action="../php/planejamento.php" method="POST">
+          <form id="formPlanejamento" class="formPLanejamento" method="POST">
             <span class="id">
               <p>Identificação </p><input class="identificacao" name="ident_deb"  type="text" placeholder="Identificaçao" maxlength="15" required>
             </span>
@@ -119,7 +119,7 @@
         </div>
         <div class="containerListaMobile">
           <h2>Adicione seus debitos</h2>
-          <form class="formMobile" action="../php/planejamento.php" method="POST">
+          <form id="formPlanejamento" class="formPLanejamento" method="POST">
             <div class="">
               <input class="identificacao" name="ident_deb" type="text" placeholder="Identificaçao" maxlength="15" required>
               <input class="observacao" name="obs_deb" type="text" placeholder="Observaçao" maxlength="100">
@@ -134,14 +134,32 @@
               <option value="nao">Não</option>
             </select>
             <div><button type="submit">adicionar<i class="fa-solid fa-plus"></i></button></div>
+            <script>
+          document.getElementById('formPlanejamento').addEventListener('submit', function(event) {
+              event.preventDefault(); // Impede o envio padrão do formulário
+  
+              const formData = new FormData(this);
+  
+              fetch('../php/processa_planejamento.php', {
+                  method: 'POST',
+                  body: formData
+              })
+              .then(response => response.text())
+              .then(data => {
+                  alert(data); // Exibe a resposta do servidor
+                  // Aqui você pode adicionar código para atualizar a lista de débitos na página, se necessário
+              })
+              .catch(error => console.error('Erro:', error));
+          });
+  </script>
           </form>
         </div>
         <ul class="listtodo">
           <li class="todo">
             <h3 class="identif">Identificação</h3>
-            <h3 class="obstodo">Observação</>
+            <h3 class="obstodo">Observação<h3>
               <h3 class="precotodo">Preço</h3>
-              <h3 class="vencimentotodo">Vencimento</>
+              <h3 class="vencimentotodo">Vencimento</h3>
                 <h3 class="notftodo">Notificações</h3>
                 <h3 class="btnstodo"></h3>
           </li>
