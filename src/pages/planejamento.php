@@ -19,6 +19,8 @@
   <link rel="stylesheet" href="../css/style.css" />
   <script src="https://kit.fontawesome.com/7414161b6e.js" crossorigin="anonymous"></script>
   <script type="module" src="../js/script.js" defer></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <title>Planejamento</title>
 </head>
 
@@ -82,8 +84,10 @@
       <div class="info-planejamento">
         <div class="entrada-salario">
           <h2>Salário bruto total</h2>
-          <p>R$ <input type="text" id="entradaSalario" placeholder=" 00.00"></p>
-          <button type="submit">Adicionar</button>
+          <form id="formSalario" method="POST">
+            <p>R$ <input type="text" name="entradaSalario" id="entradaSalario" placeholder=" 0,00"></p>
+            <button type="submit">Adicionar</button>
+          </form>
         </div>
         <div class="gastos-totais">
           <h2>Gastos Totais</h2>
@@ -134,9 +138,10 @@
               <option value="nao">Não</option>
             </select>
             <div><button type="submit">adicionar<i class="fa-solid fa-plus"></i></button></div>
+            
             <script>
-          document.getElementById('formPlanejamento').addEventListener('submit', function(event) {
-              event.preventDefault(); // Impede o envio padrão do formulário
+              document.getElementById('formPlanejamento').addEventListener('submit', function(event) {
+                event.preventDefault(); // Impede o envio padrão do formulário
   
               const formData = new FormData(this);
   
@@ -145,14 +150,58 @@
                   body: formData
               })
               .then(response => response.text())
-              .then(data => {
-                  alert(data); // Exibe a resposta do servidor
-                  // Aqui você pode adicionar código para atualizar a lista de débitos na página, se necessário
-              })
-              .catch(error => console.error('Erro:', error));
+    .then(data => {
+      Swal.fire({
+        position: 'bottom-end',
+        icon: 'success',
+        title: 'Seu débito foi adicionado com sucesso!',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      // Aqui você pode adicionar código para atualizar a lista de débitos na página, se necessário
+    })
+    .catch(error => Swal.fire({
+      position: 'bottom-end',
+      icon: 'error',
+      title: 'Erro: ' + error,
+      showConfirmButton: false,
+      timer: 1500
+    }));
           });
-  </script>
-          </form>
+            </script>
+  
+            <script>
+              document.getElementById('formSalario').addEventListener('submit', function(event) {
+                event.preventDefault(); // Impede o envio padrão do formulário
+
+               const formData = new FormData(this);
+
+              fetch('../php/entrada.php', {
+                  method: 'POST',
+                  body: formData
+                })
+                .then(response => response.text())
+    .then(data => {
+      Swal.fire({
+        position: 'bottom-end',
+        icon: 'success',
+        title: 'Seu salário foi adicionado com sucesso!',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      // Aqui você pode adicionar código para atualizar a página, se necessário
+    })
+    .catch(error => Swal.fire({
+      position: 'bottom-end',
+      icon: 'error',
+      title: 'Erro: ' + error,
+      showConfirmButton: false,
+      timer: 1500
+    }));
+                });
+                </script>
+         
+        </form>
         </div>
         <ul class="listtodo">
           <li class="todo">
