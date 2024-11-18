@@ -7,7 +7,7 @@
 //         return implode("-",array_reverse(explode("",$data)));
 //     }
 // }
-  $nome = $_POST["name"];
+  $nome = $_POST["nome"];
   $sexo = $_POST["sexo"];
   $dataNasc =$_POST["dataNasc"];
   $email = $_POST["email"];

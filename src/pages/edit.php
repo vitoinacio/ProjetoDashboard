@@ -70,7 +70,7 @@
         </div>
         <form class="formInfoPessoais" action="saveEdit.php" method="post">
           <div class="form-cadastro pessoais">
-            <input type="text" name="name" id="name" placeholder="Nome" minlength="10" maxlength="50" value="<?php echo $nome?>" required>
+            <input type="text" name="nome" id="name" placeholder="Nome" minlength="10" maxlength="50" value="<?php echo $nome?>" required>
             <div class="formDiv1">
               <select name="sexo" id="sexo" required>
                 <option value="" disabled>Sexo</option>
