@@ -1,6 +1,10 @@
 <?php
   session_start();
-  // print_r($_SESSION['email']);
+  include_once('../php/conexao.php');
+  print_r($_SESSION['email']);
+  print_r($_SESSION['id']);
+
+
   if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
   {
     unset($_SESSION['email']);
@@ -99,10 +103,10 @@
           <h2>Adicione seus debitos</h2>
           <form id="formPlanejamento" class="formPLanejamento" method="POST">
             <span class="id">
-              <p>Identificação </p><input class="identificacao" name="ident_deb"  type="text" placeholder="Identificaçao" maxlength="15" required>
+              <p>Identificação </p><input class="identificacao" name="ident_deb"  type="text" placeholder="Identificação" maxlength="15" required>
             </span>
             <span class="obs">
-              <p>Observação </p><input class="observacao" name="obs_deb" type="text" placeholder="Observaçao" maxlength="100">
+              <p>Observação </p><input class="observacao" name="obs_deb" type="text" placeholder="Observação" maxlength="100">
             </span>
             <span>
               <p>Valor R$ </p><input class="valor" name="valor_deb" type="text" placeholder="Valor R$" max="15" required>
@@ -111,19 +115,19 @@
               <p>Vencimento </p><input class="vencimento" type="text" name="data_venc" id="vencimento" placeholder="DD / MM / AAAA" maxlength="10" minlength="10" required>
             </span>
             <span class="notf">
-              <p>Notificação <br>de</p>
+              <p>Notificação <br>de Vencimento</p>
               <select name="notficacao" id="notficacao" required>
-                <option value="" selected disabled>Vencimento</option>
-                <option value="sim">Sim</option>
-                <option value="nao">Não</option>
+                <option value="" selected disabled></option>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
               </select>
             </span>
-            <div class="btnAdd"><button type="submit" >adicionar<i class="fa-solid fa-plus"></i></button></div>
+            <div class="btnAdd"><button type="submit">Adicionar<i class="fa-solid fa-plus"></i></button></div>
           </form>
         </div>
         <div class="containerListaMobile">
           <h2>Adicione seus debitos</h2>
-          <form id="formPlanejamento" class="formPLanejamento" method="POST">
+          <form id="formPlanejamentoMobile" class="formPLanejamento mobile" method="POST">
             <div class="">
               <input class="identificacao" name="ident_deb" type="text" placeholder="Identificaçao" maxlength="15" required>
               <input class="observacao" name="obs_deb" type="text" placeholder="Observaçao" maxlength="100">
@@ -140,7 +144,11 @@
             <div><button type="submit">adicionar<i class="fa-solid fa-plus"></i></button></div>
             
             <script>
-              document.getElementById('formPlanejamento').addEventListener('submit', function(event) {
+              document.getElementById('formPlanejamento').addEventListener('submit', addfetch)
+              document.getElementById('formPlanejamentoMobile').addEventListener('submit', addfetch)
+              
+              
+              function addfetch(event) {
                 event.preventDefault(); // Impede o envio padrão do formulário
   
               const formData = new FormData(this);
@@ -152,7 +160,7 @@
               .then(response => response.text())
     .then(data => {
       Swal.fire({
-        position: 'bottom-end',
+        position: 'center',
         icon: 'success',
         title: 'Seu débito foi adicionado com sucesso!',
         showConfirmButton: false,
@@ -167,7 +175,7 @@
       showConfirmButton: false,
       timer: 1500
     }));
-          });
+          };
             </script>
   
             <script>
@@ -183,7 +191,6 @@
                 .then(response => response.text())
     .then(data => {
       Swal.fire({
-        position: 'bottom-end',
         icon: 'success',
         title: 'Seu salário foi adicionado com sucesso!',
         showConfirmButton: false,
