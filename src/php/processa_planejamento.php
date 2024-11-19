@@ -4,20 +4,22 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['data'][] = 
+    
     $ident_deb = htmlspecialchars(trim($_POST["ident_deb"]));
     $obs_deb = htmlspecialchars(trim($_POST["obs_deb"]));
     $valor_deb = str_replace(",", ".", trim(str_replace("R$", "", $_POST["valor_deb"])));
     $data_venc = htmlspecialchars(trim($_POST["data_venc"]));
-    $notifi = intval(htmlspecialchars(trim($_POST["notficacao"])))
-    ;
+    $notifi = intval(htmlspecialchars(trim($_POST["notficacao"])));
+    $id = $_SESSION['id'];
 
-    $stmt = $conn->prepare("INSERT INTO debito (ident_deb, obs_deb, valor_deb, data_venc, notifi) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssdi", $ident_deb, $obs_deb, $valor_deb, $data_venc, $notifi);
+    $stmt = $conn->prepare("INSERT INTO debito (ident_deb, obs_deb, valor_deb, data_venc, notifi, fk_id_usuario) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssdii", $ident_deb, $obs_deb, $valor_deb, $data_venc, $notifi, $id);
 
     if ($stmt->execute()) {
-        echo "Débito inseridos com sucesso!";
-    } else {
         echo "Erro: " . $stmt->error;
+
+    } else {
+        echo "Débito inseridos com sucesso!";
     }
 }
 
