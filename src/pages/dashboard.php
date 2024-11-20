@@ -1,6 +1,8 @@
 <?php
   session_start();
+  include_once('../php/conexao.php');
   print_r($_SESSION['email']);
+  print_r($_SESSION['id']);
   if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
   {
     unset($_SESSION['email']);
@@ -8,6 +10,29 @@
     header('Location: ../../index.html');
   }
   $logado = $_SESSION['email'];
+  $id = $_SESSION['id'];
+
+    // Buscar o valor total de entrada do banco de dados
+    $sql = "SELECT SUM(valor_ent) as total_entrada FROM ent_financeira WHERE fk_id_usuario = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $totalEntrada = $row['total_entrada'] ? $row['total_entrada'] : 0;
+
+    // Buscar o valor total de débitos do BD
+    $sql = "SELECT SUM(valor_deb) as total_debitos FROM debito WHERE fk_id_usuario = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $totalDebitos = $row['total_debitos'] ? $row['total_debitos'] : 0;
+
+    // Calculo do valor restante
+    $valorRestante = $totalEntrada - $totalDebitos;
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -95,7 +120,7 @@
           >
             <div class="info-text">
               <h3>Entrada total</h3>
-              <p>R$ 000,00</p>
+              <p>R$ <?php echo number_format($totalEntrada, 2, ',', '.'); ?> </p>
             </div>
             <i class="fa-solid fa-money-bills"></i>
           </div>
@@ -104,7 +129,7 @@
           >
             <div class="info-text">
               <h3>Debitos totais</h3>
-              <p>R$ 000,00</p>
+              <p>R$ <?php echo number_format($totalDebitos, 2, ',', '.'); ?></p>
             </div>
             <i class="fa-solid fa-receipt"></i>
           </div>
@@ -113,7 +138,7 @@
           >
             <div class="info-text">
               <h3>Restante</h3>
-              <p>R$ 000,00</p>
+              <p>R$ <?php echo number_format($valorRestante, 2, ',','.'); ?></p>
             </div>
             <i class="fa-solid fa-coins"></i>
           </div>

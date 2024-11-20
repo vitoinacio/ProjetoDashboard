@@ -1,13 +1,13 @@
 CREATE DATABASE dashboard;
 USE dashboard;
 CREATE TABLE usuario (
-id INT AUTO_INCREMENT UNIQUE NOT NULL,
+id INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL,
 nome VARCHAR(80) NOT NULL,
 sexo VARCHAR(30) NOT NULL, 
 dataNasc VARCHAR(10) NOT NULL, 
 email VARCHAR (80) NOT NULL UNIQUE,
 senha VARCHAR (8) NOT NULL,
-cpf VARCHAR (14) NOT NULL PRIMARY KEY UNIQUE,
+cpf VARCHAR (14) NOT NULL UNIQUE,
 tel VARCHAR (20) NOT NULL,
 cep VARCHAR (10) NOT NULL,
 cidade VARCHAR (25) NOT NULL,
@@ -30,7 +30,8 @@ data_venc varchar(10),
 obs_deb varchar (50),
 valor_deb decimal (15,2),
 notifi varchar (2),
-fk_id_usuario int, foreign key (fk_id_usuario) references usuario(id)
+fk_id_usuario int,
+constraint fk_id_usuario_deb foreign key (fk_id_usuario) references usuario(id)
 );
 
 CREATE TABLE relatorio(
@@ -50,8 +51,5 @@ describe debito;
 alter table usuario rename column nameOut to nome;
 SELECT DATE_FORMAT(dataNasc, '%d-%m-%Y') AS 'dataNasc' FROM usuario;
 DELETE FROM usuario WHERE cpf = '192.894.957-66';	
-
-
-
 
 

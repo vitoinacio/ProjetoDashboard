@@ -83,8 +83,8 @@ export default function todoList() {
                 <p class="vencimentotodo">${form[0][3].value}</p>
                 <p class="notftodo">${form[0][4].value}</p>
                 <div class="btnstodo">
-                  <button class="btncheck"> pago <i class="fa-solid fa-check"></i> </button>
-                  <button class="btntrash"> excluir <i class="fa-solid fa-trash"></i> </button>
+                  <button class="btncheck"> Pago <i class="fa-solid fa-check"></i> </button>
+                  <button class="btntrash"> Excluir <i class="fa-solid fa-trash"></i> </button>
                 </div>
               </li>`;
     };
