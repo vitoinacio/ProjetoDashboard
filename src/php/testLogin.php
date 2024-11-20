@@ -21,7 +21,7 @@
             $_SESSION['email'] = $email;
             $_SESSION['senha'] = $senha;
             $logado = $_SESSION['email'];
-            header('Location: ../pages/planejamento.php');
+            header('Location: ../pages/dashboard.php');
         }
         elseif(mysqli_num_rows($result) < 1)
         {
