@@ -12,6 +12,16 @@
     header('Location: ../../index.html');
   }
   $logado = $_SESSION['email'];
+  $usuario_id = $_SESSION['id'];
+
+//Visualizar débitos adicionados  
+$sql = "SELECT * FROM debito WHERE fk_id_usuario = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $usuario_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$debitos = $result->fetch_all(MYSQLI_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -122,6 +132,7 @@
                 <option value="Não">Não</option>
               </select>
             </span>
+            
             <div class="btnAdd"><button type="submit">Adicionar<i class="fa-solid fa-plus"></i></button></div>
           </form>
         </div>
@@ -219,6 +230,19 @@
                 <h3 class="notftodo">Notificações</h3>
                 <h3 class="btnstodo"></h3>
           </li>
+          <?php foreach ($debitos as $debito): ?>
+          <li class="todo">
+            <h3 class="identif"><?php echo $debito['ident_deb']; ?></h3>
+            <h3 class="obstodo"><?php echo $debito['obs_deb']; ?><h3>
+            <h3 class="precotodo"><?php echo $debito['valor_deb']; ?></h3>
+            <h3 class="vencimentotodo"><?php echo $debito['data_venc']; ?></h3>
+            <h3 class="notftodo"><?php echo $debito['notifi']; ?></h3>
+            <div class="btnstodo">
+              <button class="btncheck"> Pago <i class="fa-solid fa-check"></i> </button>
+              <button class="btntrash"> Excluir <i class="fa-solid fa-trash"></i> </button>
+            </div>
+          </li>
+          <?php endforeach; ?>
         </ul>
       </div>
     </div>
