@@ -29,11 +29,10 @@
         $stmt -> bind_param("ssssssssssss", $nome, $sexo, $dataNasc, $email, $senha, $cpf, $tel, $cep, $cidade, $bairro, $rua, $numeroCasa);
         $stmt -> execute();
         echo 'Registrado com sucesso';
-        header('Location: testLogin.php');
         $stmt -> close();
         $conn -> close();
         
     }
-
+        header('Location: testLogin.php');
 
 ?>
