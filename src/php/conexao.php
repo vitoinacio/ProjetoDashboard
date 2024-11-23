@@ -1,7 +1,7 @@
 <?php
 $dbHost = 'Localhost';
 $dbUsername = 'root';
-$dbPassword = '2706';
+$dbPassword = '';
 $dbName = 'dashboard';
 
 $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);

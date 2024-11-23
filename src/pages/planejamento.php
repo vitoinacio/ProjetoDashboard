@@ -22,6 +22,9 @@ $stmt->execute();
 $result = $stmt->get_result();
 $debitos = $result->fetch_all(MYSQLI_ASSOC);
 
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -97,7 +100,7 @@ $debitos = $result->fetch_all(MYSQLI_ASSOC);
     <div class="content planejamento">
       <div class="info-planejamento">
         <div class="entrada-salario">
-          <h2>Salário bruto total</h2>
+          <h2>Entrada Financeira</h2>
           <form id="formSalario" method="POST">
             <p>R$ <input type="text" name="entradaSalario" id="entradaSalario" placeholder=" 0,00"></p>
             <button type="submit">Adicionar</button>
@@ -110,7 +113,7 @@ $debitos = $result->fetch_all(MYSQLI_ASSOC);
       </div>
       <div class="containertodo">
         <div class="containerLista desktop">
-          <h2>Adicione seus debitos</h2>
+          <h2>Adicione seus débitos</h2>
           <form id="formPlanejamento" class="formPLanejamento" method="POST">
             <span class="id">
               <p>Identificação </p><input class="identificacao" name="ident_deb"  type="text" placeholder="Identificação" maxlength="15" required>
@@ -129,7 +132,7 @@ $debitos = $result->fetch_all(MYSQLI_ASSOC);
               <select name="notficacao" id="notficacao" required>
                 <option value="" selected disabled></option>
                 <option value="Sim">Sim</option>
-                <option value="Não">Não</option>
+                <option value="Nao">Não</option>
               </select>
             </span>
             
@@ -148,9 +151,9 @@ $debitos = $result->fetch_all(MYSQLI_ASSOC);
               <input class="vencimento" type="text" name="data_venc" id="vencimento" placeholder="DD / MM / AAAA" maxlength="10" minlength="10" required>
             </div>
             <select name="notficacao" id="notficacao" required>
-              <option value="" selected disabled>Notficação</option>
-              <option value="sim">Sim</option>
-              <option value="nao">Não</option>
+              <option value="" selected disabled>Notificação</option>
+              <option value="1">Sim</option>
+              <option value="0">Não</option>
             </select>
             <div><button type="submit">adicionar<i class="fa-solid fa-plus"></i></button></div>
             
@@ -236,11 +239,49 @@ $debitos = $result->fetch_all(MYSQLI_ASSOC);
             <h3 class="obstodo"><?php echo $debito['obs_deb']; ?><h3>
             <h3 class="precotodo"><?php echo $debito['valor_deb']; ?></h3>
             <h3 class="vencimentotodo"><?php echo $debito['data_venc']; ?></h3>
-            <h3 class="notftodo"><?php echo $debito['notifi']; ?></h3>
+            <?php if ($debito['notifi']) {
+              echo "<h3 class='notftodo'>Sim</h3>";
+            } else {
+              echo "<h3 class='notftodo'>Não</h3>";
+            } ?>
             <div class="btnstodo">
               <button class="btncheck"> Pago <i class="fa-solid fa-check"></i> </button>
-              <button class="btntrash"> Excluir <i class="fa-solid fa-trash"></i> </button>
-            </div>
+              <button class="btntrash" data-id="<?php echo $debito['id_deb']; ?>"> Excluir <i class="fa-solid fa-trash"></i> </button>
+          <script>
+            document.querySelectorAll('.btntrash').forEach(button => {
+              button.addEventListener('click', function() {
+                const idDeb = this.getAttribute('data-id');
+
+                fetch('../php/excluir_deb.php', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                  },
+                  body: `id_deb=${idDeb}`
+                })
+                .then(response => response.text())
+                .then(data => {
+                  Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Débito excluído com sucesso!',
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                  this.closest('.todo').remove();
+                })
+                .catch(error => Swal.fire({
+                  position: 'bottom-end',
+                  icon: 'error',
+                  title: 'Erro: ' + error,
+                  showConfirmButton: false,
+                  timer: 1500
+                }));
+              });
+            });
+          </script>
+           
+          </div>
           </li>
           <?php endforeach; ?>
         </ul>
