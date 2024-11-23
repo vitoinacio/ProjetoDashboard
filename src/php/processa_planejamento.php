@@ -3,8 +3,6 @@ require_once "conexao.php";
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $_SESSION['data'][] = 
-    
     $ident_deb = htmlspecialchars(trim($_POST["ident_deb"]));
     $obs_deb = htmlspecialchars(trim($_POST["obs_deb"]));
     $valor_deb = str_replace(",", ".", trim(str_replace("R$", "", $_POST["valor_deb"])));
@@ -12,16 +10,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $notifi = intval(htmlspecialchars(trim($_POST["notficacao"])));
     $id = $_SESSION['id'];
 
+
     $stmt = $conn->prepare("INSERT INTO debito (ident_deb, obs_deb, valor_deb, data_venc, notifi, fk_id_usuario) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssdii", $ident_deb, $obs_deb, $valor_deb, $data_venc, $notifi, $id);
+    $stmt->bind_param("ssssss", $ident_deb, $obs_deb, $valor_deb, $data_venc, $notifi, $id);
 
     if ($stmt->execute()) {
-        echo "Erro: " . $stmt->error;
-
+        echo "Débito inserido com sucesso!";
     } else {
-        echo "Débito inseridos com sucesso!";
+        echo "Erro: " . $stmt->error;
     }
-}
 
-     $stmt->close();
+    $stmt->close();
+}
 ?>
