@@ -68,7 +68,7 @@
           
           <i class="fa-regular fa-address-card"></i>
         </div>
-        <form class="formInfoPessoais" action="saveEdit.php" method="post">
+        <form class="formInfoPessoais" action="saveEditUser.php" method="post">
           <div class="form-cadastro pessoais">
             <input type="text" name="nome" id="name" placeholder="Nome" minlength="10" maxlength="50" value="<?php echo $nome?>" required>
             <div class="formDiv1">
