@@ -1,13 +1,57 @@
 <?php
+    include_once('../php/conexao.php');
   session_start();
-  print_r($_SESSION['email']);
+  // print_r($_SESSION['email']);
+  // print_r($_SESSION['id']);
   if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
   {
     unset($_SESSION['email']);
     unset($_SESSION['senha']);
-    header('Location: ../../index.html');
+    header('Location: ../../index.php');
   }
   $logado = $_SESSION['email'];
+
+
+  if(!empty($_SESSION['id'])){
+
+    $id = $_SESSION['id'];
+
+    $sqlSelect = "SELECT * FROM usuario where id = $id";
+
+    $result = $conn->query($sqlSelect);
+
+    $pessoa = array();
+
+    if($result->num_rows > 0)
+    {
+      $user_data = mysqli_fetch_assoc($result);
+
+      foreach($user_data as $key => $value){
+        $pessoa[$key] = $value;
+        // echo $key . '<br><br>';
+      }
+
+      // while($user_data = mysqli_fetch_assoc($result))
+      // {
+      //   $pessoa['nome'] = $user_data["nome"];
+      //   $pessoa['sexo'] = $user_data["sexo"];
+      //   $pessoa['dataNasc'] = $user_data["dataNasc"];
+      //   $pessoa['email'] = $user_data["email"];
+      //   $pessoa['senha'] = $user_data["senha"];
+      //   $pessoa['cpf'] = $user_data["cpf"];
+      //   $pessoa['tel'] = $user_data["tel"];
+      //   $pessoa['cep'] = $user_data["cep"];
+      //   $pessoa['cidade'] = $user_data["cidade"];
+      //   $pessoa['bairro'] = $user_data["bairro"];
+      //   $pessoa['rua'] = $user_data["rua"];
+      //   $pessoa['numeroCasa'] = $user_data["numeroCasa"];
+      // }
+    }
+    else
+    {
+      header('Location:admin.php');
+    }
+  }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -89,95 +133,65 @@
       </div>
       <div class="userInfo">
         <div class="tituloUser">
-          <h2>Perfil</h2>
+          <h2>Perfil</h2><a href="editUser.php?id=<?php echo $_SESSION['id']; ?>" class="editUser"><i class="fa-solid fa-pen"></i></a>
         </div>
         <form class="formUser" onsubmit="event.preventDefault()">
           <label for="name">Nome:
             <div>
-              <input disabled type="text" id="nome" minlength="10" maxlength="50">
-              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
-              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
-              <button class="confirmUser"><i class="fa-solid fa-check"></i></button>
+              <input disabled type="text" id="nome" minlength="10" maxlength="50" value="<?php echo (isset($pessoa['nome']) && !empty($pessoa['nome'])) ? $pessoa['nome'] : ''; ?>">
             </div>
           </label>
           <label for="cpf">Cpf:
-            <div><input disabled type="text" id="cpf"></div>
+            <div><input disabled type="text" id="cpf" value="<?php echo (isset($pessoa['cpf']) && !empty($pessoa['cpf'])) ? $pessoa['cpf'] : ''; ?>"></div>
           </label>
           <label for="emailUser">Email:
             <div>
-              <input disabled type="email" id="emailUser">
-              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
-              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
-              <button class="confirmUser"> <i class="fa-solid fa-check"></i></button>
+              <input disabled type="email" id="emailUser" value="<?php echo (isset($pessoa['email']) && !empty($pessoa['email'])) ? $pessoa['email'] : ''; ?>">
             </div>
           </label>
           <label for="nascimento">Nascimento:
             <div>
-              <input disabled type="text" id="dataNasc" minlength="10" maxlength="10" oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1/$2').replace(/(\d{2})(\d)/, '$1/$2').slice(0, 10)">
-              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
-              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
-              <button class="confirmUser"><i class="fa-solid fa-check"></i></button>
+              <input disabled type="text" id="dataNasc" minlength="10" maxlength="10" oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1/$2').replace(/(\d{2})(\d)/, '$1/$2').slice(0, 10)" value="<?php echo (isset($pessoa['dataNasc']) && !empty($pessoa['dataNasc'])) ? $pessoa['dataNasc'] : ''; ?>">
             </div>
           </label>
           <label for="sexo">Sexo:
             <div>
-              <input disabled type="text" id="sexo">
+              <input disabled type="text" id="sexo" value="<?php echo (isset($pessoa['sexo']) && !empty($pessoa['sexo'])) ? $pessoa['sexo'] : ''; ?>">
             </div>
           </label>
           <label for="telefone">Telefone:
             <div>
-              <input disabled type="text" id="telefone">
-              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
-              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
-              <button class="confirmUser"> <i class="fa-solid fa-check"></i></button>
+              <input disabled type="text" id="telefone" value="<?php echo (isset($pessoa['tel']) && !empty($pessoa['tel'])) ? $pessoa['tel'] : ''; ?>">
             </div>
           </label>
           <label for="Senha">Senha:
             <div>
-              <input disabled type="password" id="senha">
-              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
-              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
-              <button class="confirmUser"> <i class="fa-solid fa-check"></i></button>
+              <input disabled type="password" id="senha" value="<?php echo (isset($pessoa['senha']) && !empty($pessoa['senha'])) ? $pessoa['senha'] : ''; ?>">
             </div>
           </label>
           <label for="cep">Cep:
             <div>
-              <input disabled type="text" id="cep">
-              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
-              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
-              <button class="confirmUser"> <i class="fa-solid fa-check"></i></button>
+              <input disabled type="text" id="cep" value="<?php echo (isset($pessoa['cep']) && !empty($pessoa['cep'])) ? $pessoa['cep'] : ''; ?>">
             </div>
           </label>
           <label for="cidade">Cidade:
             <div>
-              <input disabled type="text" id="cidade">
-              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
-              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
-              <button class="confirmUser"><i class="fa-solid fa-check"></i></button>
+              <input disabled type="text" id="cidade" value="<?php echo (isset($pessoa['cidade']) && !empty($pessoa['cidade'])) ? $pessoa['cidade'] : ''; ?>">
             </div>
           </label>
           <label for="bairro">Bairro:
             <div>
-              <input disabled type="text" id="bairro">
-              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
-              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
-              <button class="confirmUser"><i class="fa-solid fa-check"></i></button>
+              <input disabled type="text" id="bairro" value="<?php echo (isset($pessoa['bairro']) && !empty($pessoa['bairro'])) ? $pessoa['bairro'] : ''; ?>">
             </div>
           </label>
           <label for="rua">Rua:
             <div>
-              <input disabled type="text" id="rua">
-              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
-              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
-              <button class="confirmUser"> <i class="fa-solid fa-check"></i></button>
+              <input disabled type="text" id="rua" value="<?php echo (isset($pessoa['rua']) && !empty($pessoa['rua'])) ? $pessoa['rua'] : ''; ?>">
             </div>
           </label>
           <label for="numero">Número:
             <div>
-              <input disabled type="text" id="endNum">
-              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
-              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
-              <button class="confirmUser"><i class="fa-solid fa-check"></i></button>
+              <input disabled type="text" id="endNum" value="<?php echo (isset($pessoa['numeroCasa']) && !empty($pessoa['numeroCasa'])) ? $pessoa['numeroCasa'] : ''; ?>">
             </div>
           </label>
         </form>

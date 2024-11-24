@@ -34,22 +34,6 @@ fk_id_usuario int,
 constraint fk_id_usuario_deb foreign key (fk_id_usuario) references usuario(id)
 );
 
-CREATE TABLE relatorio(
-id_relatorio INT PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
-fk_id_usuario INT NOT NULL,
-total_entrada INT NOT NULL,
-total_saida INT NOT NULL,
-saldo_final INT NOT NULL,
-CONSTRAINT fk_id_usuario_rel FOREIGN KEY (fk_id_usuario) REFERENCES usuario(id));
 
-drop database dashboard;
-drop table debito;
-select * from usuario;
-describe usuario;
-describe ent_financeira;
-describe debito;
-alter table usuario rename column nameOut to nome;
-SELECT DATE_FORMAT(dataNasc, '%d-%m-%Y') AS 'dataNasc' FROM usuario;
-DELETE FROM usuario WHERE cpf = '192.894.957-66';	
 
 
