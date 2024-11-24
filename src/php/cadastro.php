@@ -33,6 +33,6 @@
         $conn -> close();
         
     }
-        header('Location: testLogin.php');
+        header('Location: ../../index.php?errorMessage=Registrado com Sucesso!');
 
 ?>
