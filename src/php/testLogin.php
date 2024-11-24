@@ -39,13 +39,13 @@
             unset($_SESSION['email']);
             unset($_SESSION['senha']);
             unset($_SESSION['id']);
-            header('location: ../../index.html');
+            header('location: ../../index.php?errorMessage=Ocorreu um erro ao fazer o login! por favor, tente novamente.');
         }
     
     else
     {
         //Não Acessa
-        header('Location:../../index.html');
+        header('Location:../../index.php?errorMessage=Ocorreu um erro ao fazer o login! por favor, tente novamente.');
     }
 }
 ?>

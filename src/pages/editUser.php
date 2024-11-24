@@ -29,7 +29,7 @@
     }
     else
     {
-      header('Location:admin.php');
+      header('Location:user.php');
     }
     
   }
@@ -57,7 +57,7 @@
   </header>
   <!-- FIM HEADER -->
   <!-- INICIO MAIN -->
-  <a href="admin.php" style="border: solid 0.5px gray;">Voltar</a>
+  <a href="user.php" style="border: solid 0.5px gray;">Voltar</a>
 
   <main class="main-cadastro">
     

@@ -1,15 +1,15 @@
 <?php
   session_start();
   include_once('../php/conexao.php');
-  print_r($_SESSION['email']);
-  print_r($_SESSION['id']);
+  // print_r($_SESSION['email']);
+  // print_r($_SESSION['id']);
 
 
   if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
   {
     unset($_SESSION['email']);
     unset($_SESSION['senha']);
-    header('Location: ../../index.html');
+    header('Location: ../../index.php');
   }
   $logado = $_SESSION['email'];
   $usuario_id = $_SESSION['id'];
@@ -233,13 +233,13 @@ $debitos = $result->fetch_all(MYSQLI_ASSOC);
                 <h3 class="notftodo">Notificações</h3>
                 <h3 class="btnstodo"></h3>
           </li>
-          <?php foreach ($debitos as $debito): ?>
+          <?php foreach ($debitos as $debito):?>
           <li class="todo">
             <h3 class="identif"><?php echo $debito['ident_deb']; ?></h3>
             <h3 class="obstodo"><?php echo $debito['obs_deb']; ?><h3>
-            <h3 class="precotodo"><?php echo $debito['valor_deb']; ?></h3>
+            <h3 class="precotodo">R$ <?php echo $debito['valor_deb']; ?></h3>
             <h3 class="vencimentotodo"><?php echo $debito['data_venc']; ?></h3>
-            <?php if ($debito['notifi']) {
+            <?php if ($debito['notifi'] === '1') {
               echo "<h3 class='notftodo'>Sim</h3>";
             } else {
               echo "<h3 class='notftodo'>Não</h3>";
