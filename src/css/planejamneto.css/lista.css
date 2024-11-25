@@ -168,9 +168,10 @@
   padding: 10px;
   display: flex;
   width: 100%;
-  gap: 10px;
+  gap: 5px;
   justify-content: space-around;
   align-items: center;
+  text-align: center;
   border-bottom: 1px solid var(--cor6);
 }
 
@@ -178,8 +179,9 @@
   flex: 15%;
 }
 
-.todo .obstodo{
+.todo h3.obstodo{
   flex: 25%;
+  text-align: center;
 }
 
 .todo .precotodo{

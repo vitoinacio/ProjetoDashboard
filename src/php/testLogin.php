@@ -1,38 +1,29 @@
 <?php
-    session_start();
-    // print_r($_REQUEST)
-    if(isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha']))
-    {
-        //Acessa
-        include_once('conexao.php');
-        $email = $_POST['email'];
-        $senha = $_POST['senha'];
+session_start();
+include_once('./conexao.php');
 
-        // print_r('Email: ' . $email);
-        // print_r('Senha: ' . $senha);
-        $sql = "SELECT * FROM usuario WHERE email = '$email' and senha = '$senha'";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
 
-        $result = $conn->query($sql);
+    // Verificar se o usuário existe no banco de dados
+    $sql = "SELECT id, email FROM usuario WHERE email = ? AND senha = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $email, $senha);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-        // print_r($result);
-        
-        if(mysqli_num_rows($result) > 0)
-        {
-            $_SESSION['email'] = $email;
-            $_SESSION['senha'] = $senha;
-            $logado = $_SESSION['email'];
-            header('Location: ../pages/dashboard.php');
-        }
-        elseif(mysqli_num_rows($result) < 1)
-        {
-            unset($_SESSION['email']);
-            unset($_SESSION['senha']);
-            header('location: ../../index.html');
-        }
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['id'] = $row['id'];
+        $_SESSION['senha'] = $senha; // Adicionando senha na sessão para verificação
+        header('Location: ../pages/dashboard.php');
+        exit();
+    } else {
+        // Usuário não encontrado ou senha incorreta
+        header('Location: ../../index.html');
+        exit();
     }
-    else
-    {
-        //Não Acessa
-        header('Location:../../index.html');
-    }
+}
 ?>
