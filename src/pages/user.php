@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 include_once('../php/conexao.php');
 
@@ -105,7 +106,7 @@ $dadosUsuario = buscarDadosUsuario($conn, $id);
       </div>
       <div class="userInfo">
         <div class="tituloUser">
-          <h2>Perfil</h2>
+          <h2>Perfil</h2><a href="editUser.php?id=<?php echo $_SESSION['id']; ?>" class="editUser"><i class="fa-solid fa-pen"></i></a>
         </div>
         <form class="formUser" onsubmit="event.preventDefault()">
           <label for="name">Nome:
@@ -156,7 +157,7 @@ $dadosUsuario = buscarDadosUsuario($conn, $id);
               <input disabled type="password" name="senha" id="senha" value="<?php echo htmlspecialchars($dadosUsuario['senha']); ?>">
               <button class="editUser"><i class="fa-solid fa-pen"></i></button>
               <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
-              <button class="confirmUser"> <i class="fa-solid fa-check"></i></button>
+              <button class="confirmUser"> <i class="fa-solid fa-check"></i></button
             </div>
           </label>
           <label for="cep">Cep:

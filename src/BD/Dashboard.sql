@@ -15,7 +15,8 @@ bairro VARCHAR (25) NOT NULL,
 rua VARCHAR (25) NOT NULL,
 numeroCasa VARCHAR (25) NOT NULL,
 foto VARCHAR (255) NOT NULL,
-dtCriacao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP 
+dtCriacao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+adm VARCHAR (1) DEFAULT '0' 
 );
 CREATE TABLE ent_financeira (
 id_ent INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -42,13 +43,3 @@ total_entrada INT NOT NULL,
 total_saida INT NOT NULL,
 saldo_final INT NOT NULL,
 CONSTRAINT fk_id_usuario_rel FOREIGN KEY (fk_id_usuario) REFERENCES usuario(id));
-
-DROP DATABASE dashboard;
-DROP TABLE debito;
-SELECT * FROM usuario;
-describe usuario;
-describe ent_financeira;
-describe debito;
-ALTER TABLE usuario rename column nameOut TO nome;
-SELECT DATE_FORMAT(dataNasc, '%d-%m-%Y') AS 'dataNasc' FROM usuario;
-DELETE FROM usuario WHERE cpf = '192.894.957-66';	

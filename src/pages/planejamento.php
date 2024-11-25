@@ -9,6 +9,7 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['senha'])) {
   exit();
 }
 
+
 $logado = isset($_SESSION['email']) ? $_SESSION['email'] : null;
 $id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
 
@@ -70,6 +71,9 @@ function buscarDebitos($conn, $id) {
 }
 
 $debitos = buscarDebitos($conn, $id);
+
+
+
 
 ?>
 
@@ -146,7 +150,7 @@ $debitos = buscarDebitos($conn, $id);
     <div class="content planejamento">
       <div class="info-planejamento">
         <div class="entrada-salario">
-          <h2>Salário bruto total</h2>
+          <h2>Entrada Financeira</h2>
           <form id="formSalario" method="POST">
             <p>R$ <input type="text" name="entradaSalario" id="entradaSalario" placeholder="0,00" value="<?php echo htmlspecialchars($totalEntrada); ?>"></p>
             <button type="submit">Adicionar</button>
@@ -159,7 +163,7 @@ $debitos = buscarDebitos($conn, $id);
       </div>
       <div class="containertodo">
         <div class="containerLista desktop">
-          <h2>Adicione seus debitos</h2>
+          <h2>Adicione seus débitos</h2>
           <form id="formPlanejamento" class="formPLanejamento" method="POST">
             <span class="id">
               <p>Identificação </p><input class="identificacao" name="ident_deb"  type="text" placeholder="Identificação" maxlength="15" required>
