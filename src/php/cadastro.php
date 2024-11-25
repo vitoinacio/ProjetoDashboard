@@ -25,8 +25,8 @@
         echo 'Registrado com sucesso';
         $stmt -> close();
         $conn -> close();
-        header('Location: ../../index.html');
+        
     }
-
+        header('Location: ../../index.php?errorMessage=Registrado com Sucesso!');
 
 ?>

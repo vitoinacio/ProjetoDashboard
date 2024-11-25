@@ -1,10 +1,12 @@
 <?php
 require_once "conexao.php";
 session_start();
+print_r($_SESSION['email']);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if(isset($_POST["entradaSalario"])) {
+        $id = $_SESSION['id'];
         $entradaSalario = htmlspecialchars(trim($_POST["entradaSalario"]));
         $entradaSalario = str_replace(",", ".", $entradaSalario); // Converte a vírgula para ponto decimal
 
