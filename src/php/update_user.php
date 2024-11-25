@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         foreach ($updates as $field => $value) {
             $setClause[] = "$field = ?";
             $params[] = $value;
-            $types .= 's'; // Assumindo que todos os campos são strings
+            $types .= 's';
         }
 
         $params[] = $id;
