@@ -24,6 +24,7 @@ function buscarDadosUsuario($conn, $id) {
 }
 
 $dadosUsuario = buscarDadosUsuario($conn, $id);
+$nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuario['nome'])[1];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -58,15 +59,14 @@ $dadosUsuario = buscarDadosUsuario($conn, $id);
       <a href="config.php"><i class="fa-solid fa-gear"></i></a>
       <div class="dropdown-menu">
         <div class="perfil-menu">
-          <img id="fotoPerfil" src="../img/perfil.jpg" alt="Perfil Usuario">
+        <img id="fotoPerfil" src="<?php echo $dadosUsuario['foto'] ? 'data:image/jpeg;base64,' . base64_encode($dadosUsuario['foto']) : '../img/perfil.jpg'; ?>" alt="Foto de Perfil">
           <div class="info-perfil">
-            <h4 id="NomeUsuario">Usuario</h4>
-            <h5>Plano Completo</h5>
+          <h4 id="NomeUsuario"><?php print_r($nome)?></h4>
           </div>
         </div>
         <hr>
         <div class="logout">
-          <img id="fotoPerfil" src="../img/perfil.jpg" alt="Perfil Usuario">
+        <img id="fotoPerfil" src="<?php echo $dadosUsuario['foto'] ? 'data:image/jpeg;base64,' . base64_encode($dadosUsuario['foto']) : '../img/perfil.jpg'; ?>" alt="Foto de Perfil">
           <div class="login">
             <p>Logado como:</p>
             <h5><?php print_r($_SESSION['email'])?></h5>
@@ -77,7 +77,7 @@ $dadosUsuario = buscarDadosUsuario($conn, $id);
           </div>
         </div>
       </div>
-      <img class="menu-config" id="fotoPerfil" src="../img/perfil.jpg" alt="foto-perfil" />
+      <img id="fotoPerfil" class="menu-config" src="<?php echo $dadosUsuario['foto'] ? 'data:image/jpeg;base64,' . base64_encode($dadosUsuario['foto']) : '../img/perfil.jpg'; ?>" alt="Foto de Perfil">
     </div>
   </header>
   <!-- FIM HEADER -->
@@ -99,7 +99,7 @@ $dadosUsuario = buscarDadosUsuario($conn, $id);
     <!-- CONTENT -->
     <div class="content user">
       <div class="userPerfil">
-        <img src="../img/perfil.jpg" alt="Foto de Perfil" id="fotoPerfil">
+      <img id="fotoPerfil" src="<?php echo $dadosUsuario['foto'] ? 'data:image/jpeg;base64,' . base64_encode($dadosUsuario['foto']) : '../img/perfil.jpg'; ?>" alt="Foto de Perfil">
         <label class="labelFotoPerfil" for="fotoPerfilInput">Editar foto <i class="fa-solid fa-user-plus"></i></label>
         <input type="file" id="fotoPerfilInput" name="fotoPerfilInput" accept="image/*" placeholder="">
       </div>
@@ -107,7 +107,7 @@ $dadosUsuario = buscarDadosUsuario($conn, $id);
         <div class="tituloUser">
           <h2>Perfil</h2>
         </div>
-        <form class="formUser" onsubmit="event.preventDefault()">
+        <form id="userForm" class="formUser" onsubmit="event.preventDefault()">
           <label for="name">Nome:
             <div>
             <input disabled type="text" id="nome" name="nome" minlength="10" maxlength="50" value="<?php echo htmlspecialchars($dadosUsuario['nome']); ?>">
@@ -206,16 +206,17 @@ $dadosUsuario = buscarDadosUsuario($conn, $id);
   <!-- FIM MAIN -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const editButtons = document.querySelectorAll('.editUser');
-        const cancelButtons = document.querySelectorAll('.cancelEdit');
-        const confirmButtons = document.querySelectorAll('.confirmUser');
-        const uploadButton = document.querySelector('.uploadFoto');
-        const inputs = document.querySelectorAll('#userForm input');
-        let originalValues = {};
+    const editButtons = document.querySelectorAll('.editUser');
+    const cancelButtons = document.querySelectorAll('.cancelEdit');
+    const confirmButtons = document.querySelectorAll('.confirmUser');
+    const fotoInput = document.getElementById('fotoPerfilInput');
+    const form = document.getElementById('userForm');
+    const inputs = document.querySelectorAll('#userForm input');
+    let originalValues = {};
 
         // Armazena os valores originais dos inputs
         inputs.forEach(input => {
-            originalValues[input.id] = input.value;
+            originalValues[input.name] = input.value;
         });
 
         // Habilita o campo de entrada para edição
@@ -236,15 +237,18 @@ $dadosUsuario = buscarDadosUsuario($conn, $id);
         cancelButtons.forEach(button => {
             button.addEventListener('click', function() {
                 const input = this.previousElementSibling.previousElementSibling;
-                if (originalValues.hasOwnProperty(input.id)) {
-                    input.value = originalValues[input.id];
+                if (originalValues.hasOwnProperty(input.name)) {
+                    input.value = originalValues[input.name];
                 }
                 input.disabled = true;
-                input.style.background = 'var(--cor6)';
+                input.style.background = '#e2dfdf';
                 input.style.outline = 'none';
                 this.style.display = 'none';
                 this.nextElementSibling.style.display = 'none';
                 this.previousElementSibling.style.display = 'inline';
+                if (input.name === 'senha') {
+                    input.type = 'password';
+                }
             });
         });
 
@@ -253,7 +257,7 @@ $dadosUsuario = buscarDadosUsuario($conn, $id);
             button.addEventListener('click', function() {
                 const input = this.previousElementSibling.previousElementSibling.previousElementSibling;
                 const newValue = input.value;
-                if (newValue !== originalValues[input.id]) {
+                if (newValue !== originalValues[input.name]) {
                     fetch('../php/update_user.php', {
                         method: 'POST',
                         headers: {
@@ -264,12 +268,16 @@ $dadosUsuario = buscarDadosUsuario($conn, $id);
                     .then(response => response.text())
                     .then(data => {
                         if (data === 'success') {
-                            originalValues[input.id] = newValue;
+                            originalValues[input.name] = newValue;
                             input.disabled = true;
-                            input.blur();
+                            input.style.background = '#e2dfdf';
+                            input.style.outline = 'none';
                             this.style.display = 'none';
                             this.previousElementSibling.style.display = 'none';
                             this.previousElementSibling.previousElementSibling.style.display = 'inline';
+                            if (input.name === 'senha') {
+                              input.type = 'password';
+                            }
                         } else {
                             console.error('Erro ao atualizar os dados.');
                         }
@@ -279,21 +287,25 @@ $dadosUsuario = buscarDadosUsuario($conn, $id);
                     });
                 } else {
                     input.disabled = true;
-                    input.blur();
+                    input.style.background = '#e2dfdf';
+                    input.style.outline = 'none';
                     this.style.display = 'none';
                     this.previousElementSibling.style.display = 'none';
                     this.previousElementSibling.previousElementSibling.style.display = 'inline';
+                    if (input.name === 'senha') {
+                      input.type = 'password';
+                    }
                 }
             });
         });
-        // Envia a foto para o servidor   
-        uploadButton.addEventListener('click', function() {
-            const formData = new FormData(document.getElementById('userForm'));
-            const fotoInput = document.getElementById('fotoPerfilInput');
+        // Envia a foto para o servidor ao selecionar o arquivo
+        fotoInput.addEventListener('change', function() {
+            const formData = new FormData();
             const fotoFile = fotoInput.files[0];
 
             if (fotoFile) {
                 formData.append('fotoPerfilInput', fotoFile);
+                formData.append('id', '<?php echo $id; ?>');
 
                 fetch('../php/update_user.php', {
                     method: 'POST',
@@ -303,9 +315,16 @@ $dadosUsuario = buscarDadosUsuario($conn, $id);
                 .then(data => {
                     if (data === 'success') {
                         // Atualiza a imagem de perfil exibida
-                        document.getElementById('fotoPerfil').src = URL.createObjectURL(fotoFile);
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            document.querySelectorAll('#fotoPerfil').forEach(img => {
+                                img.src = e.target.result;
+                            });
+                        };
+                        reader.readAsDataURL(fotoFile);
+                        console.log(data);
                     } else {
-                        console.error('Erro ao atualizar a foto.');
+                        console.error('Erro ao atualizar a foto: ' + data);
                     }
                 })
                 .catch(error => {
@@ -315,7 +334,7 @@ $dadosUsuario = buscarDadosUsuario($conn, $id);
                 alert('Por favor, selecione uma foto.');
             }
         });
-    });
+      });
 </script>
 </body>
 

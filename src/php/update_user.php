@@ -4,7 +4,7 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['id'];
-    $allowedFields = ['nome', 'email', 'senha', 'data_nascimento']; // Campos permitidos para atualização
+    $allowedFields = ['nome', 'email', 'dataNasc', 'tel', 'senha', 'cep', 'cidade', 'bairro', 'rua', 'numeroCasa']; // Campos permitidos para atualização
     $updates = [];
 
     foreach ($allowedFields as $field) {
@@ -17,22 +17,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica se há um arquivo de foto enviado
     if (isset($_FILES["fotoPerfilInput"]) && $_FILES["fotoPerfilInput"]["error"] == UPLOAD_ERR_OK) {
         $foto = $_FILES["fotoPerfilInput"];
-        $uploadDir = "../uploads/";
-        $uploadFile = $uploadDir . basename($foto["name"]);
+        $fotoData = file_get_contents($foto["tmp_name"]);
 
-        // Verifica se o arquivo é uma imagem
-        $check = getimagesize($foto["tmp_name"]);
-        if ($check !== false) {
-            if (move_uploaded_file($foto["tmp_name"], $uploadFile)) {
-                $updates['foto'] = $uploadFile;
-            } else {
-                echo "error";
-                exit();
-            }
-        } else {
-            echo "error";
-            exit();
-        }
+        // Adiciona os dados binários da foto ao array de atualizações
+        $updates['foto'] = $fotoData;
     }
 
     if (!empty($updates)) {
@@ -43,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         foreach ($updates as $field => $value) {
             $setClause[] = "$field = ?";
             $params[] = $value;
-            $types .= 's';
+            $types .= ($field === 'foto') ? 'b' : 's'; // 'b' para BLOB, 's' para string
         }
 
         $params[] = $id;
@@ -51,17 +39,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $sql = "UPDATE usuario SET " . implode(', ', $setClause) . " WHERE id = ?";
         $stmt = $conn->prepare($sql);
+
+        // Vincula os parâmetros, incluindo o BLOB
         $stmt->bind_param($types, ...$params);
+
+        // Vincula o BLOB separadamente
+        if (isset($updates['foto'])) {
+            $stmt->send_long_data(array_search('foto', array_keys($updates)), $updates['foto']);
+        }
 
         if ($stmt->execute()) {
             echo "success";
         } else {
-            echo "error";
+            echo "Erro ao atualizar o banco de dados: " . $stmt->error;
         }
 
         $stmt->close();
     } else {
-        echo "No valid fields to update";
+        echo "Nenhum campo válido para atualizar.";
     }
 }
 ?>
