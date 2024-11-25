@@ -12,10 +12,6 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['senha'])) {
 $logado = isset($_SESSION['email']) ? $_SESSION['email'] : null;
 $id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
 
-print_r('Logado: ' . $logado); 
-echo "<br>";
-print_r('ID: ' . $id);
-
 if ($id === null) {
     // Redirecionar ou lidar com o caso onde o id não está definido
     header('Location: ../../index.html');
@@ -23,7 +19,7 @@ if ($id === null) {
 }
 
 function buscarDadosUsuario($conn, $id) {
-  $sql = "SELECT nome, email FROM usuario WHERE id = ?";
+  $sql = "SELECT * FROM usuario WHERE id = ?";
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("i", $id);
   $stmt->execute();
@@ -88,14 +84,14 @@ $valorRestante = $totalEntrada - $totalDebitos;
         <a href="config.php"><i class="fa-solid fa-gear"></i></a>
         <div class="dropdown-menu">
           <div class="perfil-menu">
-            <img id="fotoPerfil" src="../img/perfil.jpg" alt="Perfil Usuario">
+            <img id="fotoPerfil" src="<?php echo $dadosUsuario['foto'] ? 'data:image/jpeg;base64,' . base64_encode($dadosUsuario['foto']) : '../img/perfil.jpg'; ?>" alt="Foto de Perfil">
             <div class="info-perfil">
               <h4 id="NomeUsuario"><?php print_r($nome)?></h4>
             </div>
           </div>
           <hr>
           <div class="logout">
-            <img id="fotoPerfil" src="../img/perfil.jpg" alt="Perfil Usuario">
+            <img id="fotoPerfil" src="<?php echo $dadosUsuario['foto'] ? 'data:image/jpeg;base64,' . base64_encode($dadosUsuario['foto']) : '../img/perfil.jpg'; ?>" alt="Foto de Perfil">
             <div class="login">
               <p>Logado como:</p>
               <h5><?php print_r($_SESSION['email'])?></h5>
@@ -106,7 +102,7 @@ $valorRestante = $totalEntrada - $totalDebitos;
             </div>
           </div>
         </div>
-        <img class="menu-config" id="fotoPerfil" src="../img/perfil.jpg" alt="foto-perfil" />
+        <img id="fotoPerfil" class="menu-config" src="<?php echo $dadosUsuario['foto'] ? 'data:image/jpeg;base64,' . base64_encode($dadosUsuario['foto']) : '../img/perfil.jpg'; ?>" alt="Foto de Perfil">
       </div>
     </header>
     <!-- FIM HEADER -->

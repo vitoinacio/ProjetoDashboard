@@ -28,12 +28,20 @@ valor_ent VARCHAR(255) NOT NULL
 CREATE TABLE debito (
 id_deb INT PRIMARY KEY auto_increment,
 ident_deb VARCHAR(50),
-data_venc DATE(10),
+data_venc VARCHAR(10),
 obs_deb VARCHAR(50),
 valor_deb DECIMAL (15,2),
 notifi INT(1),
+pago INT(10),
 fk_id_usuario INT,
 CONSTRAINT fk_id_usuario_deb FOREIGN KEY (fk_id_usuario) REFERENCES usuario(id)
+);
+
+CREATE TABLE notficacoes(
+  id_notfi INT PRIMARY KEY AUTO_INCREMENT,
+  messageText  VARCHAR(100),
+  fk_id_usuario INT,
+  CONSTRAINT fk_id_usuario_notfi FOREIGN KEY (fk_id_usuario) REFERENCES usuario(id)
 );
 
 CREATE TABLE relatorio(

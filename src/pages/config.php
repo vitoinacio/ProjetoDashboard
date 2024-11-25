@@ -1,13 +1,35 @@
 <?php
-  session_start();
-  // print_r($_SESSION['email']);
-  if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
-  {
-    unset($_SESSION['email']);
-    unset($_SESSION['senha']);
-    header('Location: ../../index.php');
-  }
-  $logado = $_SESSION['email'];
+session_start();
+include_once('../php/conexao.php');
+
+if (!isset($_SESSION['email']) || !isset($_SESSION['senha'])) {
+  unset($_SESSION['email']);
+  unset($_SESSION['senha']);
+  header('Location: ../../index.html');
+  exit();
+}
+
+$logado = isset($_SESSION['email']) ? $_SESSION['email'] : null;
+$id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
+
+if ($id === null) {
+    // Redirecionar ou lidar com o caso onde o id não está definido
+    header('Location: ../../index.html');
+    exit();
+}
+
+function buscarDadosUsuario($conn, $id) {
+  $sql = "SELECT * FROM usuario WHERE id = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("i", $id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $row = $result->fetch_assoc();
+  return $row ? $row : null;
+}
+
+$dadosUsuario = buscarDadosUsuario($conn, $id);
+$nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuario['nome'])[1];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -40,15 +62,14 @@
         <i class="fa-solid fa-gear"></i>
         <div class="dropdown-menu">
           <div class="perfil-menu">
-            <img id="fotoPerfil" src="../img/perfil.jpg" alt="Perfil Usuario">
+            <img id="fotoPerfil" src="<?php echo $dadosUsuario['foto'] ? 'data:image/jpeg;base64,' . base64_encode($dadosUsuario['foto']) : '../img/perfil.jpg'; ?>" alt="Foto de Perfil">
             <div class="info-perfil">
-              <h4 id="NomeUsuario">Usuario</h4>
-              <h5>Plano Completo</h5>
+            <h4 id="NomeUsuario"><?php print_r($nome)?></h4>
             </div>
           </div>
           <hr>
           <div class="logout">
-            <img id="fotoPerfil" src="../img/perfil.jpg" alt="Perfil Usuario">
+            <img id="fotoPerfil" src="<?php echo $dadosUsuario['foto'] ? 'data:image/jpeg;base64,' . base64_encode($dadosUsuario['foto']) : '../img/perfil.jpg'; ?>" alt="Foto de Perfil">
             <div class="login">
               <p>Logado como:</p>
               <h5><?php print_r($_SESSION['email'])?></h5>
@@ -59,7 +80,7 @@
             </div>
           </div>
         </div>
-        <img class="menu-config" id="fotoPerfil" src="../img/perfil.jpg" alt="foto-perfil" />
+        <img id="fotoPerfil" class="menu-config" src="<?php echo $dadosUsuario['foto'] ? 'data:image/jpeg;base64,' . base64_encode($dadosUsuario['foto']) : '../img/perfil.jpg'; ?>" alt="Foto de Perfil">
       </div>
     </header>
     <!-- FIM HEADER -->

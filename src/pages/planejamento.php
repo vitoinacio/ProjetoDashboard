@@ -13,10 +13,6 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['senha'])) {
 $logado = isset($_SESSION['email']) ? $_SESSION['email'] : null;
 $id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
 
-print_r('Logado: ' . $logado); 
-echo "<br>";
-print_r('ID: ' . $id);
-
 if ($id === null) {
     // Redirecionar ou lidar com o caso onde o id não está definido
     header('Location: ../../index.html');
@@ -24,7 +20,7 @@ if ($id === null) {
 }
 
 function buscarDadosUsuario($conn, $id) {
-  $sql = "SELECT nome, email FROM usuario WHERE id = ?";
+  $sql = "SELECT * FROM usuario WHERE id = ?";
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("i", $id);
   $stmt->execute();
@@ -57,8 +53,9 @@ $totalDebitos = $row['total_debitos'] ? $row['total_debitos'] : 0;
 // Calculo do valor restante
 $valorRestante = $totalEntrada - $totalDebitos;
 
+// Função para buscar os débitos do usuário no banco de dados
 function buscarDebitos($conn, $id) {
-  $sql = "SELECT id_deb, ident_deb, obs_deb, valor_deb, data_venc, notifi FROM debito WHERE fk_id_usuario = ?";
+  $sql = "SELECT * FROM debito WHERE fk_id_usuario = ?";
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("i", $id);
   $stmt->execute();
@@ -109,15 +106,14 @@ $debitos = buscarDebitos($conn, $id);
       <a href="config.php"><i class="fa-solid fa-gear"></i></a>
       <div class="dropdown-menu">
         <div class="perfil-menu">
-          <img  id="fotoPerfil" src="../img/perfil.jpg" alt="Perfil Usuario" />
+        <img id="fotoPerfil" src="<?php echo $dadosUsuario['foto'] ? 'data:image/jpeg;base64,' . base64_encode($dadosUsuario['foto']) : '../img/perfil.jpg'; ?>" alt="Foto de Perfil">
           <div class="info-perfil">
-            <h4 id="NomeUsuario">Usuario</h4>
-            <h5>Plano Completo</h5>
+          <h4 id="NomeUsuario"><?php print_r($nome)?></h4>
           </div>
         </div>
         <hr />
         <div class="logout">
-          <img id="fotoPerfil" src="../img/perfil.jpg" alt="Perfil Usuario" />
+        <img id="fotoPerfil" src="<?php echo $dadosUsuario['foto'] ? 'data:image/jpeg;base64,' . base64_encode($dadosUsuario['foto']) : '../img/perfil.jpg'; ?>" alt="Foto de Perfil">
           <div class="login">
             <p>Logado como:</p>
             <h5><?php print_r($_SESSION['email'])?></h5>
@@ -128,7 +124,7 @@ $debitos = buscarDebitos($conn, $id);
           </div>
         </div>
       </div>
-      <img class="menu-config" id="fotoPerfil" src="../img/perfil.jpg" alt="foto-perfil" />
+      <img id="fotoPerfil" class="menu-config" src="<?php echo $dadosUsuario['foto'] ? 'data:image/jpeg;base64,' . base64_encode($dadosUsuario['foto']) : '../img/perfil.jpg'; ?>" alt="Foto de Perfil">
     </div>
   </header>
   <!-- FIM HEADER -->
@@ -194,18 +190,18 @@ $debitos = buscarDebitos($conn, $id);
           <form id="formPlanejamentoMobile" class="mobile formPLanejamento" method="POST">
             <div style="display: flex; flex-direction:column; gap:7px;">
               <input style="width:100%; padding:8px; border: none; border-bottom:1px solid #555;" class="identificacao" name="ident_deb" type="text" placeholder="Identificaçao" maxlength="15" required>
-              <input style="width:100%; padding:8px;" class="observacao" name="obs_deb" type="text" placeholder="Observaçao" maxlength="100">
+              <input style="width:100%; padding:8px; border: none; border-bottom:1px solid #555;" class="observacao" name="obs_deb" type="text" placeholder="Observaçao" maxlength="100">
             </div>
             <div style="display: flex; flex-direction:column; gap:7px;">
-              <input style="width:100%; padding:8px;" class="valor" name="valor_deb" type="text" placeholder="Valor R$" max="15" required>
-              <input style="width:100%; padding:8px;" class="vencimento" type="date" name="data_venc" id="vencimento" placeholder="DD / MM / AAAA" maxlength="10" minlength="10" required>
+              <input style="width:100%; padding:8px; border: none; border-bottom:1px solid #555;" class="valor" name="valor_deb" type="text" placeholder="Valor R$" max="15" required>
+              <input style="width:100%; padding:8px; border: none; border-bottom:1px solid #555;" class="vencimento" type="date" name="data_venc" id="vencimento" placeholder="DD / MM / AAAA" maxlength="10" minlength="10" required>
             </div style="display: flex; flex-direction:column; gap:7px;">
             <select style="width:20%; padding:8px;" name="notficacao" id="notficacao" required>
               <option value="" selected disabled>Notficação</option>
               <option value="1">Sim</option>
               <option value="0">Não</option>
             </select>
-            <div style="display: flex; flex-direction:column; gap:7px;"><button style="width:100%; padding:8px; height:60px;" type="submit">adicionar<i class="fa-solid fa-plus"></i></button></div>
+            <div style="display: flex; flex-direction:column; gap:7px;"><button style="width:100%; padding:8px; height:60px; border:1px solid var(--cor2); border-radius: 10px; color: var(--cor2); font-weight: bold;" type="submit">adicionar<i class="fa-solid fa-plus"></i></button></div>
             
             <script>
               document.getElementById('formPlanejamento').addEventListener('submit', addfetch);
@@ -282,15 +278,21 @@ $debitos = buscarDebitos($conn, $id);
                 <h3 class="btnstodo"></h3>
           </li>
           <?php foreach ($debitos as $debito): ?>
-            <li class="todo">
+            <?php
+            $dataVenc = DateTime::createFromFormat('Y-m-d', $debito['data_venc']);
+            $hoje = new DateTime();
+            $intervalo = $hoje->diff($dataVenc)->days;
+            $isProximo = $intervalo <= 10;
+            $isPago = $debito['pago'];
+            ?>
+            <li class="todo" style="<?php echo $isPago ? 'text-decoration: line-through; background-color: #e2dfdf; color: #6e6d6d;' : ($isProximo ? 'background-color: #f7921f;' : ''); ?>">
                 <h3 class="identif" style="text-align: center;"><?php echo htmlspecialchars($debito['ident_deb']); ?></h3>
                 <h3 class="obstodo"><?php echo htmlspecialchars($debito['obs_deb']); ?></h3>
-                <h3 class="precotodo" style="text-align: center;"><?php echo htmlspecialchars($debito['valor_deb']); ?></h3>
+                <h3 class="precotodo" style="text-align: center;"><?php echo 'R$ '. htmlspecialchars(number_format($debito['valor_deb'], 2, ',', '.')); ?></h3>
                 <h3 class="vencimentotodo" style="text-align: center;">
                 <?php 
-                  $dataVenc = DateTime::createFromFormat('Y-m-d', $debito['data_venc']);
                   echo $dataVenc ? $dataVenc->format('d/m/Y') : 'Data inválida'; 
-                  ?></h3>
+                ?></h3>
                 <?php if ($debito['notifi'] == 1) {
                     echo '<h3 class="notftodo" style="text-align: center;">Sim</h3>';
                 } else {
@@ -298,11 +300,11 @@ $debitos = buscarDebitos($conn, $id);
                 }
                 ?>
                 <div class="btnstodo">
-                    <button class="btncheck"> Pago <i class="fa-solid fa-check"></i> </button>
+                    <button class="btncheck" data-id="<?php echo htmlspecialchars($debito['id_deb']); ?>" <?php echo $isPago ? 'disabled style="background: #504f4f;"' : ''; ?>> Pago <i class="fa-solid fa-check"></i> </button>
                     <button class="btntrash" name="<?php echo htmlspecialchars($debito['id_deb']); ?>"> Excluir <i class="fa-solid fa-trash"></i> </button>
                 </div>
             </li>
-            <?php endforeach; ?>
+        <?php endforeach; ?>
         </ul>
       </div>
     </div>
