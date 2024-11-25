@@ -248,7 +248,7 @@ $dadosUsuario = buscarDadosUsuario($conn, $id);
             });
         });
 
-        // Envia os dados atualizados para o servidor
+        // Envia os dados atualizados para o servido
         confirmButtons.forEach(button => {
             button.addEventListener('click', function() {
                 const input = this.previousElementSibling.previousElementSibling.previousElementSibling;
@@ -286,7 +286,7 @@ $dadosUsuario = buscarDadosUsuario($conn, $id);
                 }
             });
         });
-        // Envia a foto para o servidor
+        // Envia a foto para o servidor   
         uploadButton.addEventListener('click', function() {
             const formData = new FormData(document.getElementById('userForm'));
             const fotoInput = document.getElementById('fotoPerfilInput');
