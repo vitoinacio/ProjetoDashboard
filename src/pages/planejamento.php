@@ -1,26 +1,76 @@
 <?php
-  session_start();
-  include_once('../php/conexao.php');
-  // print_r($_SESSION['email']);
-  // print_r($_SESSION['id']);
+session_start();
+include_once('../php/conexao.php');
+
+if (!isset($_SESSION['email']) || !isset($_SESSION['senha'])) {
+  unset($_SESSION['email']);
+  unset($_SESSION['senha']);
+  header('Location: ../../index.html');
+  exit();
+}
 
 
-  if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
-  {
-    unset($_SESSION['email']);
-    unset($_SESSION['senha']);
-    header('Location: ../../index.php');
-  }
-  $logado = $_SESSION['email'];
-  $usuario_id = $_SESSION['id'];
+$logado = isset($_SESSION['email']) ? $_SESSION['email'] : null;
+$id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
 
-//Visualizar débitos adicionados  
-$sql = "SELECT * FROM debito WHERE fk_id_usuario = ?";
+print_r('Logado: ' . $logado); 
+echo "<br>";
+print_r('ID: ' . $id);
+
+if ($id === null) {
+    // Redirecionar ou lidar com o caso onde o id não está definido
+    header('Location: ../../index.html');
+    exit();
+}
+
+function buscarDadosUsuario($conn, $id) {
+  $sql = "SELECT nome, email FROM usuario WHERE id = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("i", $id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $row = $result->fetch_assoc();
+  return $row ? $row : null;
+}
+
+$dadosUsuario = buscarDadosUsuario($conn, $id);
+$nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuario['nome'])[1];
+
+// Buscar o valor total de entrada do banco de dados
+$sql = "SELECT SUM(valor_ent) as total_entrada FROM ent_financeira WHERE fk_id_usuario = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $usuario_id);
+$stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
-$debitos = $result->fetch_all(MYSQLI_ASSOC);
+$row = $result->fetch_assoc();
+$totalEntrada = $row['total_entrada'] ? $row['total_entrada'] : 0;
+
+// Buscar o valor total de débitos do BD
+$sql = "SELECT SUM(valor_deb) as total_debitos FROM debito WHERE fk_id_usuario = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+$totalDebitos = $row['total_debitos'] ? $row['total_debitos'] : 0;
+
+// Calculo do valor restante
+$valorRestante = $totalEntrada - $totalDebitos;
+
+function buscarDebitos($conn, $id) {
+  $sql = "SELECT id_deb, ident_deb, obs_deb, valor_deb, data_venc, notifi FROM debito WHERE fk_id_usuario = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("i", $id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $debitos = [];
+  while ($row = $result->fetch_assoc()) {
+      $debitos[] = $row;
+  }
+  return $debitos;
+}
+
+$debitos = buscarDebitos($conn, $id);
 
 
 
@@ -102,13 +152,13 @@ $debitos = $result->fetch_all(MYSQLI_ASSOC);
         <div class="entrada-salario">
           <h2>Entrada Financeira</h2>
           <form id="formSalario" method="POST">
-            <p>R$ <input type="text" name="entradaSalario" id="entradaSalario" placeholder=" 0,00"></p>
+            <p>R$ <input type="text" name="entradaSalario" id="entradaSalario" placeholder="0,00" value="<?php echo htmlspecialchars($totalEntrada); ?>"></p>
             <button type="submit">Adicionar</button>
           </form>
         </div>
         <div class="gastos-totais">
           <h2>Gastos Totais</h2>
-          <p>R$ <input type="text" id="totaisGastos" placeholder=" 00.00" disabled></p>
+          <p>R$ <input type="text" id="totaisGastos" value="<?php echo htmlspecialchars($totalDebitos);?>" placeholder=" 00.00" disabled></p>
         </div>
       </div>
       <div class="containertodo">
@@ -125,14 +175,14 @@ $debitos = $result->fetch_all(MYSQLI_ASSOC);
               <p>Valor R$ </p><input class="valor" name="valor_deb" type="text" placeholder="Valor R$" max="15" required>
             </span>
             <span>
-              <p>Vencimento </p><input class="vencimento" type="text" name="data_venc" id="vencimento" placeholder="DD / MM / AAAA" maxlength="10" minlength="10" required>
+              <p>Vencimento </p><input class="vencimento" type="date" name="data_venc" id="vencimento" placeholder="DD / MM / AAAA" maxlength="10" minlength="10" required>
             </span>
             <span class="notf">
               <p>Notificação <br>de Vencimento</p>
               <select name="notficacao" id="notficacao" required>
                 <option value="" selected disabled></option>
-                <option value="Sim">Sim</option>
-                <option value="Nao">Não</option>
+                <option value="1">Sim</option>
+                <option value="0">Não</option>
               </select>
             </span>
             
@@ -141,62 +191,60 @@ $debitos = $result->fetch_all(MYSQLI_ASSOC);
         </div>
         <div class="containerListaMobile">
           <h2>Adicione seus debitos</h2>
-          <form id="formPlanejamentoMobile" class="formPLanejamento mobile" method="POST">
-            <div class="">
-              <input class="identificacao" name="ident_deb" type="text" placeholder="Identificaçao" maxlength="15" required>
-              <input class="observacao" name="obs_deb" type="text" placeholder="Observaçao" maxlength="100">
+          <form id="formPlanejamentoMobile" class="mobile formPLanejamento" method="POST">
+            <div style="display: flex; flex-direction:column; gap:7px;">
+              <input style="width:100%; padding:8px; border: none; border-bottom:1px solid #555;" class="identificacao" name="ident_deb" type="text" placeholder="Identificaçao" maxlength="15" required>
+              <input style="width:100%; padding:8px;" class="observacao" name="obs_deb" type="text" placeholder="Observaçao" maxlength="100">
             </div>
-            <div>
-              <input class="valor" name="valor_deb" type="text" placeholder="Valor R$" max="15" required>
-              <input class="vencimento" type="text" name="data_venc" id="vencimento" placeholder="DD / MM / AAAA" maxlength="10" minlength="10" required>
-            </div>
-            <select name="notficacao" id="notficacao" required>
-              <option value="" selected disabled>Notificação</option>
+            <div style="display: flex; flex-direction:column; gap:7px;">
+              <input style="width:100%; padding:8px;" class="valor" name="valor_deb" type="text" placeholder="Valor R$" max="15" required>
+              <input style="width:100%; padding:8px;" class="vencimento" type="date" name="data_venc" id="vencimento" placeholder="DD / MM / AAAA" maxlength="10" minlength="10" required>
+            </div style="display: flex; flex-direction:column; gap:7px;">
+            <select style="width:20%; padding:8px;" name="notficacao" id="notficacao" required>
+              <option value="" selected disabled>Notficação</option>
               <option value="1">Sim</option>
               <option value="0">Não</option>
             </select>
-            <div><button type="submit">adicionar<i class="fa-solid fa-plus"></i></button></div>
+            <div style="display: flex; flex-direction:column; gap:7px;"><button style="width:100%; padding:8px; height:60px;" type="submit">adicionar<i class="fa-solid fa-plus"></i></button></div>
             
             <script>
-              document.getElementById('formPlanejamento').addEventListener('submit', addfetch)
-              document.getElementById('formPlanejamentoMobile').addEventListener('submit', addfetch)
-              
-              
+              document.getElementById('formPlanejamento').addEventListener('submit', addfetch);
+              document.getElementById('formPlanejamentoMobile').addEventListener('submit', addfetch);
+
               function addfetch(event) {
-                event.preventDefault(); // Impede o envio padrão do formulário
-  
-              const formData = new FormData(this);
-  
-              fetch('../php/processa_planejamento.php', {
-                  method: 'POST',
-                  body: formData
-              })
-              .then(response => response.text())
-    .then(data => {
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Seu débito foi adicionado com sucesso!',
-        showConfirmButton: false,
-        timer: 1500
-      });
-      // Aqui você pode adicionar código para atualizar a lista de débitos na página, se necessário
-    })
-    .catch(error => Swal.fire({
-      position: 'bottom-end',
-      icon: 'error',
-      title: 'Erro: ' + error,
-      showConfirmButton: false,
-      timer: 1500
-    }));
-          };
-            </script>
+                  event.preventDefault(); // Impede o envio padrão do formulário
+
+                  const formData = new FormData(this);
+
+                  fetch('../php/processa_planejamento.php', {
+                      method: 'POST',
+                      body: formData
+                  })
+                  .then(response => response.text())
+                  .then(data => {
+                      Swal.fire({
+                          icon: 'success',
+                          title: 'Débito adicionado com sucesso!',
+                          showConfirmButton: false,
+                          timer: 1500
+                      });
+                      // Aqui você pode adicionar código para atualizar a página, se necessário
+                  })
+                  .catch(error => Swal.fire({
+                      position: 'bottom-end',
+                      icon: 'error',
+                      title: 'Erro: ' + error,
+                      showConfirmButton: false,
+                      timer: 1500
+                  }));
+              }
+          </script>
   
             <script>
               document.getElementById('formSalario').addEventListener('submit', function(event) {
                 event.preventDefault(); // Impede o envio padrão do formulário
 
-               const formData = new FormData(this);
+              const formData = new FormData(this);
 
               fetch('../php/entrada.php', {
                   method: 'POST',
@@ -221,69 +269,40 @@ $debitos = $result->fetch_all(MYSQLI_ASSOC);
     }));
                 });
                 </script>
-         
+        
         </form>
         </div>
         <ul class="listtodo">
           <li class="todo">
             <h3 class="identif">Identificação</h3>
-            <h3 class="obstodo">Observação<h3>
-              <h3 class="precotodo">Preço</h3>
-              <h3 class="vencimentotodo">Vencimento</h3>
-                <h3 class="notftodo">Notificações</h3>
+            <h3 class="obstodo" style="text-align: center;">Observação<h3>
+              <h3 class="precotodo" style="margin-left: -40px;">Preço</h3>
+              <h3 class="vencimentotodo" style="text-align: center;">Vencimento</h3>
+                <h3 class="notftodo" style="text-align: center;">Notificações</h3>
                 <h3 class="btnstodo"></h3>
           </li>
-          <?php foreach ($debitos as $debito):?>
-          <li class="todo">
-            <h3 class="identif"><?php echo $debito['ident_deb']; ?></h3>
-            <h3 class="obstodo"><?php echo $debito['obs_deb']; ?><h3>
-            <h3 class="precotodo">R$ <?php echo $debito['valor_deb']; ?></h3>
-            <h3 class="vencimentotodo"><?php echo $debito['data_venc']; ?></h3>
-            <?php if ($debito['notifi'] === '1') {
-              echo "<h3 class='notftodo'>Sim</h3>";
-            } else {
-              echo "<h3 class='notftodo'>Não</h3>";
-            } ?>
-            <div class="btnstodo">
-              <button class="btncheck"> Pago <i class="fa-solid fa-check"></i> </button>
-              <button class="btntrash" data-id="<?php echo $debito['id_deb']; ?>"> Excluir <i class="fa-solid fa-trash"></i> </button>
-          <script>
-            document.querySelectorAll('.btntrash').forEach(button => {
-              button.addEventListener('click', function() {
-                const idDeb = this.getAttribute('data-id');
-
-                fetch('../php/excluir_deb.php', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                  },
-                  body: `id_deb=${idDeb}`
-                })
-                .then(response => response.text())
-                .then(data => {
-                  Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Débito excluído com sucesso!',
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-                  this.closest('.todo').remove();
-                })
-                .catch(error => Swal.fire({
-                  position: 'bottom-end',
-                  icon: 'error',
-                  title: 'Erro: ' + error,
-                  showConfirmButton: false,
-                  timer: 1500
-                }));
-              });
-            });
-          </script>
-           
-          </div>
-          </li>
-          <?php endforeach; ?>
+          <?php foreach ($debitos as $debito): ?>
+            <li class="todo">
+                <h3 class="identif" style="text-align: center;"><?php echo htmlspecialchars($debito['ident_deb']); ?></h3>
+                <h3 class="obstodo"><?php echo htmlspecialchars($debito['obs_deb']); ?></h3>
+                <h3 class="precotodo" style="text-align: center;"><?php echo htmlspecialchars($debito['valor_deb']); ?></h3>
+                <h3 class="vencimentotodo" style="text-align: center;">
+                <?php 
+                  $dataVenc = DateTime::createFromFormat('Y-m-d', $debito['data_venc']);
+                  echo $dataVenc ? $dataVenc->format('d/m/Y') : 'Data inválida'; 
+                  ?></h3>
+                <?php if ($debito['notifi'] == 1) {
+                    echo '<h3 class="notftodo" style="text-align: center;">Sim</h3>';
+                } else {
+                    echo '<h3 class="notftodo" style="text-align: center;">Não</h3>';
+                }
+                ?>
+                <div class="btnstodo">
+                    <button class="btncheck"> Pago <i class="fa-solid fa-check"></i> </button>
+                    <button class="btntrash" name="<?php echo htmlspecialchars($debito['id_deb']); ?>"> Excluir <i class="fa-solid fa-trash"></i> </button>
+                </div>
+            </li>
+            <?php endforeach; ?>
         </ul>
       </div>
     </div>

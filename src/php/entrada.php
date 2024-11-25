@@ -8,17 +8,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(isset($_POST["entradaSalario"])) {
         $id = $_SESSION['id'];
         $entradaSalario = htmlspecialchars(trim($_POST["entradaSalario"]));
-        $entradaSalaraio = str_replace(",",".", $entradaSalario); //Converte a virgula para ponto decimal
+        $entradaSalario = str_replace(",", ".", $entradaSalario); // Converte a vírgula para ponto decimal
 
-        $stmt = $conn->prepare("INSERT INTO ent_financeira (valor_ent, fk_id_usuario ) VALUES (?,?)");
-        $stmt->bind_param("si", $entradaSalario, $id);
-        
-        if ($stmt->execute()) {
-            echo "Valor inserido com sucesso!";
+        // Verifica se o usuário está logado e obtém o ID do usuário
+        if (isset($_SESSION['id'])) {
+            $idUsuario = $_SESSION['id'];
+
+            // Prepara a consulta para inserir o valor de entrada financeira
+            $stmt = $conn->prepare("INSERT INTO ent_financeira (valor_ent, fk_id_usuario) VALUES (?, ?)");
+            $stmt->bind_param("si", $entradaSalario, $idUsuario);
+
+            if ($stmt->execute()) {
+                echo "Valor inserido com sucesso!";
+            } else {
+                echo "Erro: " . $stmt->error;
+            }
+            $stmt->close();
         } else {
-            echo "Erro: " . $stmt->error;
+            echo "Usuário não está logado.";
         }
-        $stmt ->close();
     }
 }
-
+?>

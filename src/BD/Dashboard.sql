@@ -14,27 +14,32 @@ cidade VARCHAR (25) NOT NULL,
 bairro VARCHAR (25) NOT NULL,
 rua VARCHAR (25) NOT NULL,
 numeroCasa VARCHAR (25) NOT NULL,
+foto VARCHAR (255) NOT NULL,
 dtCriacao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 adm VARCHAR (1) DEFAULT '0' 
 );
 CREATE TABLE ent_financeira (
-id_ent INT AUTO_INCREMENT PRIMARY KEY NOT NULL UNIQUE,
+id_ent INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 fk_id_usuario INT NOT NULL,
 CONSTRAINT fk_id_usuario_ent FOREIGN KEY (fk_id_usuario) REFERENCES usuario(id),
 data_ent TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 valor_ent VARCHAR(255) NOT NULL
 );
-create table debito (
-id_deb int primary key auto_increment,
-ident_deb varchar(50),
-data_venc varchar(10),
-obs_deb varchar (50),
-valor_deb decimal (15,2),
-notifi varchar (2),
-fk_id_usuario int,
-constraint fk_id_usuario_deb foreign key (fk_id_usuario) references usuario(id)
+CREATE TABLE debito (
+id_deb INT PRIMARY KEY auto_increment,
+ident_deb VARCHAR(50),
+data_venc DATE(10),
+obs_deb VARCHAR(50),
+valor_deb DECIMAL (15,2),
+notifi INT(1),
+fk_id_usuario INT,
+CONSTRAINT fk_id_usuario_deb FOREIGN KEY (fk_id_usuario) REFERENCES usuario(id)
 );
 
-
-
-
+CREATE TABLE relatorio(
+id_relatorio INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+fk_id_usuario INT NOT NULL,
+total_entrada INT NOT NULL,
+total_saida INT NOT NULL,
+saldo_final INT NOT NULL,
+CONSTRAINT fk_id_usuario_rel FOREIGN KEY (fk_id_usuario) REFERENCES usuario(id));

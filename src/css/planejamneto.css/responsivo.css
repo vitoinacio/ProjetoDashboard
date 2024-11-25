@@ -109,18 +109,17 @@
     text-align: center;
   }
 
-  .formMobile{
+  #formPlanejamentoMobile{
     display: flex;
     flex-direction: column;
-    gap: 5px;
   }
 
-  .formMobile div{
+  #formPlanejamentoMobile div{
     display: flex;
     gap: 2%;
   }
 
-  .formMobile div input{
+  #formPlanejamentoMobile div input{
     padding: 5px;
     width: 50%;
     font-size: 15px;
@@ -128,16 +127,16 @@
     border-bottom: 2px solid var(--cor6)
   }
 
-  .formMobile div input:focus{
+  #formPlanejamentoMobile div input:focus{
     outline: none;
   }
 
-  .formMobile select{
+  #formPlanejamentoMobile select{
     padding: 5px;
     outline: none;
   }
 
-  .formMobile div button{
+  #formPlanejamentoMobile div button{
     padding: 7px;
     width: 100%;
     background: var(--cor2);
@@ -153,15 +152,15 @@
     align-items: center;
   }
 
-  .formMobile div button i{
+  #formPlanejamentoMobile div button i{
     font-size: 15px;
   }
 
-  .formMobile div button:hover{
+  #formPlanejamentoMobile div button:hover{
     background-color: var(--cor3);
   }
 
-  .formMobile div button:active{
+  #formPlanejamentoMobile div button:active{
     box-shadow: none;
   }
 

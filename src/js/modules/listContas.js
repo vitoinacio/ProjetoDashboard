@@ -77,11 +77,11 @@ export default function todoList() {
   
     const createModel = (form) => {
       return `<li class="todo">
-                <h3 class="identif">${form[0][0].value}</h3>
+                <h3 class="identif" style="text-align: center;">${form[0][0].value}</h3>
                 <p class="obstodo">${form[0][1].value}</p>
-                <p class="precotodo">${form[0][2].value}</p>
-                <p class="vencimentotodo">${form[0][3].value}</p>
-                <p class="notftodo">${form[0][4].value}</p>
+                <p class="precotodo" style="text-align: center;">${form[0][2].value}</p>
+                <p class="vencimentotodo" style="text-align: center;">${form[0][3].value}</p>
+                <p class="notftodo" style="text-align: center;">${form[0][4].value===1?'Sim':'Não'}</p>
                 <div class="btnstodo">
                   <button class="btncheck"> Pago <i class="fa-solid fa-check"></i> </button>
                   <button class="btntrash"> Excluir <i class="fa-solid fa-trash"></i> </button>

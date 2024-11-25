@@ -1,38 +1,60 @@
 <?php
-  session_start();
-  include_once('../php/conexao.php');
-  // print_r($_SESSION['email']);
-  // print_r($_SESSION['id']);
-  if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
-  {
-    unset($_SESSION['email']);
-    unset($_SESSION['senha']);
-    header('Location: ../../index.php');
-  }
-  $logado = $_SESSION['email'];
-  $id = $_SESSION['id'];
+session_start();
+include_once('../php/conexao.php');
 
-    // Buscar o valor total de entrada do banco de dados
-    $sql = "SELECT SUM(valor_ent) as total_entrada FROM ent_financeira WHERE fk_id_usuario = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    $totalEntrada = $row['total_entrada'] ? $row['total_entrada'] : 0;
+if (!isset($_SESSION['email']) || !isset($_SESSION['senha'])) {
+  unset($_SESSION['email']);
+  unset($_SESSION['senha']);
+  header('Location: ../../index.html');
+  exit();
+}
 
-    // Buscar o valor total de débitos do BD
-    $sql = "SELECT SUM(valor_deb) as total_debitos FROM debito WHERE fk_id_usuario = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    $totalDebitos = $row['total_debitos'] ? $row['total_debitos'] : 0;
+$logado = isset($_SESSION['email']) ? $_SESSION['email'] : null;
+$id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
 
-    // Calculo do valor restante
-    $valorRestante = $totalEntrada - $totalDebitos;
+print_r('Logado: ' . $logado); 
+echo "<br>";
+print_r('ID: ' . $id);
 
+if ($id === null) {
+    // Redirecionar ou lidar com o caso onde o id não está definido
+    header('Location: ../../index.html');
+    exit();
+}
+
+function buscarDadosUsuario($conn, $id) {
+  $sql = "SELECT nome, email FROM usuario WHERE id = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("i", $id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $row = $result->fetch_assoc();
+  return $row ? $row : null;
+}
+
+$dadosUsuario = buscarDadosUsuario($conn, $id);
+$nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuario['nome'])[1];
+
+// Buscar o valor total de entrada do banco de dados
+$sql = "SELECT SUM(valor_ent) as total_entrada FROM ent_financeira WHERE fk_id_usuario = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+$totalEntrada = $row['total_entrada'] ? $row['total_entrada'] : 0;
+
+// Buscar o valor total de débitos do BD
+$sql = "SELECT SUM(valor_deb) as total_debitos FROM debito WHERE fk_id_usuario = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+$totalDebitos = $row['total_debitos'] ? $row['total_debitos'] : 0;
+
+// Calculo do valor restante
+$valorRestante = $totalEntrada - $totalDebitos;
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -68,8 +90,7 @@
           <div class="perfil-menu">
             <img id="fotoPerfil" src="../img/perfil.jpg" alt="Perfil Usuario">
             <div class="info-perfil">
-              <h4 id="NomeUsuario">Usuario</h4>
-              <h5>Plano Completo</h5>
+              <h4 id="NomeUsuario"><?php print_r($nome)?></h4>
             </div>
           </div>
           <hr>

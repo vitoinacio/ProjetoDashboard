@@ -7,12 +7,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $obs_deb = htmlspecialchars(trim($_POST["obs_deb"]));
     $valor_deb = str_replace(",", ".", trim(str_replace("R$", "", $_POST["valor_deb"])));
     $data_venc = htmlspecialchars(trim($_POST["data_venc"]));
-    $notifi = intval(htmlspecialchars(trim($_POST["notficacao"])));
+    $notifi = isset($_POST["notficacao"]) ? intval($_POST["notficacao"]) : 0;
     $id = $_SESSION['id'];
 
 
     $stmt = $conn->prepare("INSERT INTO debito (ident_deb, obs_deb, valor_deb, data_venc, notifi, fk_id_usuario) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $ident_deb, $obs_deb, $valor_deb, $data_venc, $notifi, $id);
+    $stmt->bind_param("ssssis", $ident_deb, $obs_deb, $valor_deb, $data_venc, $notifi,
 
     if ($stmt->execute()) {
         echo "Débito inserido com sucesso!";

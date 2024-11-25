@@ -1,57 +1,30 @@
 <?php
-    include_once('../php/conexao.php');
-  session_start();
-  // print_r($_SESSION['email']);
-  // print_r($_SESSION['id']);
-  if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
-  {
+
+session_start();
+include_once('../php/conexao.php');
+
+if (!isset($_SESSION['email']) || !isset($_SESSION['senha'])) {
     unset($_SESSION['email']);
     unset($_SESSION['senha']);
-    header('Location: ../../index.php');
-  }
-  $logado = $_SESSION['email'];
+    header('Location: ../../index.html');
+    exit();
+}
 
+$logado = $_SESSION['email'];
+$id = $_SESSION['id'];
 
-  if(!empty($_SESSION['id'])){
+// Função para buscar os dados do usuário no banco de dados
+function buscarDadosUsuario($conn, $id) {
+    $sql = "SELECT * FROM usuario WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row ? $row : null;
+}
 
-    $id = $_SESSION['id'];
-
-    $sqlSelect = "SELECT * FROM usuario where id = $id";
-
-    $result = $conn->query($sqlSelect);
-
-    $pessoa = array();
-
-    if($result->num_rows > 0)
-    {
-      $user_data = mysqli_fetch_assoc($result);
-
-      foreach($user_data as $key => $value){
-        $pessoa[$key] = $value;
-        // echo $key . '<br><br>';
-      }
-
-      // while($user_data = mysqli_fetch_assoc($result))
-      // {
-      //   $pessoa['nome'] = $user_data["nome"];
-      //   $pessoa['sexo'] = $user_data["sexo"];
-      //   $pessoa['dataNasc'] = $user_data["dataNasc"];
-      //   $pessoa['email'] = $user_data["email"];
-      //   $pessoa['senha'] = $user_data["senha"];
-      //   $pessoa['cpf'] = $user_data["cpf"];
-      //   $pessoa['tel'] = $user_data["tel"];
-      //   $pessoa['cep'] = $user_data["cep"];
-      //   $pessoa['cidade'] = $user_data["cidade"];
-      //   $pessoa['bairro'] = $user_data["bairro"];
-      //   $pessoa['rua'] = $user_data["rua"];
-      //   $pessoa['numeroCasa'] = $user_data["numeroCasa"];
-      // }
-    }
-    else
-    {
-      header('Location:admin.php');
-    }
-  }
+$dadosUsuario = buscarDadosUsuario($conn, $id);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -138,60 +111,93 @@
         <form class="formUser" onsubmit="event.preventDefault()">
           <label for="name">Nome:
             <div>
-              <input disabled type="text" id="nome" minlength="10" maxlength="50" value="<?php echo (isset($pessoa['nome']) && !empty($pessoa['nome'])) ? $pessoa['nome'] : ''; ?>">
+            <input disabled type="text" id="nome" name="nome" minlength="10" maxlength="50" value="<?php echo htmlspecialchars($dadosUsuario['nome']); ?>">
+              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
+              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
+              <button class="confirmUser"><i class="fa-solid fa-check"></i></button>
             </div>
           </label>
           <label for="cpf">Cpf:
-            <div><input disabled type="text" id="cpf" value="<?php echo (isset($pessoa['cpf']) && !empty($pessoa['cpf'])) ? $pessoa['cpf'] : ''; ?>"></div>
+            <div><input disabled type="text" id="cpf" name="cpf" value="<?php echo htmlspecialchars($dadosUsuario['cpf']); ?>"></div>
           </label>
           <label for="emailUser">Email:
             <div>
-              <input disabled type="email" id="emailUser" value="<?php echo (isset($pessoa['email']) && !empty($pessoa['email'])) ? $pessoa['email'] : ''; ?>">
+              <input disabled type="email" id="emailUser" name="email" value="<?php echo htmlspecialchars($dadosUsuario['email']); ?>">
+              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
+              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
+              <button class="confirmUser"> <i class="fa-solid fa-check"></i></button>
             </div>
           </label>
           <label for="nascimento">Nascimento:
             <div>
-              <input disabled type="text" id="dataNasc" minlength="10" maxlength="10" oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1/$2').replace(/(\d{2})(\d)/, '$1/$2').slice(0, 10)" value="<?php echo (isset($pessoa['dataNasc']) && !empty($pessoa['dataNasc'])) ? $pessoa['dataNasc'] : ''; ?>">
+              <input disabled type="text" id="dataNasc" name="dataNasc" minlength="10" maxlength="10" oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1/$2').replace(/(\d{2})(\d)/, '$1/$2').slice(0, 10)" value="<?php 
+                $dataNasc = DateTime::createFromFormat('Y-m-d', $dadosUsuario['dataNasc']);
+                echo htmlspecialchars($dataNasc ? $dataNasc->format('d/m/Y')  : 'Data inválida'); 
+              ?>">
+              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
+              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
+              <button class="confirmUser"><i class="fa-solid fa-check"></i></button>
             </div>
           </label>
           <label for="sexo">Sexo:
             <div>
-              <input disabled type="text" id="sexo" value="<?php echo (isset($pessoa['sexo']) && !empty($pessoa['sexo'])) ? $pessoa['sexo'] : ''; ?>">
+              <input disabled type="text" id="sexo" name="sexo" value="<?php echo htmlspecialchars($dadosUsuario['sexo']); ?>">
             </div>
           </label>
           <label for="telefone">Telefone:
             <div>
-              <input disabled type="text" id="telefone" value="<?php echo (isset($pessoa['tel']) && !empty($pessoa['tel'])) ? $pessoa['tel'] : ''; ?>">
+              <input disabled type="text" id="telefone" name="tel" value="<?php echo htmlspecialchars($dadosUsuario['tel']); ?>">
+              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
+              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
+              <button class="confirmUser"> <i class="fa-solid fa-check"></i></button>
             </div>
           </label>
           <label for="Senha">Senha:
             <div>
-              <input disabled type="password" id="senha" value="<?php echo (isset($pessoa['senha']) && !empty($pessoa['senha'])) ? $pessoa['senha'] : ''; ?>">
+              <input disabled type="password" name="senha" id="senha" value="<?php echo htmlspecialchars($dadosUsuario['senha']); ?>">
+              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
+              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
+              <button class="confirmUser"> <i class="fa-solid fa-check"></i></button
             </div>
           </label>
           <label for="cep">Cep:
             <div>
-              <input disabled type="text" id="cep" value="<?php echo (isset($pessoa['cep']) && !empty($pessoa['cep'])) ? $pessoa['cep'] : ''; ?>">
+              <input disabled type="text" id="cep" name="cep" value="<?php echo htmlspecialchars($dadosUsuario['cep']); ?>">
+              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
+              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
+              <button class="confirmUser"> <i class="fa-solid fa-check"></i></button>
             </div>
           </label>
           <label for="cidade">Cidade:
             <div>
-              <input disabled type="text" id="cidade" value="<?php echo (isset($pessoa['cidade']) && !empty($pessoa['cidade'])) ? $pessoa['cidade'] : ''; ?>">
+              <input disabled type="text" id="cidade" name="cidade" value="<?php echo htmlspecialchars($dadosUsuario['cidade']); ?>">
+              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
+              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
+              <button class="confirmUser"><i class="fa-solid fa-check"></i></button>
             </div>
           </label>
           <label for="bairro">Bairro:
             <div>
-              <input disabled type="text" id="bairro" value="<?php echo (isset($pessoa['bairro']) && !empty($pessoa['bairro'])) ? $pessoa['bairro'] : ''; ?>">
+              <input disabled type="text" id="bairro" name="bairro" value="<?php echo htmlspecialchars($dadosUsuario['bairro']); ?>">
+              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
+              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
+              <button class="confirmUser"><i class="fa-solid fa-check"></i></button>
             </div>
           </label>
           <label for="rua">Rua:
             <div>
-              <input disabled type="text" id="rua" value="<?php echo (isset($pessoa['rua']) && !empty($pessoa['rua'])) ? $pessoa['rua'] : ''; ?>">
+              <input disabled type="text" id="rua" name="rua" value="<?php echo htmlspecialchars($dadosUsuario['rua']); ?>">
+              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
+              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
+              <button class="confirmUser"> <i class="fa-solid fa-check"></i></button>
             </div>
           </label>
           <label for="numero">Número:
             <div>
-              <input disabled type="text" id="endNum" value="<?php echo (isset($pessoa['numeroCasa']) && !empty($pessoa['numeroCasa'])) ? $pessoa['numeroCasa'] : ''; ?>">
+              <input disabled type="text" id="endNum" name="numeroCasa" value="<?php echo htmlspecialchars($dadosUsuario['numeroCasa']); ?>">
+              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
+              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
+              <button class="confirmUser"><i class="fa-solid fa-check"></i></button>
             </div>
           </label>
         </form>
@@ -199,6 +205,119 @@
     </div>
   </section>
   <!-- FIM MAIN -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const editButtons = document.querySelectorAll('.editUser');
+        const cancelButtons = document.querySelectorAll('.cancelEdit');
+        const confirmButtons = document.querySelectorAll('.confirmUser');
+        const uploadButton = document.querySelector('.uploadFoto');
+        const inputs = document.querySelectorAll('#userForm input');
+        let originalValues = {};
+
+        // Armazena os valores originais dos inputs
+        inputs.forEach(input => {
+            originalValues[input.id] = input.value;
+        });
+
+        // Habilita o campo de entrada para edição
+        editButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                input.disabled = false;
+                input.style.background = '#fff';
+                input.style.outline = '2px solid var(--cor2)';
+                input.focus();
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'inline';
+                this.nextElementSibling.nextElementSibling.style.display = 'inline';
+            });
+        });
+
+        // Restaura o valor original do campo de entrada
+        cancelButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const input = this.previousElementSibling.previousElementSibling;
+                if (originalValues.hasOwnProperty(input.id)) {
+                    input.value = originalValues[input.id];
+                }
+                input.disabled = true;
+                input.style.background = 'var(--cor6)';
+                input.style.outline = 'none';
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'none';
+                this.previousElementSibling.style.display = 'inline';
+            });
+        });
+
+        // Envia os dados atualizados para o servido
+        confirmButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const input = this.previousElementSibling.previousElementSibling.previousElementSibling;
+                const newValue = input.value;
+                if (newValue !== originalValues[input.id]) {
+                    fetch('../php/update_user.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `id=<?php echo $id; ?>&${input.name}=${encodeURIComponent(newValue)}`
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        if (data === 'success') {
+                            originalValues[input.id] = newValue;
+                            input.disabled = true;
+                            input.blur();
+                            this.style.display = 'none';
+                            this.previousElementSibling.style.display = 'none';
+                            this.previousElementSibling.previousElementSibling.style.display = 'inline';
+                        } else {
+                            console.error('Erro ao atualizar os dados.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro:', error);
+                    });
+                } else {
+                    input.disabled = true;
+                    input.blur();
+                    this.style.display = 'none';
+                    this.previousElementSibling.style.display = 'none';
+                    this.previousElementSibling.previousElementSibling.style.display = 'inline';
+                }
+            });
+        });
+        // Envia a foto para o servidor   
+        uploadButton.addEventListener('click', function() {
+            const formData = new FormData(document.getElementById('userForm'));
+            const fotoInput = document.getElementById('fotoPerfilInput');
+            const fotoFile = fotoInput.files[0];
+
+            if (fotoFile) {
+                formData.append('fotoPerfilInput', fotoFile);
+
+                fetch('../php/update_user.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    if (data === 'success') {
+                        // Atualiza a imagem de perfil exibida
+                        document.getElementById('fotoPerfil').src = URL.createObjectURL(fotoFile);
+                    } else {
+                        console.error('Erro ao atualizar a foto.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
+            } else {
+                alert('Por favor, selecione uma foto.');
+            }
+        });
+    });
+</script>
 </body>
 
 </html>
