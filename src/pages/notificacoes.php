@@ -28,6 +28,28 @@ function buscarDadosUsuario($conn, $id) {
   return $row ? $row : null;
 }
 
+function buscarNotificacoes($conn, $id) {
+  $sql = "SELECT ident_deb, data_venc, valor_deb FROM debito WHERE fk_id_usuario = ? AND DATEDIFF(data_venc, CURDATE()) <= 10 AND DATEDIFF(data_venc, CURDATE()) >= 0 AND notifi = 1";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("i", $id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+
+  $notificacoes = [];
+  while ($row = $result->fetch_assoc()) {
+      $notificacoes[] = $row;
+  }
+
+  return $notificacoes;
+}
+
+// Debug: Verificar se há notificações
+if (buscarNotificacoes($conn, $id) === null) {
+    echo "Nenhuma notificação encontrada.";
+} else {
+    $notificacoes = buscarNotificacoes($conn, $id);
+}
+
 $dadosUsuario = buscarDadosUsuario($conn, $id);
 $nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuario['nome'])[1];
 ?>
@@ -110,8 +132,18 @@ $nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuari
       <div class="content notfy">
         <div class="containerNotfi">
           <h4 class="tituloNotfi">Notificaçoes</h4>
-          <div class="notficacoesContainer">
+          <div class="notficacoesContainer" style="justify-content: initial; align-items: initial; flex-direction: column;">
+          <?php if (empty($notificacoes)): ?>
             <p class="semNofi">Sem Notificações</p>
+          <?php else: ?>
+            <ul>
+              <?php foreach ($notificacoes as $notificacao): ?>
+                <li>
+                  <p>Seu débito <strong><?php echo htmlspecialchars($notificacao['ident_deb']); ?></strong> no valor de <strong>R$ <?php echo number_format($notificacao['valor_deb'], 2, ',', '.'); ?></strong> está próximo do vencimento em <strong><?php echo date('d/m/Y', strtotime($notificacao['data_venc'])); ?></strong>.</p>
+                </li>
+              <?php endforeach; ?>
+            </ul>
+          <?php endif; ?>
           </div>
         </div>
       </div>

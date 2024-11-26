@@ -9,6 +9,10 @@ export default function graficoCircular(theme) {
         const totalDebito = parseFloat(financeiro.total_debito);
         const restante = parseFloat(financeiro.restante);
 
+        // Definir a cor do restante com base na condição
+        const restanteColor = (restante / totalEntrada) < 0.7 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(75, 192, 192, 0.5)'; // Vermelho se menos de 70%, caso contrário verde
+        const restanteBorderColor = (restante / totalEntrada) < 0.7 ? 'rgba(255, 99, 132, 1)' : 'rgba(75, 192, 192, 1)';
+
         Chart.defaults.color = theme;
 
         let graficoCircular = new Chart(ctx, {
@@ -19,14 +23,14 @@ export default function graficoCircular(theme) {
               label: 'Percentual de gastos',
               data: [totalEntrada, totalDebito, restante],
               backgroundColor: [
-                'rgba(3, 60, 158, 0.5)',  // Entrada - Azul Forte
-                'rgba(199, 120, 2, 0.5)',  // Débitos - Vermelho Forte
-                'rgba(2, 120, 9, 0.5)',  // Restante - Verde Forte
+                'rgba(54, 162, 235, 0.7)',  // Entrada - Azul Escuro
+                'rgba(255, 159, 64, 0.7)',  // Débitos - Laranja Moderno
+                restanteColor  // Restante - Verde ou Vermelho Moderno
               ],
               borderColor: [
-                'rgba(3, 60, 158, 1)',  // Entrada - Azul Forte
-                'rgba(199, 120, 2, 1)',  // Débitos - Vermelho Forte
-                'rgba(2, 120, 9, 1)',  // Restante - Verde Forte
+                'rgba(54, 162, 235, 1)',  // Entrada - Azul Escuro
+                'rgba(255, 159, 64, 1)',  // Débitos - Laranja Moderno
+                restanteBorderColor  // Restante - Verde ou Vermelho Moderno
               ],
               borderWidth: 1
             }]
@@ -34,6 +38,17 @@ export default function graficoCircular(theme) {
           options: {
             responsive: true,
             plugins: {
+              legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                  color: theme,
+                  font: {
+                    size: 14,
+                    weight: 'bold'
+                  }
+                }
+              },
               tooltip: {
                 callbacks: {
                   label: function(context) {
@@ -47,11 +62,27 @@ export default function graficoCircular(theme) {
                     return label;
                   }
                 }
+              },
+              datalabels: {
+                formatter: function(value) {
+                  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+                },
+                color: theme,
+                font: {
+                  size: 12,
+                  weight: 'bold'
+                }
               }
+            },
+            animation: {
+              duration: 1000,
+              easing: 'easeInOutQuad'
             }
           }
         });
       })
       .catch(error => console.error('Erro ao buscar dados financeiros:', error));
+  } else {
+    console.error('Elemento canvas não encontrado');
   }
 }

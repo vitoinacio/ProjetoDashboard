@@ -150,7 +150,7 @@ $debitos = buscarDebitos($conn, $id);
         </div>
         <div class="gastos-totais">
           <h2>Gastos Totais</h2>
-          <p>R$ <input type="text" id="totaisGastos" value="<?php echo htmlspecialchars($totalDebitos);?>" placeholder=" 00.00" disabled></p>
+          <p>R$ <input type="text" id="totaisGastos" value="<?php echo number_format($totalDebitos, 2, ',', '.'); ?>" placeholder=" 00.00" disabled></p>
         </div>
       </div>
       <div class="containertodo">
@@ -206,7 +206,12 @@ $debitos = buscarDebitos($conn, $id);
               function addfetch(event) {
                   event.preventDefault(); // Impede o envio padrão do formulário
 
+                  const form = event.target;
                   const formData = new FormData(this);
+
+                  const valorField = form.querySelector('input[name="valor_deb"]');
+                  const valor = valorField.value.replace(/[^\d,]/g, '').replace(',', '.');
+                  formData.set('valor_deb', valor);
 
                   fetch('../php/processa_planejamento.php', {
                       method: 'POST',
@@ -232,36 +237,36 @@ $debitos = buscarDebitos($conn, $id);
               }
           </script>
   
-            <script>
-              document.getElementById('formSalario').addEventListener('submit', function(event) {
-                event.preventDefault(); // Impede o envio padrão do formulário
+          <script>
+            document.getElementById('formSalario').addEventListener('submit', function(event) {
+              event.preventDefault(); // Impede o envio padrão do formulário
 
-              const formData = new FormData(this);
+            const formData = new FormData(this);
 
-              fetch('../php/entrada.php', {
-                  method: 'POST',
-                  body: formData
-                })
-                .then(response => response.text())
-    .then(data => {
-      Swal.fire({
-        icon: 'success',
-        title: 'Seu salário foi adicionado com sucesso!',
-        showConfirmButton: false,
-        timer: 1500
-      });
-      // Aqui você pode adicionar código para atualizar a página, se necessário
-    })
-    .catch(error => Swal.fire({
-      position: 'bottom-end',
-      icon: 'error',
-      title: 'Erro: ' + error,
-      showConfirmButton: false,
-      timer: 1500
-    }));
+            fetch('../php/entrada.php', {
+                method: 'POST',
+                body: formData
+              })
+              .then(response => response.text())
+              .then(data => {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Seu salário foi adicionado com sucesso!',
+                  showConfirmButton: false,
+                  timer: 1500
                 });
-                </script>
-        
+                // Aqui você pode adicionar código para atualizar a página, se necessário
+              })
+              .catch(error => Swal.fire({
+                position: 'bottom-end',
+                icon: 'error',
+                title: 'Erro: ' + error,
+                showConfirmButton: false,
+                timer: 1500
+              }));
+            });
+          </script>
+
         </form>
         </div>
         <ul class="listtodo">

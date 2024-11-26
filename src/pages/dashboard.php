@@ -51,6 +51,8 @@ $totalDebitos = $row['total_debitos'] ? $row['total_debitos'] : 0;
 
 // Calculo do valor restante
 $valorRestante = $totalEntrada - $totalDebitos;
+
+$percentualRestante = ($valorRestante / $totalEntrada) * 100;
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -133,7 +135,6 @@ $valorRestante = $totalEntrada - $totalDebitos;
         <div class="info-cash">
           <div
             class="info-cash-box"
-            onload="handleTheme()"
           >
             <div class="info-text">
               <h3>Entrada total</h3>
@@ -150,9 +151,7 @@ $valorRestante = $totalEntrada - $totalDebitos;
             </div>
             <i class="fa-solid fa-receipt"></i>
           </div>
-          <div
-            class="info-cash-box"
-          >
+          <div class="info-cash-box" data-percentual-restante="<?php echo $percentualRestante; ?>">
             <div class="info-text">
               <h3>Restante</h3>
               <p>R$ <?php echo number_format($valorRestante, 2, ',','.'); ?></p>
@@ -171,5 +170,32 @@ $valorRestante = $totalEntrada - $totalDebitos;
       </div>
     </section>
     <!-- FIM MAIN -->
+    <script>
+      document.addEventListener('DOMContentLoaded', handleTheme);
+      function handleTheme() {
+        const boxInfo = document.querySelectorAll('.info-cash-box');
+        if(boxInfo.length){
+          const percentualRestante = parseFloat(boxInfo[2].getAttribute('data-percentual-restante'));
+
+          if (sessionStorage.getItem('theme') === 'dark') {
+            boxInfo[0].style.background = 'linear-gradient(45deg, rgb(1 1 30), rgb(6 6 126))';
+            boxInfo[1].style.background = 'linear-gradient(45deg, rgb(39 29 0), #9b6604)';
+            if (percentualRestante < 30) {
+              boxInfo[2].style.background = 'linear-gradient(45deg, rgb(41 0 0), rgb(153 0 0))'; // Vermelho
+            } else {
+              boxInfo[2].style.background = 'linear-gradient(45deg, rgb(0 41 0), rgb(0 153 0))'; // Verde
+            }
+          } else {
+            boxInfo[0].style.background = 'linear-gradient(45deg, rgb(3, 3, 158), blue)';
+            boxInfo[1].style.background = 'linear-gradient(45deg, rgb(199, 146, 2), orange)';
+            if (percentualRestante < 30) {
+              boxInfo[2].style.background = 'linear-gradient(45deg, rgb(156, 2, 2), rgb(221, 3, 3))'; // Vermelho
+            } else {
+              boxInfo[2].style.background = 'linear-gradient(45deg,rgb(2, 156, 2),rgb(3, 221, 3))'; // Verde
+            }
+          }
+        }
+      }
+    </script>
   </body>
 </html>
