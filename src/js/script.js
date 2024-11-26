@@ -10,18 +10,15 @@ import todoList from "./modules/listContas.js";
 import cadastreSe from "./modules/cadastreSe.js";
 import theme from "./modules/theme.js";
 import handleTheme from "./modules/handleTheme.js";
-import graficoDeBarraAnalise from "./modules/graficoDeBarraAnalise.js";
 import fontSize from "./modules/fontSize.js";
 
 // muda a color dos graficos ao verificar o thema atual
 if (sessionStorage.getItem('theme') === 'dark') {
   graficoDeBarra('#fff');
   graficoCircular('#fff');
-  graficoDeBarraAnalise('#fff')
 } else {
   graficoDeBarra('#504f4f');
   graficoCircular('#504f4f');
-  graficoDeBarraAnalise('#504f4f')
 }
 
 handleTheme();

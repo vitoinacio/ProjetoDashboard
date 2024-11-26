@@ -1,71 +1,62 @@
-export default function graficoDeBarra(theme) {
-  
-  const ctx = document.querySelector("#graficoDeBarra");
-  
-  if (ctx) {
-      let data = [1,2,3,4,5,6,6,5,4,3,2,1];
-      Chart.defaults.color = theme;
+export default function graficoCircular(theme) {
+  console.log('Função graficoCircular foi chamada');
+  const ctx = document.querySelector('#graficoCircular');
 
-      let graficoBarra = new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: [
-            "Jan",
-            "Fev",
-            "Mar",
-            "Abr",
-            "Mai",
-            "Jun",
-            "Jul",
-            "Ago",
-            "Set",
-            "Out",
-            "Nov",
-            "Dez"
-          ],
-          datasets: [
-            {
-              label: "Gastos mensais R$",
-              data: data,
+  if (ctx) {
+    console.log('Elemento canvas encontrado');
+    fetch('../php/get_financeiro.php')
+      .then(response => response.json())
+      .then(financeiro => {
+        console.log('Dados financeiros recebidos:', financeiro);
+        const totalEntrada = parseFloat(financeiro.total_entrada);
+        const totalDebito = parseFloat(financeiro.total_debito);
+        const restante = parseFloat(financeiro.restante);
+
+        Chart.defaults.color = theme;
+
+        let graficoCircular = new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Entrada', 'Débitos', 'Restante'],
+            datasets: [{
+              label: 'Percentual de gastos',
+              data: [totalEntrada, totalDebito, restante],
               backgroundColor: [
-                "rgba(240, 248, 255, 0.7)",  // Janeiro - Alice Blue
-                "rgba(224, 238, 255, 0.7)",  // Fevereiro - Light Sky Blue
-                "rgba(200, 220, 255, 0.7)",  // Março - Light Steel Blue
-                "rgba(175, 215, 255, 0.7)",  // Abril - Light Blue
-                "rgba(150, 200, 255, 0.7)",  // Maio - Sky Blue
-                "rgba(125, 185, 255, 0.7)",  // Junho - Dodger Blue
-                "rgba(100, 170, 255, 0.7)",  // Julho - Deep Sky Blue
-                "rgba(80, 155, 255, 0.7)",   // Agosto - Cornflower Blue
-                "rgba(60, 140, 255, 0.7)",   // Setembro - Medium Slate Blue
-                "rgba(40, 125, 255, 0.7)",   // Outubro - Royal Blue
-                "rgba(20, 110, 255, 0.7)",   // Novembro - Medium Blue
-                "rgba(10, 95, 255, 0.7)"     // Dezembro - Dark Blue
+                'rgba(3, 60, 158, 0.5)',  // Entrada - Azul Forte
+                'rgba(199, 120, 2, 0.5)',  // Débitos - Vermelho Forte
+                'rgba(2, 120, 9, 0.5)',  // Restante - Verde Forte
               ],
               borderColor: [
-                "rgba(9, 248, 210, 1)",  // Janeiro - Alice Blue
-                "rgba(9, 238, 210, 1)",  // Fevereiro - Light Sky Blue
-                "rgba(9, 220, 210, 1)",  // Março - Light Steel Blue
-                "rgba(9, 215, 210, 1)",  // Abril - Light Blue
-                "rgba(9, 200, 210, 1)",  // Maio - Sky Blue
-                "rgba(9, 185, 210, 1)",  // Junho - Dodger Blue
-                "rgba(9, 170, 210, 1)",  // Julho - Deep Sky Blue
-                "rgba(9, 155, 210, 1)",   // Agosto - Cornflower Blue
-                "rgba(9, 140, 210, 1)",   // Setembro - Medium Slate Blue
-                "rgba(9, 125, 210, 1)",   // Outubro - Royal Blue
-                "rgba(9, 110, 210, 1)",   // Novembro - Medium Blue
-                "rgba(9, 9, 210, 1)"
+                'rgba(3, 60, 158, 1)',  // Entrada - Azul Forte
+                'rgba(199, 120, 2, 1)',  // Débitos - Vermelho Forte
+                'rgba(2, 120, 9, 1)',  // Restante - Verde Forte
               ],
-              borderWidth: 1,
-            },
-          ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
+              borderWidth: 1
+            }]
           },
-        },
-      });
+          options: {
+            responsive: true,
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  label: function(context) {
+                    let label = context.label || '';
+                    if (label) {
+                      label += ': ';
+                    }
+                    if (context.parsed !== null) {
+                      label += new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(context.parsed);
+                    }
+                    return label;
+                  }
+                }
+              }
+            }
+          }
+        });
+      })
+      .catch(error => console.error('Erro ao buscar dados financeiros:', error));
+  } else {
+    console.error('Elemento canvas não encontrado');
   }
 }
