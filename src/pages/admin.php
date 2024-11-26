@@ -6,7 +6,7 @@
   {
     unset($_SESSION['email']);
     unset($_SESSION['senha']);
-    header('Location: ../../index.html');
+    header('Location: ../../index.php');
   }
   $logado = $_SESSION['email'];
 
@@ -48,14 +48,15 @@
       <div class="info-header">
         <i class="fa-solid fa-bell"></i>
         <i class="fa-solid fa-gear"></i>
-        <img src="../img/perfil.png" alt="foto-perfil" />
+        <img src="../img/perfil.jpg" alt="foto-perfil" />
       </div>
     </header>
     <!-- FIM HEADER -->
 
     <!-- INICIO MAIN -->
+     <a href="../php/sair.php" style="border: solid 0.5px gray;">Voltar</a>
      <br>
-        <div class="box-search" style="justify-content: center; display:flex; gap:.1%;">
+             <div class="box-search" style="justify-content: center; display:flex; gap:.1%;">
           <input type="search" class="form-control w-25" placeholder="Pesquisar" id="pesquisar">
           <button onclick="searchData()" class="btn btn-primary">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
