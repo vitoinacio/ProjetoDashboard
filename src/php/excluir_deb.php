@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 }
-
+require_once "enviar_notificacoes.php";
 // Fechar a conexão
 $conn->close();
 ?>

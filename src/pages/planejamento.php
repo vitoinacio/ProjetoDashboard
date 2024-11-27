@@ -154,7 +154,7 @@ $debitos = buscarDebitos($conn, $id);
         </div>
         <div class="gastos-totais">
           <h2>Gastos Totais</h2>
-          <p>R$ <input type="text" id="totaisGastos" value="<?php echo htmlspecialchars($totalDebitos);?>" placeholder=" 00.00" disabled></p>
+          <p>R$ <input type="text" id="totaisGastos" value="<?php echo number_format($totalDebitos, 2, ',', '.'); ?>" placeholder=" 00.00" disabled></p>
         </div>
       </div>
       <div class="containertodo">
@@ -188,20 +188,20 @@ $debitos = buscarDebitos($conn, $id);
         <div class="containerListaMobile">
           <h2>Adicione seus debitos</h2>
           <form id="formPlanejamentoMobile" class="mobile formPLanejamento" method="POST">
-            <div style="display: flex; flex-direction:column; gap:7px;">
+            <div style="display: flex;width:75%; flex-direction:column; gap:7px;">
               <input style="width:100%; padding:8px; border: none; border-bottom:1px solid #555;" class="identificacao" name="ident_deb" type="text" placeholder="Identificaçao" maxlength="15" required>
               <input style="width:100%; padding:8px; border: none; border-bottom:1px solid #555;" class="observacao" name="obs_deb" type="text" placeholder="Observaçao" maxlength="100">
             </div>
-            <div style="display: flex; flex-direction:column; gap:7px;">
+            <div style="display: flex; width:75%; flex-direction:column; gap:7px;">
               <input style="width:100%; padding:8px; border: none; border-bottom:1px solid #555;" class="valor" name="valor_deb" type="text" placeholder="Valor R$" max="15" required>
               <input style="width:100%; padding:8px; border: none; border-bottom:1px solid #555;" class="vencimento" type="date" name="data_venc" id="vencimento" placeholder="DD / MM / AAAA" maxlength="10" minlength="10" required>
-            </div style="display: flex; flex-direction:column; gap:7px;">
-            <select style="width:20%; padding:8px;" name="notficacao" id="notficacao" required>
+            </div>
+            <select style="width:75%; padding:8px;" name="notficacao" id="notficacao" required>
               <option value="" selected disabled>Notficação</option>
               <option value="1">Sim</option>
               <option value="0">Não</option>
             </select>
-            <div style="display: flex; flex-direction:column; gap:7px;"><button style="width:100%; padding:8px; height:60px; border:1px solid var(--cor2); border-radius: 10px; color: var(--cor2); font-weight: bold;" type="submit">adicionar<i class="fa-solid fa-plus"></i></button></div>
+            <div style="display: flex; width:75%; flex-direction:column; gap:7px;"><button style="width:100%; padding:8px; height:60px; border:1px solid var(--cor2); border-radius: 10px; color: var(--cor1); font-weight: bold;" type="submit">adicionar<i class="fa-solid fa-plus"></i></button></div>
             
             <script>
               document.getElementById('formPlanejamento').addEventListener('submit', addfetch);
@@ -210,7 +210,12 @@ $debitos = buscarDebitos($conn, $id);
               function addfetch(event) {
                   event.preventDefault(); // Impede o envio padrão do formulário
 
+                  const form = event.target;
                   const formData = new FormData(this);
+
+                  const valorField = form.querySelector('input[name="valor_deb"]');
+                  const valor = valorField.value.replace(/[^\d,]/g, '').replace(',', '.');
+                  formData.set('valor_deb', valor);
 
                   fetch('../php/processa_planejamento.php', {
                       method: 'POST',
@@ -236,36 +241,36 @@ $debitos = buscarDebitos($conn, $id);
               }
           </script>
   
-            <script>
-              document.getElementById('formSalario').addEventListener('submit', function(event) {
-                event.preventDefault(); // Impede o envio padrão do formulário
+          <script>
+            document.getElementById('formSalario').addEventListener('submit', function(event) {
+              event.preventDefault(); // Impede o envio padrão do formulário
 
-              const formData = new FormData(this);
+            const formData = new FormData(this);
 
-              fetch('../php/entrada.php', {
-                  method: 'POST',
-                  body: formData
-                })
-                .then(response => response.text())
-    .then(data => {
-      Swal.fire({
-        icon: 'success',
-        title: 'Seu salário foi adicionado com sucesso!',
-        showConfirmButton: false,
-        timer: 1500
-      });
-      // Aqui você pode adicionar código para atualizar a página, se necessário
-    })
-    .catch(error => Swal.fire({
-      position: 'bottom-end',
-      icon: 'error',
-      title: 'Erro: ' + error,
-      showConfirmButton: false,
-      timer: 1500
-    }));
+            fetch('../php/entrada.php', {
+                method: 'POST',
+                body: formData
+              })
+              .then(response => response.text())
+              .then(data => {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Seu salário foi adicionado com sucesso!',
+                  showConfirmButton: false,
+                  timer: 1500
                 });
-                </script>
-        
+                // Aqui você pode adicionar código para atualizar a página, se necessário
+              })
+              .catch(error => Swal.fire({
+                position: 'bottom-end',
+                icon: 'error',
+                title: 'Erro: ' + error,
+                showConfirmButton: false,
+                timer: 1500
+              }));
+            });
+          </script>
+
         </form>
         </div>
         <ul class="listtodo">

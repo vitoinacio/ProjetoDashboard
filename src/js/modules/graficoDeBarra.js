@@ -1,71 +1,119 @@
 export default function graficoDeBarra(theme) {
-  
   const ctx = document.querySelector("#graficoDeBarra");
-  
-  if (ctx) {
-      let data = [1,2,3,4,5,6,6,5,4,3,2,1];
-      Chart.defaults.color = theme;
 
-      let graficoBarra = new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: [
-            "Jan",
-            "Fev",
-            "Mar",
-            "Abr",
-            "Mai",
-            "Jun",
-            "Jul",
-            "Ago",
-            "Set",
-            "Out",
-            "Nov",
-            "Dez"
-          ],
-          datasets: [
-            {
-              label: "Gastos mensais R$",
-              data: data,
-              backgroundColor: [
-                "rgba(240, 248, 255, 0.7)",  // Janeiro - Alice Blue
-                "rgba(224, 238, 255, 0.7)",  // Fevereiro - Light Sky Blue
-                "rgba(200, 220, 255, 0.7)",  // Março - Light Steel Blue
-                "rgba(175, 215, 255, 0.7)",  // Abril - Light Blue
-                "rgba(150, 200, 255, 0.7)",  // Maio - Sky Blue
-                "rgba(125, 185, 255, 0.7)",  // Junho - Dodger Blue
-                "rgba(100, 170, 255, 0.7)",  // Julho - Deep Sky Blue
-                "rgba(80, 155, 255, 0.7)",   // Agosto - Cornflower Blue
-                "rgba(60, 140, 255, 0.7)",   // Setembro - Medium Slate Blue
-                "rgba(40, 125, 255, 0.7)",   // Outubro - Royal Blue
-                "rgba(20, 110, 255, 0.7)",   // Novembro - Medium Blue
-                "rgba(10, 95, 255, 0.7)"     // Dezembro - Dark Blue
-              ],
-              borderColor: [
-                "rgba(9, 248, 210, 1)",  // Janeiro - Alice Blue
-                "rgba(9, 238, 210, 1)",  // Fevereiro - Light Sky Blue
-                "rgba(9, 220, 210, 1)",  // Março - Light Steel Blue
-                "rgba(9, 215, 210, 1)",  // Abril - Light Blue
-                "rgba(9, 200, 210, 1)",  // Maio - Sky Blue
-                "rgba(9, 185, 210, 1)",  // Junho - Dodger Blue
-                "rgba(9, 170, 210, 1)",  // Julho - Deep Sky Blue
-                "rgba(9, 155, 210, 1)",   // Agosto - Cornflower Blue
-                "rgba(9, 140, 210, 1)",   // Setembro - Medium Slate Blue
-                "rgba(9, 125, 210, 1)",   // Outubro - Royal Blue
-                "rgba(9, 110, 210, 1)",   // Novembro - Medium Blue
-                "rgba(9, 9, 210, 1)"
-              ],
-              borderWidth: 1,
-            },
-          ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
+  if (ctx) {
+    fetch('../php/get_debitos.php')
+      .then(response => response.json())
+      .then(debitos => {
+        let valoresPorMes = Array(12).fill(0);
+
+        debitos.forEach(debito => {
+          let dataVenc = new Date(debito.data_venc);
+          let mes = dataVenc.getMonth(); // Janeiro é 0, Fevereiro é 1, etc.
+          valoresPorMes[mes] += parseFloat(debito.valor_deb);
+        });
+
+        Chart.defaults.color = theme;
+
+        let graficoBarra = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: [
+              "Jan",
+              "Fev",
+              "Mar",
+              "Abr",
+              "Mai",
+              "Jun",
+              "Jul",
+              "Ago",
+              "Set",
+              "Out",
+              "Nov",
+              "Dez"
+            ],
+            datasets: [
+              {
+                label: "Débitos por Mês",
+                data: valoresPorMes,
+                backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                borderRadius: 10,
+                borderSkipped: false
+              }
+            ]
           },
-        },
-      });
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                  color: theme,
+                  font: {
+                    size: 14,
+                    weight: 'bold'
+                  }
+                }
+              },
+              tooltip: {
+                callbacks: {
+                  label: function(context) {
+                    let label = context.dataset.label || '';
+                    if (label) {
+                      label += ': ';
+                    }
+                    if (context.parsed.y !== null) {
+                      label += new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(context.parsed.y);
+                    }
+                    return label;
+                  }
+                }
+              },
+              datalabels: {
+                anchor: 'end',
+                align: 'end',
+                formatter: function(value) {
+                  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+                },
+                color: theme,
+                font: {
+                  size: 12,
+                  weight: 'bold'
+                }
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  color: theme === '#fff' ? '#000' : '#fff', // Ajustar cor do texto com base no tema
+                  callback: function(value) {
+                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+                  }
+                },
+                grid: {
+                  color: 'rgba(200, 200, 200, 0.2)'
+                }
+              },
+              x: {
+                ticks: {
+                  color: theme === '#fff' ? '#000' : '#fff'
+                },
+                grid: {
+                  color: 'rgba(200, 200, 200, 0.2)'
+                }
+              }
+            },
+            animation: {
+              duration: 1000,
+              easing: 'easeInOutQuad'
+            }
+          }
+        });
+      })
+      .catch(error => console.error('Erro ao buscar débitos:', error));
   }
 }

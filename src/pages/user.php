@@ -157,7 +157,7 @@ $nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuari
               <input disabled type="password" name="senha" id="senha" value="<?php echo htmlspecialchars($dadosUsuario['senha']); ?>">
               <button class="editUser"><i class="fa-solid fa-pen"></i></button>
               <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
-              <button class="confirmUser"> <i class="fa-solid fa-check"></i></button
+              <button class="confirmUser"> <i class="fa-solid fa-check"></i></button>
             </div>
           </label>
           <label for="cep">Cep:
