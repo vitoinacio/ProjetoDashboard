@@ -5,7 +5,7 @@ include_once('../php/conexao.php');
 if (!isset($_SESSION['email']) || !isset($_SESSION['senha'])) {
   unset($_SESSION['email']);
   unset($_SESSION['senha']);
-  header('Location: ../../index.html');
+  header('Location: ../../index.php');
   exit();
 }
 
@@ -14,7 +14,7 @@ $id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
 
 if ($id === null) {
     // Redirecionar ou lidar com o caso onde o id não está definido
-    header('Location: ../../index.html');
+    header('Location: ../../index.php');
     exit();
 }
 
@@ -52,7 +52,13 @@ $totalDebitos = $row['total_debitos'] ? $row['total_debitos'] : 0;
 // Calculo do valor restante
 $valorRestante = $totalEntrada - $totalDebitos;
 
-$percentualRestante = ($valorRestante / $totalEntrada) * 100;
+if ($totalEntrada === 0) {
+  $percentualRestante = 0;
+} else {
+  $percentualRestante = ($valorRestante / $totalEntrada) * 100;
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -79,7 +85,7 @@ $percentualRestante = ($valorRestante / $totalEntrada) * 100;
             <span class="menuMobile"></span>
             <span class="menuMobile"></span>
           </div>
-          <h3>SmartWallet</h3>
+            <h3><a href="../../index.php" style="text-decoration: none; color: inherit;">SmartWallet</a></h3>
         </div>
       </div>
       <div class="info-header">
@@ -120,6 +126,9 @@ $percentualRestante = ($valorRestante / $totalEntrada) * 100;
         >
         <a href="planejamento.php"><i class="fa-solid fa-clipboard-list"></i> Planejamento</a>
         <a href="user.php"><i class="fa-regular fa-circle-user"></i> User</a>
+        <?php if ($dadosUsuario['email'] == "contatossmartwallet@gmail.com"): ?>
+          <a href="admin.php"><i class="fa-solid fa-user-cog"></i> Admin</a>
+        <?php endif; ?>
         <a href="config.php" class="mobile"
           ><i class="fa-solid fa-gear"></i> Configurações</a
         >

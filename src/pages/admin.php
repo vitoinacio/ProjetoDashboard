@@ -54,7 +54,7 @@
     <!-- FIM HEADER -->
 
     <!-- INICIO MAIN -->
-     <a href="../php/sair.php" style="border: solid 0.5px gray;">Voltar</a>
+     <a href="../pages/dashboard.php" style="border: solid 0.5px gray;">Voltar</a>
      <br>
              <div class="box-search" style="justify-content: center; display:flex; gap:.1%;">
           <input type="search" class="form-control w-25" placeholder="Pesquisar" id="pesquisar">
