@@ -109,10 +109,10 @@ export default function todoList() {
     const createModel = (form) => {
       return `<li class="todo">
                 <h3 class="identif" style="text-align: center; font-weight: bold;">${form[0][0].value}</h3>
-                <p class="obstodo">${form[0][1].value}</p>
-                <p class="precotodo" style="text-align: center; font-weight: bold;">${form[0][2].value}</p>
-                <p class="vencimentotodo" style="text-align: center; font-weight: bold;">${form[0][3].value.split('-').reverse().join('/')}</p>
-                <p class="notftodo" style="text-align: center; font-weight: bold;">${form[0][4].value === '1' ? 'Sim' : 'Não'}</p>
+                <h3 class="obstodo" style="flex:25%;">${form[0][1].value}</h3>
+                <h3 class="precotodo" style="text-align: center; font-weight: bold;">${form[0][2].value}</h3>
+                <h3 class="vencimentotodo" style="text-align: center; font-weight: bold;">${form[0][3].value.split('-').reverse().join('/')}</h3>
+                <h3 class="notftodo" style="text-align: center; font-weight: bold;">${form[0][4].value === '1' ? 'Sim' : 'Não'}</h3>
                 <div class="btnstodo">
                   <button class="btncheck" data-id="${form[0][5].value}"> Pago <i class="fa-solid fa-check"></i> </button>
                   <button class="btntrash" name="${form[0][5].value}"> Excluir <i class="fa-solid fa-trash"></i> </button>

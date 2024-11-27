@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     $stmt = $conn->prepare("INSERT INTO debito (ident_deb, obs_deb, valor_deb, data_venc, notifi, fk_id_usuario) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssis", $ident_deb, $obs_deb, $valor_deb, $data_venc, $notifi,
+    $stmt->bind_param("ssssis", $ident_deb, $obs_deb, $valor_deb, $data_venc, $notifi, $id);
 
     if ($stmt->execute()) {
         echo "Débito inserido com sucesso!";
@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Erro: " . $stmt->error;
     }
 
+    require_once "enviar_notificacoes.php";
     $stmt->close();
 }
 ?>

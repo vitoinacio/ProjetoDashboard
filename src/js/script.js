@@ -13,13 +13,27 @@ import handleTheme from "./modules/handleTheme.js";
 import fontSize from "./modules/fontSize.js";
 
 // muda a color dos graficos ao verificar o thema atual
-if (sessionStorage.getItem('theme') === 'dark') {
-  graficoDeBarra('#fff');
-  graficoCircular('#fff');
-} else {
-  graficoDeBarra('#504f4f');
-  graficoCircular('#504f4f');
-}
+document.addEventListener('DOMContentLoaded', function() {
+  if (sessionStorage.getItem('theme') === 'dark') {
+    const canvasBarra = document.getElementById('graficoDeBarra');
+    if (canvasBarra) {
+      graficoDeBarra('#504f4f');
+    }
+    const canvasCircular = document.getElementById('graficoCircular');
+    if (canvasCircular) {
+      graficoCircular('#504f4f');
+    }
+  } else {
+    const canvasBarra = document.getElementById('graficoDeBarra');
+    if (canvasBarra) {
+      graficoDeBarra('#fff');
+    }
+    const canvasCircular = document.getElementById('graficoCircular');
+    if (canvasCircular) {
+      graficoCircular('#fff');
+    }
+  }
+});
 
 handleTheme();
 

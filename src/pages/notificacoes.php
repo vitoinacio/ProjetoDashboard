@@ -1,13 +1,6 @@
 <?php
+require_once "../php/conexao.php";
 session_start();
-include_once('../php/conexao.php');
-
-if (!isset($_SESSION['email']) || !isset($_SESSION['senha'])) {
-  unset($_SESSION['email']);
-  unset($_SESSION['senha']);
-  header('Location: ../../index.html');
-  exit();
-}
 
 $logado = isset($_SESSION['email']) ? $_SESSION['email'] : null;
 $id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
@@ -43,13 +36,7 @@ function buscarNotificacoes($conn, $id) {
   return $notificacoes;
 }
 
-// Debug: Verificar se há notificações
-if (buscarNotificacoes($conn, $id) === null) {
-    echo "Nenhuma notificação encontrada.";
-} else {
-    $notificacoes = buscarNotificacoes($conn, $id);
-}
-
+$notificacoes = buscarNotificacoes($conn, $id);
 $dadosUsuario = buscarDadosUsuario($conn, $id);
 $nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuario['nome'])[1];
 ?>
@@ -64,6 +51,50 @@ $nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuari
       crossorigin="anonymous"
     ></script>
     <script type="module" src="../js/script.js" defer></script>
+    <style>
+      ul#conatinerListaMensagem {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      background-color: var(--cor1); /* Cor de fundo */
+      border-radius: 10px; /* Bordas arredondadas */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    }
+
+    li#menssagemContainer {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0;
+      border-radius: 10px;
+      background-color: var(--cor7); /* Cor de fundo */
+      border-left: 5px solid var(--cor2); /* Borda esquerda */
+      border-right: 5px solid var(--cor2); /* Borda direita */
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transições suaves */
+    }
+
+    li#menssagemContainer:hover {
+      transform: translateY(-5px); /* Elevação ao passar o mouse */
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra ao passar o mouse */
+    }
+
+    li#menssagemContainer p {
+      margin: 0;
+      color: var(--cor5); /* Cor do texto */
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    li#menssagemContainer strong {
+      color: var(--cor2); /* Cor do texto em negrito */
+    }
+    </style>
     <title>Configurações</title>
   </head>
   <body>
@@ -132,13 +163,13 @@ $nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuari
       <div class="content notfy">
         <div class="containerNotfi">
           <h4 class="tituloNotfi">Notificaçoes</h4>
-          <div class="notficacoesContainer" style="justify-content: initial; align-items: initial; flex-direction: column;">
+          <div class="notficacoesContainer" style="<?php echo (empty(!$notificacoes)) ? 'justify-content: initial; align-items: initial; flex-direction: column;' : ''; ?>">
           <?php if (empty($notificacoes)): ?>
             <p class="semNofi">Sem Notificações</p>
           <?php else: ?>
-            <ul>
+            <ul id="conatinerListaMensagem">
               <?php foreach ($notificacoes as $notificacao): ?>
-                <li>
+                <li id="menssagemContainer">
                   <p>Seu débito <strong><?php echo htmlspecialchars($notificacao['ident_deb']); ?></strong> no valor de <strong>R$ <?php echo number_format($notificacao['valor_deb'], 2, ',', '.'); ?></strong> está próximo do vencimento em <strong><?php echo date('d/m/Y', strtotime($notificacao['data_venc'])); ?></strong>.</p>
                 </li>
               <?php endforeach; ?>

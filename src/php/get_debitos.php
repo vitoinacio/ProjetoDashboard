@@ -24,4 +24,5 @@ while ($row = $resultDebitos->fetch_assoc()) {
 
 header('Content-Type: application/json');
 echo json_encode($debitos);
+require_once "enviar_notificacoes.php";
 ?>

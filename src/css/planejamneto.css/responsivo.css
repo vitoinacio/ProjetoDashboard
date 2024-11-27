@@ -256,6 +256,10 @@
     height: 119px;
   }
 
+  .containerListaMobile #formPlanejamentoMobile #vencimento{
+    width: 100%;
+  }
+
   .todo h3{
     flex: 15%;
     font-size: 8px;

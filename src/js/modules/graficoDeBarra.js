@@ -89,7 +89,7 @@ export default function graficoDeBarra(theme) {
               y: {
                 beginAtZero: true,
                 ticks: {
-                  color: theme,
+                  color: theme === '#fff' ? '#000' : '#fff', // Ajustar cor do texto com base no tema
                   callback: function(value) {
                     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
                   }
@@ -100,7 +100,7 @@ export default function graficoDeBarra(theme) {
               },
               x: {
                 ticks: {
-                  color: theme
+                  color: theme === '#fff' ? '#000' : '#fff'
                 },
                 grid: {
                   color: 'rgba(200, 200, 200, 0.2)'

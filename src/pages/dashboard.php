@@ -65,6 +65,7 @@ $percentualRestante = ($valorRestante / $totalEntrada) * 100;
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0" defer></script>
     <script type="module" src="../js/script.js" defer></script>
     <title>Dashboard</title>
   </head>

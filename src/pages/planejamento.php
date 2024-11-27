@@ -188,20 +188,20 @@ $debitos = buscarDebitos($conn, $id);
         <div class="containerListaMobile">
           <h2>Adicione seus debitos</h2>
           <form id="formPlanejamentoMobile" class="mobile formPLanejamento" method="POST">
-            <div style="display: flex; flex-direction:column; gap:7px;">
+            <div style="display: flex;width:75%; flex-direction:column; gap:7px;">
               <input style="width:100%; padding:8px; border: none; border-bottom:1px solid #555;" class="identificacao" name="ident_deb" type="text" placeholder="Identificaçao" maxlength="15" required>
               <input style="width:100%; padding:8px; border: none; border-bottom:1px solid #555;" class="observacao" name="obs_deb" type="text" placeholder="Observaçao" maxlength="100">
             </div>
-            <div style="display: flex; flex-direction:column; gap:7px;">
+            <div style="display: flex; width:75%; flex-direction:column; gap:7px;">
               <input style="width:100%; padding:8px; border: none; border-bottom:1px solid #555;" class="valor" name="valor_deb" type="text" placeholder="Valor R$" max="15" required>
               <input style="width:100%; padding:8px; border: none; border-bottom:1px solid #555;" class="vencimento" type="date" name="data_venc" id="vencimento" placeholder="DD / MM / AAAA" maxlength="10" minlength="10" required>
-            </div style="display: flex; flex-direction:column; gap:7px;">
-            <select style="width:20%; padding:8px;" name="notficacao" id="notficacao" required>
+            </div>
+            <select style="width:75%; padding:8px;" name="notficacao" id="notficacao" required>
               <option value="" selected disabled>Notficação</option>
               <option value="1">Sim</option>
               <option value="0">Não</option>
             </select>
-            <div style="display: flex; flex-direction:column; gap:7px;"><button style="width:100%; padding:8px; height:60px; border:1px solid var(--cor2); border-radius: 10px; color: var(--cor2); font-weight: bold;" type="submit">adicionar<i class="fa-solid fa-plus"></i></button></div>
+            <div style="display: flex; width:75%; flex-direction:column; gap:7px;"><button style="width:100%; padding:8px; height:60px; border:1px solid var(--cor2); border-radius: 10px; color: var(--cor1); font-weight: bold;" type="submit">adicionar<i class="fa-solid fa-plus"></i></button></div>
             
             <script>
               document.getElementById('formPlanejamento').addEventListener('submit', addfetch);
