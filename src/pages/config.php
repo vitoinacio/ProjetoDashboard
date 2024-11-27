@@ -5,7 +5,7 @@ include_once('../php/conexao.php');
 if (!isset($_SESSION['email']) || !isset($_SESSION['senha'])) {
   unset($_SESSION['email']);
   unset($_SESSION['senha']);
-  header('Location: ../../index.html');
+  header('Location: ../../index.php');
   exit();
 }
 
@@ -14,7 +14,7 @@ $id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
 
 if ($id === null) {
     // Redirecionar ou lidar com o caso onde o id não está definido
-    header('Location: ../../index.html');
+    header('Location: ../../index.php');
     exit();
 }
 

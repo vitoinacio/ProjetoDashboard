@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     } else {
         // Usuário não encontrado ou senha incorreta
-        header('Location: ../../index.html');
+        header('Location: ../../index.php');
         exit();
     }
 }

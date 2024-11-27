@@ -6,7 +6,7 @@ include_once('../php/conexao.php');
 if (!isset($_SESSION['email']) || !isset($_SESSION['senha'])) {
     unset($_SESSION['email']);
     unset($_SESSION['senha']);
-    header('Location: ../../index.html');
+    header('Location: ../../index.php');
     exit();
 }
 
@@ -52,7 +52,7 @@ $nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuari
           <span class="menuMobile"></span>
           <span class="menuMobile"></span>
         </div>
-        <h3>SmartWallet</h3>
+        <h3><a href="../../index.php" style="text-decoration: none; color: inherit;">SmartWallet</a></h3>
       </div>
     </div>
     <div class="info-header">
@@ -92,6 +92,9 @@ $nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuari
         <i class="fa-solid fa-chart-line"></i> Dashboard</a>
       <a href="planejamento.php"><i class="fa-solid fa-clipboard-list"></i> Planejamento</a>
       <a href="user.php"><i class="fa-regular fa-circle-user"></i> User</a>
+      <?php if ($dadosUsuario['email'] == "contatossmartwallet@gmail.com"): ?>
+          <a href="admin.php"><i class="fa-solid fa-user-cog"></i> Admin</a>
+        <?php endif; ?>
       <a href="config.php" class="mobile"><i class="fa-solid fa-gear"></i> Configurações</a>
       <a href="notificacoes.php" class="mobile"><i class="fa-solid fa-bell"></i> Notficações</a>
       <a href="../php/sair.php" class="mobile"><i class="fa-solid fa-power-off"></i> Logout</a>
