@@ -2,9 +2,9 @@
 session_start();
 include_once('../php/conexao.php');
 
-if (!isset($_SESSION['email']) || !isset($_SESSION['senha'])) {
+if (!isset($_SESSION['email']) || !isset($_SESSION['id'])) {
   unset($_SESSION['email']);
-  unset($_SESSION['senha']);
+  unset($_SESSION['id']);
   header('Location: ../../index.php');
   exit();
 }

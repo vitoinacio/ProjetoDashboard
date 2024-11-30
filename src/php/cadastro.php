@@ -14,13 +14,15 @@
     $rua = $_POST["rua"];
     $numeroCasa = $_POST["numeroCasa"];
 
+    $senha_criptografada = password_hash($senha, PASSWORD_DEFAULT);
+
   //Database connection.
     // $conn = new mysqli('localhost', 'root', '', 'dashboard');
     if ($conn->connect_error){
         die ('Connection Failed  :  '.$conn->connect_error);
     }else {
-        $stmt = $conn->prepare("insert into usuario(nome, sexo, dataNasc, email, senha, cpf, tel, cep, cidade, bairro, rua, numeroCasa) values(?,?,?,?,?,?,?,?,?,?,?,?)");
-        $stmt -> bind_param("ssssssssssss", $nome, $sexo, $dataNasc, $email, $senha, $cpf, $tel, $cep, $cidade, $bairro, $rua, $numeroCasa);
+        $stmt = $conn->prepare("INSERT INTO usuario(nome, sexo, dataNasc, email, senha, cpf, tel, cep, cidade, bairro, rua, numeroCasa) values(?,?,?,?,?,?,?,?,?,?,?,?)");
+        $stmt -> bind_param("ssssssssssss", $nome, $sexo, $dataNasc, $email, $senha_criptografada, $cpf, $tel, $cep, $cidade, $bairro, $rua, $numeroCasa);
         $stmt -> execute();
         echo 'Registrado com sucesso';
         $stmt -> close();

@@ -18,7 +18,9 @@
         $rua = $_POST["rua"];
         $numeroCasa = $_POST["numeroCasa"];
 
-        $sqlUpdate = "UPDATE usuario SET nome = '$nome', senha ='$senha', dataNasc = '$dataNasc', email = '$email', senha = '$senha',
+        $senha_criptografada = password_hash($senha, PASSWORD_DEFAULT);
+
+        $sqlUpdate = "UPDATE usuario SET nome = '$nome', senha ='$senha', dataNasc = '$dataNasc', email = '$email', senha = '$senha_criptografada',
         cpf = '$cpf', tel = '$tel', cep = '$cep', cidade = '$cidade', bairro = '$bairro', rua = '$rua', numeroCasa = '$numeroCasa'
         WHERE id = '$id'";
 
