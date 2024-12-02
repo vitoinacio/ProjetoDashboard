@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['email']) && isset($_POST['senha'])) {
         $email = $_POST['email'];
         $senha = $_POST['senha'];
-
+      
         // Verificar se o usuário existe no banco de dados
         $sql = "SELECT id, email, senha FROM usuario WHERE email = ?";
         $stmt = $conn->prepare($sql);
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $_SESSION['errorMessage'] = 'Por favor, preencha todos os campos';
         header('Location: ../../index.php');
-        exit();
+
     }
 } else {
     $_SESSION['errorMessage'] = 'Método de requisição inválido';

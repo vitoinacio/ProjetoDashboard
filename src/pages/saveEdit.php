@@ -9,7 +9,7 @@
         $sexo = $_POST["sexo"];
         $dataNasc = $_POST["dataNasc"];
         $email = $_POST["email"];
-        $senha = $_POST["senha"];
+        $senha = password_hash($_POST["senha"], PASSWORD_DEFAULT);
         $cpf = $_POST["cpf"];
         $tel = $_POST["tel"];
         $cep = $_POST["cep"];
