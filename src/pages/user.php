@@ -177,14 +177,6 @@ function formatarCEP($cep) {
               <button class="confirmUser"> <i class="fa-solid fa-check"></i></button>
             </div>
           </label>
-          <label for="Senha">Senha:
-            <div>
-              <input disabled type="password" name="senha" id="senha" value="<?php echo htmlspecialchars($dadosUsuario['senha']); ?>">
-              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
-              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
-              <button class="confirmUser"> <i class="fa-solid fa-check"></i></button>
-            </div>
-          </label>
           <label for="cep">Cep:
             <div>
               <input disabled type="text" id="cep" name="cep" minlength="8" maxlength="9" value="<?php echo htmlspecialchars(formatarCEP($dadosUsuario['cep'])); ?>">
@@ -341,9 +333,6 @@ function formatarCEP($cep) {
             this.style.display = 'none';
             this.nextElementSibling.style.display = 'none';
             this.previousElementSibling.style.display = 'inline';
-            if (input.name === 'senha') {
-                input.type = 'password';
-            }
 
             // Reaplica a máscara ao campo restaurado
             if (input.id === 'cpf') {
