@@ -1,11 +1,3 @@
-// function getLoginForm() {
-//   return document.querySelector('form.loginForm');
-// }
-
-// function getStoredUser(key) {
-//   return JSON.parse(localStorage.getItem(key));
-// }
-
 function setError(reference, text) {
   //obtem o item content do form
   const content = document.querySelector('.modal-content');
@@ -48,10 +40,6 @@ const removeError = () => {
   }
 };
 
-// function redirectToDashboard() {
-//   window.location = 'src/pages/dashboard.html';
-// }
-
 function handleInput(form) {
   form[0].addEventListener('input', () => {
     removeError(form[0]);
@@ -59,6 +47,10 @@ function handleInput(form) {
   form[1].addEventListener('input', () => {
     removeError(form[1]);
   });
+}
+
+function getStoredUser(key) {
+  return JSON.parse(localStorage.getItem(key));
 }
 
 function validateLogin(form) {
@@ -95,6 +87,10 @@ function validateLogin(form) {
       }
     }
   }
+}
+
+function getLoginForm() {
+  return document.getElementById('loginForm');
 }
 
 export default function fluxoLogin() {

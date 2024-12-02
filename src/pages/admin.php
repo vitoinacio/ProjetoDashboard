@@ -2,11 +2,11 @@
   session_start();
   include_once('../php/conexao.php');
   // print_r($_SESSION['email']);
-  if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
-  {
+  if (!isset($_SESSION['email']) || !isset($_SESSION['id'])) {
     unset($_SESSION['email']);
-    unset($_SESSION['senha']);
+    unset($_SESSION['id']);
     header('Location: ../../index.php');
+    exit();
   }
   $logado = $_SESSION['email'];
 

@@ -3,11 +3,11 @@
 session_start();
 include_once('../php/conexao.php');
 
-if (!isset($_SESSION['email']) || !isset($_SESSION['senha'])) {
-    unset($_SESSION['email']);
-    unset($_SESSION['senha']);
-    header('Location: ../../index.php');
-    exit();
+if (!isset($_SESSION['email']) || !isset($_SESSION['id'])) {
+  unset($_SESSION['email']);
+  unset($_SESSION['id']);
+  header('Location: ../../index.php');
+  exit();
 }
 
 $logado = $_SESSION['email'];
@@ -26,6 +26,28 @@ function buscarDadosUsuario($conn, $id) {
 
 $dadosUsuario = buscarDadosUsuario($conn, $id);
 $nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuario['nome'])[1];
+
+function formatPhone($phone) {
+  // Adiciona a máscara ao telefone
+  $phone = preg_replace('/(\d{2})(\d{2})(\d{5})(\d{4})/', '+$1 ($2) $3-$4', $phone);
+  return $phone;
+}
+
+function formatarCPF($cpf) {
+  // Remove qualquer caractere que não seja número
+  $cpf = preg_replace('/[^0-9]/', '', $cpf);
+
+  // Adiciona a máscara ao CPF
+  return preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/', '$1.$2.$3-$4', $cpf);
+}
+
+function formatarCEP($cep) {
+  // Remove qualquer caractere que não seja número
+  $cep = preg_replace('/[^0-9]/', '', $cep);
+
+  // Adiciona a máscara ao CEP
+  return preg_replace('/(\d{5})(\d{3})/', '$1-$2', $cep);
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -121,7 +143,7 @@ $nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuari
             </div>
           </label>
           <label for="cpf">Cpf:
-            <div><input disabled type="text" id="cpf" name="cpf" value="<?php echo htmlspecialchars($dadosUsuario['cpf']); ?>"></div>
+            <div><input disabled type="text" id="cpf" name="cpf" value="<?php echo htmlspecialchars(formatarCPF($dadosUsuario['cpf'])) ?>"></div>
           </label>
           <label for="emailUser">Email:
             <div>
@@ -149,7 +171,7 @@ $nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuari
           </label>
           <label for="telefone">Telefone:
             <div>
-              <input disabled type="text" id="telefone" name="tel" value="<?php echo htmlspecialchars($dadosUsuario['tel']); ?>">
+              <input disabled type="text" id="telefone" name="tel" value="<?php echo htmlspecialchars(formatPhone($dadosUsuario['tel'])); ?>" maxlength="19">
               <button class="editUser"><i class="fa-solid fa-pen"></i></button>
               <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
               <button class="confirmUser"> <i class="fa-solid fa-check"></i></button>
@@ -165,7 +187,7 @@ $nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuari
           </label>
           <label for="cep">Cep:
             <div>
-              <input disabled type="text" id="cep" name="cep" value="<?php echo htmlspecialchars($dadosUsuario['cep']); ?>">
+              <input disabled type="text" id="cep" name="cep" minlength="8" maxlength="9" value="<?php echo htmlspecialchars(formatarCEP($dadosUsuario['cep'])); ?>">
               <button class="editUser"><i class="fa-solid fa-pen"></i></button>
               <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
               <button class="confirmUser"> <i class="fa-solid fa-check"></i></button>
@@ -218,127 +240,219 @@ $nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuari
     const inputs = document.querySelectorAll('#userForm input');
     let originalValues = {};
 
-        // Armazena os valores originais dos inputs
-        inputs.forEach(input => {
-            originalValues[input.name] = input.value;
+    function aplicarMascara(input, mascara) {
+        input.addEventListener('input', function() {
+            let i = input.value.length;
+            let saida = mascara.substring(0,1);
+            let texto = mascara.substring(i);
+            
+            if (texto.substring(0,1) != saida) {
+                input.value += texto.substring(0,1);
+            }
         });
+    }
 
-        // Habilita o campo de entrada para edição
-        editButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const input = this.previousElementSibling;
-                input.disabled = false;
-                input.style.background = '#fff';
-                input.style.outline = '2px solid var(--cor2)';
-                input.focus();
-                this.style.display = 'none';
-                this.nextElementSibling.style.display = 'inline';
-                this.nextElementSibling.nextElementSibling.style.display = 'inline';
-            });
+    function aplicarMascaraTelefone(input) {
+        input.addEventListener('input', function() {
+            let value = input.value.replace(/\D/g, '');
+            let formattedValue = '';
+
+            if (value.length > 0) {
+                formattedValue += '+';
+            }
+            if (value.length > 2) {
+                formattedValue += value.substring(0, 2) + ' ';
+                value = value.substring(2);
+            }
+            if (value.length > 2) {
+                formattedValue += '(' + value.substring(0, 2) + ') ';
+                value = value.substring(2);
+            }
+            if (value.length > 5) {
+                formattedValue += value.substring(0, 5) + '-' + value.substring(5);
+            } else {
+                formattedValue += value;
+            }
+
+            input.value = formattedValue;
         });
+    }
 
-        // Restaura o valor original do campo de entrada
-        cancelButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const input = this.previousElementSibling.previousElementSibling;
-                if (originalValues.hasOwnProperty(input.name)) {
-                    input.value = originalValues[input.name];
-                }
-                input.disabled = true;
-                input.style.background = '#e2dfdf';
-                input.style.outline = 'none';
-                this.style.display = 'none';
-                this.nextElementSibling.style.display = 'none';
-                this.previousElementSibling.style.display = 'inline';
-                if (input.name === 'senha') {
-                    input.type = 'password';
-                }
-            });
+    function removerMascara(input) {
+        return input.value.replace(/\D/g, '');
+    }
+
+    const cpfInput = document.getElementById('cpf');
+    const telefoneInput = document.getElementById('telefone');
+    const cepInput = document.getElementById('cep');
+
+    function aplicarMascaras() {
+        aplicarMascara(cpfInput, '999.999.999-99');
+        aplicarMascaraTelefone(telefoneInput);
+        aplicarMascara(cepInput, '99999-999');
+    }
+
+    aplicarMascaras();
+
+    document.getElementById('userForm').addEventListener('submit', function() {
+        cpfInput.value = removerMascara(cpfInput);
+        telefoneInput.value = removerMascara(telefoneInput);
+        cepInput.value = removerMascara(cepInput);
+    });
+
+    // Armazena os valores originais dos inputs
+    inputs.forEach(input => {
+        originalValues[input.name] = input.value;
+    });
+
+    // Habilita o campo de entrada para edição
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const input = this.previousElementSibling;
+            input.disabled = false;
+            input.style.background = '#fff';
+            input.style.outline = '2px solid var(--cor2)';
+            input.focus();
+            this.style.display = 'none';
+            this.nextElementSibling.style.display = 'inline';
+            this.nextElementSibling.nextElementSibling.style.display = 'inline';
+
+            // Aplica a máscara ao campo habilitado
+            if (input.id === 'cpf') {
+                aplicarMascara(input, '999.999.999-99');
+            } else if (input.id === 'telefone') {
+                aplicarMascaraTelefone(input);
+            } else if (input.id === 'cep') {
+                aplicarMascara(input, '99999-999');
+            }
         });
+    });
 
-        // Envia os dados atualizados para o servido
-        confirmButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const input = this.previousElementSibling.previousElementSibling.previousElementSibling;
-                const newValue = input.value;
-                if (newValue !== originalValues[input.name]) {
-                    fetch('../php/update_user.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
-                        body: `id=<?php echo $id; ?>&${input.name}=${encodeURIComponent(newValue)}`
-                    })
-                    .then(response => response.text())
-                    .then(data => {
-                        if (data === 'success') {
-                            originalValues[input.name] = newValue;
-                            input.disabled = true;
-                            input.style.background = '#e2dfdf';
-                            input.style.outline = 'none';
-                            this.style.display = 'none';
-                            this.previousElementSibling.style.display = 'none';
-                            this.previousElementSibling.previousElementSibling.style.display = 'inline';
-                            if (input.name === 'senha') {
-                              input.type = 'password';
-                            }
-                        } else {
-                            console.error('Erro ao atualizar os dados.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Erro:', error);
-                    });
-                } else {
-                    input.disabled = true;
-                    input.style.background = '#e2dfdf';
-                    input.style.outline = 'none';
-                    this.style.display = 'none';
-                    this.previousElementSibling.style.display = 'none';
-                    this.previousElementSibling.previousElementSibling.style.display = 'inline';
-                    if (input.name === 'senha') {
-                      input.type = 'password';
-                    }
-                }
-            });
+    // Restaura o valor original do campo de entrada
+    cancelButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const input = this.previousElementSibling.previousElementSibling;
+            if (originalValues.hasOwnProperty(input.name)) {
+                input.value = originalValues[input.name];
+            }
+            input.disabled = true;
+            input.style.background = '#e2dfdf';
+            input.style.outline = 'none';
+            this.style.display = 'none';
+            this.nextElementSibling.style.display = 'none';
+            this.previousElementSibling.style.display = 'inline';
+            if (input.name === 'senha') {
+                input.type = 'password';
+            }
+
+            // Reaplica a máscara ao campo restaurado
+            if (input.id === 'cpf') {
+                aplicarMascara(input, '999.999.999-99');
+            } else if (input.id === 'telefone') {
+                aplicarMascaraTelefone(input);
+            } else if (input.id === 'cep') {
+                aplicarMascara(input, '99999-999');
+            }
         });
-        // Envia a foto para o servidor ao selecionar o arquivo
-        fotoInput.addEventListener('change', function() {
-            const formData = new FormData();
-            const fotoFile = fotoInput.files[0];
+    });
 
-            if (fotoFile) {
-                formData.append('fotoPerfilInput', fotoFile);
-                formData.append('id', '<?php echo $id; ?>');
-
+    // Envia os dados atualizados para o servidor
+    confirmButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const input = this.previousElementSibling.previousElementSibling.previousElementSibling;
+            if(input.name === 'cep'){
+                input.value = removerMascara(cepInput);
+            } else if(input.name === 'telefone'){
+                input.value = removerMascara(telefoneInput);
+            } else if(input.name === 'cpf'){
+                input.value = removerMascara(cpfInput);
+            }
+            const newValue = input.value;
+            if (newValue !== originalValues[input.name]) {
                 fetch('../php/update_user.php', {
                     method: 'POST',
-                    body: formData
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `id=<?php echo $id; ?>&${input.name}=${encodeURIComponent(newValue)}`
                 })
                 .then(response => response.text())
                 .then(data => {
                     if (data === 'success') {
-                        // Atualiza a imagem de perfil exibida
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            document.querySelectorAll('#fotoPerfil').forEach(img => {
-                                img.src = e.target.result;
-                            });
-                        };
-                        reader.readAsDataURL(fotoFile);
-                        console.log(data);
+                        originalValues[input.name] = newValue;
+                        input.disabled = true;
+                        input.style.background = '#e2dfdf';
+                        input.style.outline = 'none';
+                        this.style.display = 'none';
+                        this.previousElementSibling.style.display = 'none';
+                        this.previousElementSibling.previousElementSibling.style.display = 'inline';
+                        if (input.name === 'senha') {
+                            input.type = 'password';
+                        }
+
+                        // Reaplica a máscara após a atualização
+                        aplicarMascaras();
                     } else {
-                        console.error('Erro ao atualizar a foto: ' + data);
+                        console.error('Erro ao atualizar os dados.');
                     }
                 })
                 .catch(error => {
                     console.error('Erro:', error);
                 });
             } else {
-                alert('Por favor, selecione uma foto.');
+                input.disabled = true;
+                input.style.background = '#e2dfdf';
+                input.style.outline = 'none';
+                this.style.display = 'none';
+                this.previousElementSibling.style.display = 'none';
+                this.previousElementSibling.previousElementSibling.style.display = 'inline';
+                if (input.name === 'senha') {
+                    input.type = 'password';
+                }
+
+                // Reaplica a máscara após a atualização
+                aplicarMascaras();
             }
         });
-      });
+    });
+
+    // Envia a foto para o servidor ao selecionar o arquivo
+    fotoInput.addEventListener('change', function() {
+        const formData = new FormData();
+        const fotoFile = fotoInput.files[0];
+
+        if (fotoFile) {
+            formData.append('fotoPerfilInput', fotoFile);
+            formData.append('id', '<?php echo $id; ?>');
+
+            fetch('../php/update_user.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data === 'success') {
+                    // Atualiza a imagem de perfil exibida
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.querySelectorAll('#fotoPerfil').forEach(img => {
+                            img.src = e.target.result;
+                        });
+                    };
+                    reader.readAsDataURL(fotoFile);
+                    console.log(data);
+                } else {
+                    console.error('Erro ao atualizar a foto: ' + data);
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        } else {
+            alert('Por favor, selecione uma foto.');
+        }
+    });
+});
 </script>
 </body>
 
