@@ -1,10 +1,10 @@
 <?php
   session_start();
   // print_r($_SESSION['email']);
-  if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
+  if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['id']) == true))
   {
     unset($_SESSION['email']);
-    unset($_SESSION['senha']);
+    unset($_SESSION['id']);
     header('Location: ../../index.php');
   }
   $logado = $_SESSION['email'];

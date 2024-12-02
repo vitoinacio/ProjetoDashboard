@@ -10,6 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach ($allowedFields as $field) {
         if (isset($_POST[$field])) {
             $value = htmlspecialchars(trim($_POST[$field]));
+            if ($field === 'senha') {
+                $value = password_hash($value, PASSWORD_DEFAULT);
+            }
             $updates[$field] = $value;
         }
     }

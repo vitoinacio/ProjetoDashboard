@@ -2,10 +2,10 @@
   session_start();
   include_once('../php/conexao.php');
   // print_r($_SESSION['email']);
-  if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
+  if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['id']) == true))
   {
     unset($_SESSION['email']);
-    unset($_SESSION['senha']);
+    unset($_SESSION['id']);
     header('Location: ../../index.php');
   }
   $logado = $_SESSION['email'];
@@ -74,7 +74,7 @@
               <th scope="col">Sexo</th>
               <th scope="col">Data Nascimento</th>
               <th scope="col">Email</th>
-              <th scope="col">Senha</th>
+              <!-- <th scope="col">Senha</th> -->
               <th scope="col">CPF</th>
               <th scope="col">Telefone</th>
               <th scope="col">CEP</th>
@@ -96,7 +96,7 @@
                         echo "<td>" . $user_data['sexo']."</td>";
                         echo "<td>" . $user_data['dataNasc']."</td>";
                         echo "<td>" . $user_data['email']."</td>";
-                        echo "<td>" . $user_data['senha']."</td>";
+                        // echo "<td>" . $user_data['senha']."</td>";
                         echo "<td>" . $user_data['cpf']."</td>";
                         echo "<td>" . $user_data['tel']."</td>";
                         echo "<td>" . $user_data['cep']."</td>";
