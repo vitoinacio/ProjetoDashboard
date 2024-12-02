@@ -28,23 +28,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } else {
                 // Senha incorreta
                 $_SESSION['errorMessage'] = 'Senha incorreta';
-                header('Location: ../../index.php');
+                header('Location: ../../index.php?errorMessage= Senha Incorreta');
                 exit();
             }
         } else {
             // Usuário não encontrado
             $_SESSION['errorMessage'] = 'Usuário não encontrado';
-            header('Location: ../../index.php');
+            header('Location: ../../index.php?errorMessage=Usuário não encontrado');
             exit();
         }
     } else {
         $_SESSION['errorMessage'] = 'Por favor, preencha todos os campos';
-        header('Location: ../../index.php');
+        header('Location: ../../index.php?errorMessage=Preencha todos os campos');
 
     }
 } else {
     $_SESSION['errorMessage'] = 'Método de requisição inválido';
-    header('Location: ../../index.php');
+    header('Location: ../../index.php?errorMessage=Método de requisição inválido');
     exit();
 }
 ?>

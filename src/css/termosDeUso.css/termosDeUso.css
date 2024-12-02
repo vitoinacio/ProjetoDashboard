@@ -6,6 +6,7 @@
 }
 
 .containerTelasAdcionais h2{
+  color: var(--cor5);
   position: relative;
   padding:  20px 0px;
 }
@@ -27,7 +28,7 @@
 }
 
 .containerTelasAdcionais strong{
-  color: var(--cor8);
+  color: var(--cor5);
   display: block;
   padding-bottom: 10px;
 }
@@ -35,14 +36,3 @@
 .containerTelasAdcionais p strong:nth-child(2){
   display: inline;
 }
-
-
-
-
-
-
-
-/* .footerTelasAdicionais{
-position: relative;
-top: 100%;
-} */

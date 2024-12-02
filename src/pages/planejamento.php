@@ -152,7 +152,7 @@ $debitos = buscarDebitos($conn, $id);
           <h2>Entrada Financeira</h2>
           <form id="formSalario" method="POST">
             <p>R$ <input type="text" name="entradaSalario" id="entradaSalario" placeholder="0,00" value="<?php echo htmlspecialchars($totalEntrada); ?>"></p>
-            <button type="submit">Adicionar</button>
+            <button type="submit" style="width: 100%; margin-top: 5px;">Adicionar</button>
           </form>
         </div>
         <div class="gastos-totais">

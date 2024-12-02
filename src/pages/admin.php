@@ -9,6 +9,7 @@
     exit();
   }
   $logado = $_SESSION['email'];
+  $id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
 
   if(!empty($_GET['search']))
   {
@@ -20,6 +21,18 @@
     $sql = "SELECT * FROM usuario ORDER BY id DESC";
   }
   $result = $conn->query($sql);
+
+  function buscarDadosUsuario($conn, $id) {
+    $sql = "SELECT * FROM usuario WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row ? $row : null;
+  }
+  
+  $dadosUsuario = buscarDadosUsuario($conn, $id);
 
 ?>
 <!DOCTYPE html>
@@ -48,7 +61,7 @@
       <div class="info-header">
         <i class="fa-solid fa-bell"></i>
         <i class="fa-solid fa-gear"></i>
-        <img src="../img/perfil.jpg" alt="foto-perfil" />
+        <img id="fotoPerfil" src="<?php echo $dadosUsuario['foto'] ? 'data:image/jpeg;base64,' . base64_encode($dadosUsuario['foto']) : '../img/perfil.jpg'; ?>" alt="Foto de Perfil">
       </div>
     </header>
     <!-- FIM HEADER -->

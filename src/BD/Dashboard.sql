@@ -39,11 +39,3 @@ notificacao_enviada BOOLEAN DEFAULT FALSE,
 fk_id_usuario INT,
 CONSTRAINT fk_id_usuario_deb FOREIGN KEY (fk_id_usuario) REFERENCES usuario(id)
 );
-
-CREATE TABLE relatorio(
-id_relatorio INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-fk_id_usuario INT NOT NULL,
-total_entrada INT NOT NULL,
-total_saida INT NOT NULL,
-saldo_final INT NOT NULL,
-CONSTRAINT fk_id_usuario_rel FOREIGN KEY (fk_id_usuario) REFERENCES usuario(id));
