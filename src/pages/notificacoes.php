@@ -1,6 +1,12 @@
 <?php
 require_once "../php/conexao.php";
 session_start();
+if (!isset($_SESSION['email']) || !isset($_SESSION['id'])) {
+  unset($_SESSION['email']);
+  unset($_SESSION['id']);
+  header('Location: ../../index.php');
+  exit();
+}
 
 $logado = isset($_SESSION['email']) ? $_SESSION['email'] : null;
 $id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
