@@ -29,7 +29,13 @@ function buscarDadosUsuario($conn, $id) {
 }
 
 $dadosUsuario = buscarDadosUsuario($conn, $id);
-$nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuario['nome'])[1];
+// Verificar se o nome possui mais de um nome
+$nomePartes = explode(' ', $dadosUsuario['nome']);
+if (count($nomePartes) > 1) {
+    $nome = $nomePartes[0] . ' ' . $nomePartes[1];
+} else {
+    $nome = $dadosUsuario['nome'];
+}
 
 // Buscar o valor total de entrada do banco de dados
 $sql = "SELECT SUM(valor_ent) as total_entrada FROM ent_financeira WHERE fk_id_usuario = ?";
@@ -126,7 +132,7 @@ if ($totalEntrada === 0) {
         >
         <a href="planejamento.php"><i class="fa-solid fa-clipboard-list"></i> Planejamento</a>
         <a href="user.php"><i class="fa-regular fa-circle-user"></i> User</a>
-        <?php if ($dadosUsuario['email'] == "contatossmartwallet@gmail.com"): ?>
+        <?php if ($dadosUsuario['email'] === "contatosmartwallet@gmail.com"): ?>
           <a href="admin.php"><i class="fa-solid fa-user-cog"></i> Admin</a>
         <?php endif; ?>
         <a href="config.php" class="mobile"

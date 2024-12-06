@@ -12,6 +12,19 @@ import handleTheme from "./modules/handleTheme.js";
 import fontSize from "./modules/fontSize.js";
 
 
+// Inicializa os modulos
+handleTheme();
+menuMobile();
+sidebar();
+buttonMenu();
+loginBtn();
+validateCadastro();
+todoList();
+cadastreSe();
+theme();
+fontSize();
+
+
 // muda a color dos graficos ao verificar o thema atual
 document.addEventListener('DOMContentLoaded', function() {
   if (sessionStorage.getItem('theme') === 'dark') {
@@ -34,42 +47,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 });
-
-//Altera se o usuario quer tela de 2fa ou não
-const checkbox2FA = document.getElementById('2fa');
-if(checkbox2FA){
-
-  checkbox2FA.addEventListener('change', function() {
-    const isChecked = checkbox2FA.checked;
-
-    fetch('../php/update_adm.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ adm: isChecked ? 1 : 0 })
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        console.log('Atualização bem-sucedida');
-      } else {
-        console.error('Erro na atualização');
-      }
-    })
-    .catch(error => console.error('Erro:', error));
-  });
-};
-
-
-handleTheme();
-
-menuMobile();
-sidebar();
-buttonMenu();
-loginBtn();
-validateCadastro();
-todoList();
-cadastreSe();
-theme();
-fontSize();

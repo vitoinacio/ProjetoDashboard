@@ -17,21 +17,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql = "SELECT * FROM usuario WHERE email = ?";
     $params = [$email];
     $types = "s";
+    $metodo_2fa = '';
 
     if ($cpf) {
         $sql .= " AND cpf = ?";
         $params[] = $cpf;
         $types .= "s";
+        $metodo_2fa = 'CPF';
     }
     if ($dataNasc) {
         $sql .= " AND dataNasc = ?";
         $params[] = $dataNasc;
         $types .= "s";
+        $metodo_2fa = 'Data de Nascimento';
     }
     if ($cep) {
         $sql .= " AND cep = ?";
         $params[] = $cep;
         $types .= "s";
+        $metodo_2fa = 'CEP';
     }
 
     $stmt = $conn->prepare($sql);
@@ -47,7 +51,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $row = $result->fetch_assoc();
         $_SESSION['email'] = $email;
         $_SESSION['id'] = $row['id'];
+        $_SESSION['nome'] = $row['nome'];
+        $_SESSION['cpf'] = $row['cpf'];
         $_SESSION['tentativas'] = 0; // Resetar tentativas em caso de sucesso
+
+        // Inserir log de autenticação com 2FA
+        $sql = "INSERT INTO logs_autenticacao (usuario_id, nome_usuario, cpf, metodo_2fa) VALUES (?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('isss', $row['id'], $row['nome'], $row['cpf'], $metodo_2fa);
+        $stmt->execute();
+
         header('Location:../pages/dashboard.php');
     } else {
         $_SESSION['tentativas'] += 1;
