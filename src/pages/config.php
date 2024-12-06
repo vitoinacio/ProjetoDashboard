@@ -30,6 +30,7 @@ function buscarDadosUsuario($conn, $id) {
 
 $dadosUsuario = buscarDadosUsuario($conn, $id);
 $nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuario['nome'])[1];
+$adm = $dadosUsuario['adm'];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -116,6 +117,13 @@ $nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuari
           <div class="divConfig">
             <p class="nomeConfig">Tamanho da Fonte</p>
             <input id="fontSizeConfig" type="number" placeholder="Tamanho da Fonte" min="18" max="30">
+          </div>
+          <div class="div2fa">
+            <p class="nomeConfig">Ativar autenticação de 2 Fatores</p>
+            <label class="switch">
+              <input type="checkbox" id="2fa" <?php echo $adm == 1 ? 'checked' : ''; ?>>
+              <span class="slider round"></span>
+            </label>
           </div>
         </div>
       </div>
