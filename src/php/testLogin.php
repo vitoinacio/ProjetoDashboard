@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $senha = $_POST['senha'];
       
         // Verificar se o usuário existe no banco de dados
-        $sql = "SELECT id, email, senha FROM usuario WHERE email = ?";
+        $sql = "SELECT id, email, senha, adm FROM usuario WHERE email = ?";
         $stmt = $conn->prepare($sql);
         if ($stmt === false) {
             die('Erro na preparação da consulta: ' . $conn->error);
@@ -23,7 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (password_verify($senha, $row['senha'])) {
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['id'] = $row['id'];
-                header('Location: ../pages/dashboard.php');
+                 
+                // Verificar se a coluna adm é igual a 1
+                if ($row['adm'] == 0) {
+                    header('Location: ../pages/2faa.php');
+                } else {
+                    header('Location: ../pages/dashboard.php');
+                }
                 exit();
             } else {
                 // Senha incorreta

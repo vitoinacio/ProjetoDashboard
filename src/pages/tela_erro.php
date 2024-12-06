@@ -28,7 +28,7 @@
     <header>
       <div class="info-header">
         <div class="logo">
-          <h3>SmartWallet</h3>
+        <h3><a href="../../index.php" style="text-decoration: none; color: inherit;">SmartWallet</a></h3>
         </div>
       </div>
       <div class="info-header">
