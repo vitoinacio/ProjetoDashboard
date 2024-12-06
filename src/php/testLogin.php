@@ -23,7 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (password_verify($senha, $row['senha'])) {
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['id'] = $row['id'];
-                header('Location: ../pages/dashboard.php');
+                $_SESSION['2fa'] = false;
+                header('Location: ../pages/autenticacao.php');
                 exit();
             } else {
                 // Senha incorreta
