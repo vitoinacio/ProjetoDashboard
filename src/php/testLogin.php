@@ -23,9 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (password_verify($senha, $row['senha'])) {
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['id'] = $row['id'];
-                 
-                // Verificar se a coluna adm é igual a 1
-                if ($row['adm'] == 0) {
+                
+                // Verificar se a coluna adm é igual a true
+                if ($row['adm'] == true) {
                     header('Location: ../pages/2faa.php');
                 } else {
                     header('Location: ../pages/dashboard.php');

@@ -164,6 +164,14 @@ function formatarCEP($cep) {
               <button class="confirmUser"><i class="fa-solid fa-check"></i></button>
             </div>
           </label>
+          <label for="senha">Senha:
+            <div>
+              <input disabled type="password" id="senha" name="senha" value="********" maxlength="8">
+              <button class="editUser"><i class="fa-solid fa-pen"></i></button>
+              <button class="cancelEdit"><i class="fa-solid fa-xmark"></i></button>
+              <button class="confirmUser"> <i class="fa-solid fa-check"></i></button>
+            </div>
+          </label>
           <label for="sexo">Sexo:
             <div>
               <input disabled type="text" id="sexo" name="sexo" value="<?php echo htmlspecialchars($dadosUsuario['sexo']); ?>">
@@ -301,6 +309,10 @@ function formatarCEP($cep) {
     editButtons.forEach(button => {
         button.addEventListener('click', function() {
             const input = this.previousElementSibling;
+            if (input.name === 'senha') {
+              input.type = 'text';
+              input.value = '';
+            }
             input.disabled = false;
             input.style.background = '#fff';
             input.style.outline = '2px solid var(--cor2)';
@@ -326,6 +338,9 @@ function formatarCEP($cep) {
             const input = this.previousElementSibling.previousElementSibling;
             if (originalValues.hasOwnProperty(input.name)) {
                 input.value = originalValues[input.name];
+            }
+            if (input.name === 'senha') {
+                input.type = 'password';
             }
             input.disabled = true;
             input.style.background = '#e2dfdf';
@@ -355,6 +370,8 @@ function formatarCEP($cep) {
                 input.value = removerMascara(telefoneInput);
             } else if(input.name === 'cpf'){
                 input.value = removerMascara(cpfInput);
+            } else if(input.name === 'senha'){
+                input.value = input.value;
             }
             const newValue = input.value;
             if (newValue !== originalValues[input.name]) {

@@ -36,8 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 //Altera se o usuario quer tela de 2fa ou não
-document.addEventListener('DOMContentLoaded', function() {
-  const checkbox2FA = document.getElementById('2fa');
+const checkbox2FA = document.getElementById('2fa');
+if(checkbox2FA){
 
   checkbox2FA.addEventListener('change', function() {
     const isChecked = checkbox2FA.checked;
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .catch(error => console.error('Erro:', error));
   });
-});
+};
 
 
 handleTheme();
