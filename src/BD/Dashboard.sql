@@ -16,8 +16,10 @@ rua VARCHAR (25) NOT NULL,
 numeroCasa VARCHAR (25) NOT NULL,
 foto BLOB,
 dtCriacao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-adm BOOLEAN DEFAULT FALSE 
+twoFa BOOLEAN DEFAULT FALSE 
 );
+
+INSERT INTO usuario (nome, sexo, dataNasc, email, senha, cpf, tel, cep, cidade, bairro, rua, numeroCasa) VALUES ('Admin', ' ', '2024-01-12', 'contatosmartwallet@gmail.com', 'admin', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
 
 CREATE TABLE ent_financeira (
 id_ent INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -38,4 +40,14 @@ pago INT(1),
 notificacao_enviada BOOLEAN DEFAULT FALSE,
 fk_id_usuario INT,
 CONSTRAINT fk_id_usuario_deb FOREIGN KEY (fk_id_usuario) REFERENCES usuario(id)
+);
+
+CREATE TABLE logs_autenticacao (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  usuario_id INT NOT NULL,
+  nome_usuario VARCHAR(255) NOT NULL,
+  cpf VARCHAR(14) NOT NULL,
+  data_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  metodo_2fa VARCHAR(50) NOT NULL,
+  FOREIGN KEY (usuario_id) REFERENCES usuario(id)
 );

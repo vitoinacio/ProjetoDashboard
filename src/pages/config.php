@@ -29,8 +29,14 @@ function buscarDadosUsuario($conn, $id) {
 }
 
 $dadosUsuario = buscarDadosUsuario($conn, $id);
-$nome = explode(' ', $dadosUsuario['nome'])[0] . ' ' . explode(' ', $dadosUsuario['nome'])[1];
-$adm = $dadosUsuario['adm'];
+// Verificar se o nome possui mais de um nome
+$nomePartes = explode(' ', $dadosUsuario['nome']);
+if (count($nomePartes) > 1) {
+    $nome = $nomePartes[0] . ' ' . $nomePartes[1];
+} else {
+    $nome = $dadosUsuario['nome'];
+}
+$twoFa = $dadosUsuario['twoFa'];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -133,6 +139,9 @@ $adm = $dadosUsuario['adm'];
         >
         <a href="planejamento.php"><i class="fa-solid fa-clipboard-list"></i> Planejamento</a>
         <a href="user.php"><i class="fa-regular fa-circle-user"></i> User</a>
+        <?php if ($dadosUsuario['email'] === "contatosmartwallet@gmail.com"): ?>
+          <a href="admin.php"><i class="fa-solid fa-user-cog"></i> Admin</a>
+        <?php endif; ?>
         <a href="config.php" class="mobile"
           ><i class="fa-solid fa-gear"></i> Configurações</a
         >
@@ -157,11 +166,38 @@ $adm = $dadosUsuario['adm'];
           </div>
           <div class="divConfig">
             <label class="nomeConfig" for="2fa">Autenticação de 2 Fatores</label>
-              <input style="padding: 100px;" type="checkbox" class="twofa" id="2fa" <?php echo $adm == 1 ? 'checked' : ''; ?>>
+              <input style="padding: 100px;" type="checkbox" class="twofa" id="2fa" <?php echo $twoFa == true ? 'checked' : ''; ?>>
           </div>
         </div>
       </div>
     </section>
     <!-- FIM MAIN -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      const twoFaCheckbox = document.getElementById('2fa');
+      if (twoFaCheckbox) {
+        twoFaCheckbox.addEventListener('change', function() {
+          const twoFa = twoFaCheckbox.checked;
+
+          fetch('../php/update_adm.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ twoFa: twoFa })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              console.log('Atualização bem-sucedida');
+            } else {
+              console.error('Erro na atualização:', data.message);
+            }
+          })
+          .catch(error => console.error('Erro:', error));
+        });
+      }
+    });
+    </script>
   </body>
 </html>
