@@ -1,3 +1,10 @@
+<?php
+session_start();
+include_once('../php/conexao.php');
+if ($_SESSION['email'] !== null) {
+  $emailComplete = $_SESSION['email'];
+};
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -59,7 +66,7 @@
       <h2 class="title">Preencha os campos abaixo</h2>
         <div class="form-cadastro pessoais" style="width: 500px;">
             <form class="formInfoPessoais" method="post" action="../php/test2faa.php">
-                <input type="email" name="email" id="email" placeholder="Email" required>
+                <input type="email" name="email" id="email" placeholder="Email" value="<?php echo $emailComplete?>" required>
                 <?php
                 $pergunta = rand(1, 3);
                 if ($pergunta == 1) {

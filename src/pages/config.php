@@ -43,6 +43,43 @@ $adm = $dadosUsuario['adm'];
       crossorigin="anonymous"
     ></script>
     <script type="module" src="../js/script.js" defer></script>
+    <style>
+      .twofa {
+        display: inline-block;
+        margin-right: 20px;
+        margin-bottom: 15px;
+      }
+
+      .twofa::after {
+        content: '';
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem;
+        width: 20px;
+        height: 20px;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: #fff;
+        border: 1px solid #121d77;
+        color: white;
+      }
+
+      .twofa:checked::after {
+        content: '✔';
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem;
+        width: 20px;
+        height: 20px;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: #121d77;
+        color: white;
+      }
+
+    </style>
     <title>Configurações</title>
   </head>
   <body>
@@ -76,8 +113,8 @@ $adm = $dadosUsuario['adm'];
               <h5><?php print_r($_SESSION['email'])?></h5>
             </div>
             <div class="buttons-menu">
-              <Button><a href="#"><i class="fa-solid fa-gear"></i></a></Button>
-              <Button><i class="fa-solid fa-power-off"></i></Button>
+              <Button><a href="config.php"><i class="fa-solid fa-gear"></i></a></Button>
+              <button><a href="../php/sair.php"><i class="fa-solid fa-power-off"></i></a></button>
             </div>
           </div>
         </div>
@@ -118,12 +155,9 @@ $adm = $dadosUsuario['adm'];
             <p class="nomeConfig">Tamanho da Fonte</p>
             <input id="fontSizeConfig" type="number" placeholder="Tamanho da Fonte" min="18" max="30">
           </div>
-          <div class="div2fa">
-            <p class="nomeConfig">Ativar autenticação de 2 Fatores</p>
-            <label class="switch">
-              <input type="checkbox" id="2fa" <?php echo $adm == 1 ? 'checked' : ''; ?>>
-              <span class="slider round"></span>
-            </label>
+          <div class="divConfig">
+            <label class="nomeConfig" for="2fa">Autenticação de 2 Fatores</label>
+              <input style="padding: 100px;" type="checkbox" class="twofa" id="2fa" <?php echo $adm == 1 ? 'checked' : ''; ?>>
           </div>
         </div>
       </div>
