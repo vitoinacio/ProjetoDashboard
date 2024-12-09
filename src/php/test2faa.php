@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header('Location: ../../index.php?errorMessage=Maximo de tentativa excedida');
             exit();
         } else {
-            header('Location:../pages/2fa.php');
+            header('Location:../pages/2faa.php?errorMessage=Reposta incorreta, tente novamente');
         }
     }
 }
