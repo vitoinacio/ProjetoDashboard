@@ -378,6 +378,8 @@ function formatarCEP($cep) {
                 input.value = removerMascara(cpfInput);
             } else if(input.name === 'senha'){
                 input.value = input.value;
+            } else if(input.name === 'dataNasc'){
+                input.value = input.value.split('/').reverse().join('-');
             }
             const newValue = input.value;
             if (newValue !== originalValues[input.name]) {
@@ -400,6 +402,8 @@ function formatarCEP($cep) {
                         this.previousElementSibling.previousElementSibling.style.display = 'inline';
                         if (input.name === 'senha') {
                             input.type = 'password';
+                        } else  if(input.name === 'dataNasc'){
+                          input.value = input.value.split('-').reverse().join('/');
                         }
 
                         // Reaplica a máscara após a atualização
