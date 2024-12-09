@@ -4,20 +4,10 @@ include_once('../php/conexao.php');
 
 if (!isset($_SESSION['email'])) {
   unset($_SESSION['email']);
-  
- 
   exit();
 }
 
 $logado = isset($_SESSION['email']) ? $_SESSION['email'] : null;
-$id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
-// print_r($id);
-
-if ($id === null) {
-    // Redirecionar ou lidar com o caso onde o id não está definido
-    header('Location: ../../index.php');
-    exit();
-}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -27,7 +17,6 @@ if ($id === null) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/style.css" />
   <script src="https://kit.fontawesome.com/7414161b6e.js" crossorigin="anonymous"></script>
-  <script type="module" src="../js/script.js" defer></script>
   <style>
     body{
       overflow-x: hidden;
@@ -86,8 +75,10 @@ if ($id === null) {
             <input type="password" id="confirmSenha" name="confirmSenha" placeholder="Confirme sua senha" minlength="8" maxlength="8" required>
             <?php
               if (isset($_SESSION['errorMessage'])) {
-                echo '<p id="errorMessage" style="color: red;" style="display:block;">' . htmlspecialchars($_SESSION['errorMessage']) . '</p>';
+                echo '<p id="errorMessage" style="color: red; display:block;">' . htmlspecialchars($_SESSION['errorMessage']) . '</p>';
                 unset($_SESSION['errorMessage']);
+              } else {
+                echo '<p id="errorMessage" style="color: red; display:none;"></p>';
               }
             ?>
               <br>
