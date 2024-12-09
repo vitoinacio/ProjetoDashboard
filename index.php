@@ -77,7 +77,7 @@
             name="senha"
             placeholder="Senha"
           />
-          <a  href="src/pages/2fa.php" class="recoverPassword" id="recoverPassword">Recuperar Senha</a>
+          <a  href="src/pages/codigoRecovery.php" class="recoverPassword" id="recoverPassword">Recuperar Senha</a>
           <input type="submit" name="submit" id="entrarLogin" class="entrar-btn-modal" value="Enviar"/>
           <button type="reset" class="limpar-btn-modal">Limpar</button>
         </form>
