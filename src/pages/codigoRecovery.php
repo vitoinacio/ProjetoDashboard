@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <header class="header-nav cadastro-header">
     <div class="logo-nav">
       <h2>
-        <i class="fa-solid fa-chart-line"></i>Smart<strong>Wallet</strong>
+         <a href="../../index.php" style="color: white;"><i class="fa-solid fa-chart-line"></i>Smart<strong>Wallet</strong></a>
       </h2>
     </div>
   </header>

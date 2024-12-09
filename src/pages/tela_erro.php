@@ -1,14 +1,3 @@
-<?php
-  session_start();
-  // print_r($_SESSION['email']);
-  if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['id']) == true))
-  {
-    unset($_SESSION['email']);
-    unset($_SESSION['id']);
-    header('Location: ../../index.php');
-  }
-  $logado = $_SESSION['email'];
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -25,18 +14,13 @@
   </head>
   <body>
     <!-- INICIO HEADER -->
-    <header>
-      <div class="info-header">
-        <div class="logo">
-        <h3><a href="../../index.php" style="text-decoration: none; color: inherit;">SmartWallet</a></h3>
-        </div>
-      </div>
-      <div class="info-header">
-        <i class="fa-solid fa-bell"></i>
-        <i class="fa-solid fa-gear"></i>
-        <img src="../img/perfil.png" alt="foto-perfil" />
-      </div>
-    </header>
+  <header class="header-nav cadastro-header">
+    <div class="logo-nav">
+      <h2>
+      <a href="../../index.php" style="color: white;"><i class="fa-solid fa-chart-line"></i>Smart<strong>Wallet</strong></a>
+      </h2>
+    </div>
+  </header>
     <!-- FIM HEADER -->
 
     <!-- INICIO MAIN -->

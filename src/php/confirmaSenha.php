@@ -34,8 +34,8 @@ if (isset($_POST['update'])) {
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
-            $_SESSION['successMessage'] = 'Senha atualizada com sucesso';
-            header('Location: ../../index.php?successMessage=Senha atualizada com sucesso');
+            $_SESSION['errorMessage'] = 'Senha atualizada com sucesso';
+            header('Location: ../../index.php?errorMessage=Senha atualizada com sucesso');
             exit();
         } else {
             $_SESSION['errorMessage'] = 'Erro ao atualizar a senha. Nenhuma linha foi afetada.';

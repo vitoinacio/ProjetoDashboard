@@ -181,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <header class="header-nav cadastro-header">
     <div class="logo-nav">
       <h2>
-        <i class="fa-solid fa-chart-line"></i>Smart<strong>Wallet</strong>
+      <a href="../../index.php" style="color: white;"><i class="fa-solid fa-chart-line"></i>Smart<strong>Wallet</strong></a>
       </h2>
     </div>
   </header>
@@ -193,7 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <label for="codigo">Digite o codigo enviado Por email</label>
           <input type="text" id="codigo" name="codigo" required placeholder="Codigo" maxlength="6">
           <?php if (isset($_GET['errorMessage'])): ?>
-              <p id="errorMessage" style="color: red; width:100% ;text-align: start; font-size: 14px;"><?php echo htmlspecialchars($_GET['errorMessage']); ?></p>
+              <p id="errorMessage" style="color: red; width:100% ;text-align: start; font-size: 12px;"><?php echo htmlspecialchars($_GET['errorMessage']); ?></p>
           <?php endif; ?>
             <button type="submit">Verificar</button>
         </form>
