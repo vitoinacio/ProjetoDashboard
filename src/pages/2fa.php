@@ -62,6 +62,14 @@ if ($_SESSION['email'] !== null) {
   </header>
     <!-- FIM HEADER -->
     <!-- INICIO MAIN -->
+<?php
+        if(isset($_GET['errorMessage']) && !empty($_GET['errorMessage'])){ ?>
+          <div class="error" id="error-message">
+            <div class="message"><?php echo $_GET['errorMessage']; ?></div>
+            <div class="icon"><button class="close-button" onclick="fecharErro()"><i class="fa-solid fa-xmark"></i></button></div>
+          </div>
+       <?php }
+      ?>
     <div class="container-cadastro">
       <h2 class="title">Preencha os campos abaixo</h2>
         <div class="form-cadastro pessoais" style="width: 500px;">
