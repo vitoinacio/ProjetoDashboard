@@ -18,6 +18,9 @@ if(!empty($_GET['id']))
 
             $sqlDeleteDeb = " DELETE FROM debito where fk_id_usuario= $id";
             $resultDeleteDeb = $conn->query($sqlDeleteDeb);
+
+            $sqlDeleteAut = "DELETE FROM logs_autenticacao WHERE usuario_id = $id";
+            $resultDeleteAut = $conn->query($sqlDeleteAut);
             
             $sqlDelete = "DELETE FROM usuario WHERE id = $id";
             $resultDelete = $conn->query($sqlDelete);
